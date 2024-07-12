@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\96e5a629b035b9d7d45ac842b03f8cc0\monster_test_generated.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\96e5a629b035b9d7d45ac842b03f8cc0\monster_test.bfbs.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\41e8a58cd26a3b3db309f5c33f52cc7e\namespace_test1_generated.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\41e8a58cd26a3b3db309f5c33f52cc7e\namespace_test2_generated.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\07f58ed4d73d39886556867119202a82\union_vector_generated.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\96e5a629b035b9d7d45ac842b03f8cc0\optional_scalars_generated.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\96e5a629b035b9d7d45ac842b03f8cc0\native_type_test_generated.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\96e5a629b035b9d7d45ac842b03f8cc0\arrays_test_generated.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\96e5a629b035b9d7d45ac842b03f8cc0\arrays_test.bfbs.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\96e5a629b035b9d7d45ac842b03f8cc0\monster_test_bfbs_generated.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\96e5a629b035b9d7d45ac842b03f8cc0\monster_extra_generated.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\eb0ad26e07ba61d4d956e485e7e0b747\monster_generated.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\eb0ad26e07ba61d4d956e485e7e0b747\monster.bfbs.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\87f753253920a71b5e54d3d728314328\generated_code.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="H:\flatbufferstool\flatbuffers-vs\CMakeFiles\generated_code" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{593934E8-A845-341C-9C51-97F19C44D736}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

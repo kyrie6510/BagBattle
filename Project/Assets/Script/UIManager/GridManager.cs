@@ -219,6 +219,10 @@ namespace Script
                     //安全校验
                     if (startIdX + j >= _colNum || startIdY + i >= _rowNum)
                     {
+                        if (type == (int) ItemGridType.Body)
+                        {
+                            return false;
+                        }
                         continue;
                     }
                     

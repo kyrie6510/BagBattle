@@ -70,10 +70,14 @@ namespace Script
                     var size = item.GetComponent<RectTransform>().rect;
                     var texture = Resources.Load<Texture>($"Texture/{config.TexturePath}") as Texture2D;
                     var img = go.GetComponent<Image>();
-                   // img.sprite = Sprite.Create(texture,new Rect(0,0,texture.width,texture.height),Vector2.zero);
-                
+                    img.sprite = Sprite.Create(texture,new Rect(0,0,texture.width,texture.height),Vector2.zero);
+
+                    img.rectTransform.sizeDelta = new Vector2(texture.width / 2, texture.height / 2);
+                    
                     _itemMap.Add(_localId,config);
-                
+
+                  
+                    
                     item.LocalId = _localId;
                     _localId++;
                     item.ConfigId = i;

@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\reflection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_cpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_csharp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_dart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_kotlin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_go.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_java.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_ts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_php.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_python.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_lobster.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_lua.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_rust.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_fbs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_grpc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_json_schema.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\idl_gen_swift.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\flatc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\flatc_main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\src\code_generators.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\grpc\src\compiler\cpp_generator.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\grpc\src\compiler\go_generator.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\grpc\src\compiler\java_generator.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\grpc\src\compiler\python_generator.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\grpc\src\compiler\swift_generator.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\flatbufferstool\flatbuffers-vs\grpc\src\compiler\ts_generator.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\include\flatbuffers\base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\include\flatbuffers\flatbuffers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\include\flatbuffers\hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\include\flatbuffers\idl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\include\flatbuffers\util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\include\flatbuffers\reflection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\include\flatbuffers\reflection_generated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\include\flatbuffers\stl_emulation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\include\flatbuffers\flexbuffers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\include\flatbuffers\registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\include\flatbuffers\minireflect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\include\flatbuffers\code_generators.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\grpc\src\compiler\schema_interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\grpc\src\compiler\cpp_generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\grpc\src\compiler\go_generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\grpc\src\compiler\java_generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\grpc\src\compiler\python_generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\grpc\src\compiler\swift_generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\flatbufferstool\flatbuffers-vs\grpc\src\compiler\ts_generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="H:\flatbufferstool\flatbuffers-vs\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2761637A-04B9-3E8A-9BA1-BD2547228AD0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{CA121303-A8D1-3BC3-BC20-341D3FD9E52F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
