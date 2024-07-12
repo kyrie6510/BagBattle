@@ -1,0 +1,32 @@
+/Temp
+/Library
+/client.sln
+/Assets/.DS_Store
+/BuildRes
+Library/*
+Temp/*
+Logs/*
+UserSettings/Layouts/*
+/obj
+*.csproj
+.DS_Store
+/.idea
+*.sln.DotSettings.user
+*.userproperties
+*.suo
+*.scx.meta
+
+Assets/Game/**/*.meta
+/Assets/Lua/.idea/workspace.xml
+*.vsidx
+.vs/*
+*.sln
+Assets/Editor/EmmyLuaService.cs
+Assets/Editor/EmmyLuaService.cs.meta
+.vscode/settings.json
+Assets/New Scene.unity
+Assets/New Scene.unity.meta
+Assets/UnityTest.cs
+Assets/UnityTest.cs.meta
+client.sln.DotSettings.user
+/MemoryCaptures
