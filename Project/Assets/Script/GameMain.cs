@@ -7,10 +7,10 @@ namespace Script
     {
         private void Awake()
         {
-            ConfigManager.Instance.Awake();
+            ItemManager.Instance.Awake();
             InputManager.Instance.Awake();
             GridManager.Instance.Awake();
-            ItemManager.Instance.Awake();
+            ConfigManager.Instance.Awake();
             
         }
 

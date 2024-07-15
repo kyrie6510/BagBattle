@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Dynamic;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Script.Event;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
@@ -14,11 +16,19 @@ namespace Script
         public GameObject BoxObj;
 
         private Dictionary<int, ConfigItem> _itemMap = new Dictionary<int, ConfigItem>();
+        private Dictionary<int, UIDataItem> _itemDataMap = new Dictionary<int, UIDataItem>();
+        private Dictionary<int, UIItem> _itemUIMap = new Dictionary<int, UIItem>();
         private int _localId = 1;
+
+        private UIDataItem _curSelectItemData;
         
         public override void Awake()
         {
             base.Awake();
+            
+            EventManager.Instance.AddListener<OnItemSelectEvent>(OnItemSelectFunction);
+            
+            
             _prefabs = new List<GameObject>();
             BagItem = GameObject.Find("BagItem");
             PropItem = GameObject.Find("PropItem");
@@ -26,6 +36,52 @@ namespace Script
             GenerateItem();
         }
 
+        private void OnItemSelectFunction(OnItemSelectEvent e)
+        {
+            if (_itemDataMap.ContainsKey(e.LocalId))
+            {
+                _curSelectItemData = _itemDataMap[e.LocalId];
+            }
+            
+        }
+
+        public UIItem GetItemUI(int localId)
+        {
+            if (_itemUIMap.TryGetValue(localId,out var item))
+            {
+                return item;
+            }
+
+            return null;
+        }
+
+        public UIDataItem GetItemData(int localId)
+        {
+            if (_itemDataMap.TryGetValue(localId,out var item))
+            {
+                return item;
+            }
+
+            return null;
+        }
+        
+        
+        // public UIDataItem GetCurSelectItemData()
+        // {
+        //     return _curSelectItemData;
+        // }
+        //
+        // public UIItem GetCurSelectItemUI()
+        // {
+        //     if (_itemUIMap.ContainsKey(_curSelectItemData.LocalId))
+        //     {
+        //         return _itemUIMap[_curSelectItemData.LocalId];
+        //     }
+        //     
+        //     return null;
+        // }
+        
+        
         public override void Update()
         {
             base.Update();
@@ -77,6 +133,8 @@ namespace Script
                     _itemMap.Add(_localId,config);
 
                   
+                    _itemDataMap.Add(_localId,new UIDataItem(){ LocalId =  _localId, ConfigId =  i});
+                    _itemUIMap.Add(_localId,item);
                     
                     item.LocalId = _localId;
                     _localId++;
@@ -87,6 +145,9 @@ namespace Script
            
         }
 
+        
+        
+        
         public ConfigItem GetItem(int localId)
         {
             if (_itemMap.ContainsKey(localId))

@@ -1,17 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Script;
-using UnityEditor;
-using UnityEditorInternal;
+using Script.Event;
 using UnityEngine;
 
 public class InputManager : Singleton<InputManager>
 {
-    // public int CurSelectLocalId;
+     private int _curSelectItemId;
     // public int CurItemId;
-    private UIItem _curSelectItem;
+    
+    
+    private UIItem _curSelectItemUI;
+    private UIDataItem _curSelectItemData;
     private ConfigItem _curSelectConfig;
 
     private GameObject _bagObj;
@@ -31,32 +29,37 @@ public class InputManager : Singleton<InputManager>
         _mousePoint = GameObject.Find("MousePoint");
         
         _newCellSize =_cellSize + _offsetGrid;
+        
+        
+        EventManager.Instance.AddListener<OnItemSelectEvent>(OnItemSelectFunction);
     }
+
+    
 
     public override void Update()
     {
         base.Update();
         
-        if (_curSelectItem == null)
+        if (_curSelectItemData == null)
         {
             return;
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            var z = _curSelectItem.transform.rotation.eulerAngles.z;
+            var z = _curSelectItemUI.transform.rotation.eulerAngles.z;
             z -= 90;
-            _curSelectItem.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, z);
+            _curSelectItemUI.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, z);
             
-            _curSelectItem.IsRoatete = !_curSelectItem.IsRoatete;
-            _curSelectItem.RotateValue += 90;
-            if (_curSelectItem.RotateValue == 360) _curSelectItem.RotateValue = 0;
+            _curSelectItemData.IsRoatete = !_curSelectItemData.IsRoatete;
+            _curSelectItemData.RotateValue += 90;
+            if (_curSelectItemData.RotateValue == 360) _curSelectItemData.RotateValue = 0;
             
             UpdateMousePointSize();
-            GridManager.Instance.RefreshState();
+            GridManager.Instance.TouchClear();
         }
         
-        this._curSelectItem.transform.position = Input.mousePosition;
+        this._curSelectItemUI.transform.position = Input.mousePosition;
         DealItemAndMousePos();
         
         if (Input.GetMouseButtonUp(0))
@@ -66,8 +69,9 @@ public class InputManager : Singleton<InputManager>
             
             ClearMousePointSize();
             
-            _curSelectItem = null;
+            _curSelectItemUI = null;
             _curSelectConfig = null;
+            _curSelectItemData = null;
         }
     }
 
@@ -99,7 +103,7 @@ public class InputManager : Singleton<InputManager>
         // 偶数要偏移奇数不用
         var centerV2 = new Vector2(_curSelectConfig.Width % 2 == 0 ? 1 : 0,
             _curSelectConfig.Height % 2 == 0 ? 1 : 0);
-        if (_curSelectItem.IsRoatete)
+        if (_curSelectItemData.IsRoatete)
         {
             centerV2 = new Vector2(centerV2.y, centerV2.x);
         }
@@ -128,7 +132,7 @@ public class InputManager : Singleton<InputManager>
         
         if (isDrop)
         {
-            _curSelectItem.transform.localPosition = endPos;
+            _curSelectItemUI.transform.localPosition = endPos;
         }
       
         
@@ -156,7 +160,7 @@ public class InputManager : Singleton<InputManager>
         var size =  new Vector2(_curSelectConfig.Width * _newCellSize,
             _curSelectConfig.Height * _newCellSize);
         
-        if (_curSelectItem.IsRoatete)
+        if (_curSelectItemData.IsRoatete)
         {
             size = new Vector2(size.y, size.x);
         }
@@ -165,26 +169,29 @@ public class InputManager : Singleton<InputManager>
     }
     
     
-    public void SetCurSelectItem(UIItem item)
+    private void OnItemSelectFunction(OnItemSelectEvent e)
     {
-        _curSelectItem = item;
-        _curSelectConfig = ConfigManager.Instance.GetConfigItem(item.ConfigId);
+        _curSelectItemId = e.LocalId;
         
-        item.transform.SetParent(_bagObj.transform);
+        _curSelectItemUI = ItemManager.Instance.GetItemUI(_curSelectItemId);
+        _curSelectItemData = ItemManager.Instance.GetItemData(_curSelectItemId);
+        _curSelectConfig = ConfigManager.Instance.GetConfigItem(_curSelectItemData.ConfigId);
+        
+        _curSelectItemUI.transform.SetParent(_bagObj.transform);
         _mousePoint.transform.position = Input.mousePosition;
         UpdateMousePointSize();
         
-        _curSelectItem.SetRigState(false);
+        _curSelectItemUI.SetRigState(false);
         
-        _curSelectItem.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, -_curSelectItem.RotateValue);
+        _curSelectItemUI.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, - _curSelectItemData.RotateValue);
         
         GridManager.Instance.TouchClear();
-        
     }
+    
 
     public int GetCurSelectItemGridCont()
     {
-        if (_curSelectItem != null)
+        if (_curSelectItemUI != null)
         {
             return _curSelectConfig.Height * _curSelectConfig.Width;    
         }
@@ -193,13 +200,13 @@ public class InputManager : Singleton<InputManager>
     }
 
 
-    public ConfigItem GetCurSelectItemConfig()
+    public int GetCurSelectItemId()
     {
-        return _curSelectConfig;
+        return _curSelectItemId;
     }
     public UIItem GetCurSelectItem()
     {
-        return _curSelectItem;
+        return _curSelectItemUI;
     }
    
 }

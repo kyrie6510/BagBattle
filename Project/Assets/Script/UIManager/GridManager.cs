@@ -8,13 +8,18 @@ namespace Script
 {
     public class GridManager: Singleton<GridManager>
     {
+        //UI
         private List<UIGrid> _grids = new List<UIGrid>();
         private List<GameObject> _gridViews = new List<GameObject>();
         private List<GameObject> _gridStars = new List<GameObject>();
+        
+        //数据
         private Dictionary<int, List<int>> _itemInGridInfoMap = new();
         private Dictionary<int, List<int>> _itemInGridBodyInfoMap = new();
         private Dictionary<int, List<int>> _itemStarInfoMap = new();
-        
+
+
+        private List<UIDataGrid> _gridsData = new List<UIDataGrid>();
 
         private int _rowNum = 7;
         private int _colNum = 9;
@@ -31,6 +36,13 @@ namespace Script
                 _grids.Add(uiGrid);
                 uiGrid.Id = i;
                 uiGrid.transform.GetChild(0).GetComponent<Text>().text = $"{i}";
+
+                UIDataGrid dataGrid = new UIDataGrid()
+                {
+                    Id = i
+                };
+                _gridsData.Add(dataGrid);
+
             }
             
             for (int i = 0; i < gridViewObj.transform.childCount; i++)
@@ -60,6 +72,8 @@ namespace Script
 
             return null;
         }
+
+        private HashSet<int> _tempStarMap = new HashSet<int>();
         
         public void RefreshState()
         {
@@ -74,6 +88,7 @@ namespace Script
             {
                 star.gameObject.SetActive(false);
             }
+            _tempStarMap.Clear();
             
             
             var sortTouchGrids = touchGrids.ToList();
@@ -85,8 +100,10 @@ namespace Script
             int startIdX = (startId) % _colNum;
             int startIdY = (startId) / _colNum;
 
-            var curItem = InputManager.Instance.GetCurSelectItem();
-            var curConfig = InputManager.Instance.GetCurSelectItemConfig();
+            int curSelectItemId = InputManager.Instance.GetCurSelectItemId();
+            
+            var curItem = ItemManager.Instance.GetItemData(curSelectItemId);
+            var curConfig = ConfigManager.Instance.GetConfigItem(curItem.ConfigId);
             if(curItem==null) return;
             
             
@@ -111,25 +128,21 @@ namespace Script
                         continue;
                     }
 
-                    var curGrid = sortTouchGrids[index];
-                    
-                    if (type == (int) ItemGridType.Star)
+                    if (index >= sortTouchGrids.Count)
                     {
-                        // index++;
-                        // continue;
-                        _gridStars[curGrid.Id].SetActive(true);
+                        Debug.Log("dadada");
                     }
-
+                    
+                    var curGridUI = sortTouchGrids[index];
+                    var curGridData = _gridsData[curGridUI.Id];
                     
                     
-                    var img = curGrid.GetComponent<Image>();
+                    var img = curGridUI.GetComponent<Image>();
                     if (type == (int) ItemGridType.Body)
                     {
-                       
-                        
                         if (curConfig.PropType == PropType.Bag)
                         {
-                            if (curGrid.LocalBagId == 0)
+                            if (curGridData.LocalIdBag == 0)
                             {
                                 img.color = Color.green;
                             }
@@ -140,13 +153,13 @@ namespace Script
                         }
                         else
                         {
-                            if (curGrid.LocalBagId == 0)
+                            if (curGridData.LocalIdBag == 0)
                             {
                                 img.color = Color.red;
                             }
                             else
                             {
-                                if (curGrid.LocalId==0)
+                                if (curGridData.LocalIdItem==0)
                                 {
                                     img.color = Color.green;
                                 }
@@ -160,15 +173,16 @@ namespace Script
 
                     if (type == (int) ItemGridType.Star)
                     {
-                        if (curGrid.LocalId != 0)
+                        if (curGridData.LocalIdItem != 0)
                         {
-                            var targetPropType = ItemManager.Instance.GetItem(curGrid.LocalId).PropType;
+                            var targetPropType = ItemManager.Instance.GetItem(curGridData.LocalIdItem).PropType;
 
                             foreach (var triggerType in curConfig.TriggerStarType)
                             {
-                                if (triggerType == (int) targetPropType)
+                                if (!_tempStarMap.Contains(curGridData.LocalIdItem)&&triggerType == (int) targetPropType)
                                 {
-                                    img.color = Color.yellow; 
+                                    _gridStars[curGridUI.Id].SetActive(true);
+                                    _tempStarMap.Add(curGridData.LocalIdItem);
                                 }
                             }
                          
@@ -213,8 +227,10 @@ namespace Script
         private bool CheckAndPut()
         {
 
-            var curItem = InputManager.Instance.GetCurSelectItem();
-            var curItemConfig = InputManager.Instance.GetCurSelectItemConfig();
+            var curLocalId = InputManager.Instance.GetCurSelectItemId();
+            
+            var curItemData = ItemManager.Instance.GetItemData(curLocalId);
+            var curItemConfig = ConfigManager.Instance.GetConfigItem(curItemData.ConfigId);
             var touchGrids = _touchGrids.ToList();
             touchGrids.Sort((grid1, grid2) => grid1.Id < grid2.Id ?  -1 :1  );
             
@@ -223,7 +239,7 @@ namespace Script
             int startId = touchGrids[0].Id;
       
 
-            var gridTypeArray = ConfigManager.Instance.GetConfigGridTypeArray(curItem.ConfigId,curItem.RotateValue);
+            var gridTypeArray = ConfigManager.Instance.GetConfigGridTypeArray(curItemData.ConfigId,curItemData.RotateValue);
             
             int startIdX = (startId) % _colNum;
             int startIdY = (startId) / _colNum;
@@ -254,26 +270,32 @@ namespace Script
                         index++;
                         continue;
                     }
+
+                    if (index >= touchGrids.Count)
+                    {
+                        Debug.Log("faffa");
+                    }
                     
-                    var curGrid = touchGrids[index];
-                
+                    var curGridUI = touchGrids[index];
+                    var curGridData = _gridsData[curGridUI.Id];
+                    
                     if (type == (int)ItemGridType.Body)
                     {
 
                         if (curItemConfig.PropType == PropType.Bag)
                         {
-                            if (curGrid.LocalBagId != 0)
+                            if (curGridData.LocalIdBag != 0)
                             {
                                 return false;
                             }
                         }
                         else
                         {
-                            if (curGrid.LocalBagId == 0)
+                            if (curGridData.LocalIdBag  == 0)
                             {
                                 return false;
                             }
-                            if (curGrid.LocalId != 0)
+                            if (curGridData.LocalIdItem != 0)
                             {
                                 return false;
                             }
@@ -286,16 +308,16 @@ namespace Script
             
             //put data
 
-            if (!_itemInGridInfoMap.TryGetValue(curItem.LocalId,out var insideGrids))
+            if (!_itemInGridInfoMap.TryGetValue(curItemData.LocalId,out var insideGrids))
             {
-                _itemInGridInfoMap.Add(curItem.LocalId,new List<int>());
-                insideGrids = _itemInGridInfoMap[curItem.LocalId];
+                _itemInGridInfoMap.Add(curItemData.LocalId,new List<int>());
+                insideGrids = _itemInGridInfoMap[curItemData.LocalId];
                 
-                _itemInGridBodyInfoMap.Add(curItem.LocalId,new List<int>());
+                _itemInGridBodyInfoMap.Add(curItemData.LocalId,new List<int>());
                 
             }
             insideGrids.Clear();
-            _itemInGridBodyInfoMap[curItem.LocalId].Clear();
+            _itemInGridBodyInfoMap[curItemData.LocalId].Clear();
 
             index = 0;
 
@@ -310,12 +332,27 @@ namespace Script
                         continue;
                     }
                     
-                    var curGrid = touchGrids[index];
+                    var curGridUI = touchGrids[index];
+                    var curGridData = _gridsData[curGridUI.Id];
+                
                     var type = gridTypeArray[i, j];
 
                     if (type == (int) ItemGridType.Star)
                     {
-                        //curGrid.
+                        if (curGridData.LocalIdItem != 0)
+                        {
+                            var targetPropType = ItemManager.Instance.GetItem(curGridData.LocalIdItem).PropType;
+
+                            foreach (var triggerType in curItemConfig.TriggerStarType)
+                            {
+                                if (!curItemData.StarTargetLocalId.Contains(curGridData.LocalIdItem)&&triggerType == (int) targetPropType)
+                                {
+                                    _gridStars[curGridUI.Id].SetActive(true);
+                                    curItemData.StarTargetLocalId.Add(curGridData.LocalIdItem);
+                                }
+                            }
+                         
+                        }
                     }
                     
                     if (type == (int) ItemGridType.Body)
@@ -323,17 +360,17 @@ namespace Script
                         //数据写入
                         if (curItemConfig.PropType == PropType.Bag)
                         {
-                            curGrid.LocalBagId = curItem.LocalId;
+                            curGridData.LocalIdBag = curItemData.LocalId;
                         }
                         else
                         {
-                            curGrid.LocalId = curItem.LocalId;
+                            curGridData.LocalIdItem = curItemData.LocalId;
                         }
                         
-                        _itemInGridBodyInfoMap[curItem.LocalId].Add(curGrid.Id);
+                        _itemInGridBodyInfoMap[curItemData.LocalId].Add(curGridUI.Id);
                         
                         //缓存物品在哪些格子信息
-                        insideGrids.Add(curGrid.Id);
+                        insideGrids.Add(curGridUI.Id);
                     }
                 
                     index++;
@@ -355,7 +392,7 @@ namespace Script
 
             foreach (var id in grids)
             {
-                _grids[id].RemoveInfo(itemLocalId);
+                _gridsData[id].RemoveInfo(itemLocalId);
             }
             
             SetAlphaGridByItemId(itemLocalId,false);
@@ -377,7 +414,7 @@ namespace Script
                 }
                 else
                 {
-                    if (_grids[id].LocalBagId == 0)
+                    if (_gridsData[id].LocalIdBag == 0)
                     {
                         _gridViews[id].SetActive(isOpen);
                     }

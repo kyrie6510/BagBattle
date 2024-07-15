@@ -6,11 +6,9 @@
     }
 
 
-    public struct OnClick : BaseEvent
+    public struct OnItemSelectEvent : BaseEvent
     {
-        public int Id;
-        public int X;
-        public int Y;
+        public int LocalId;
     }
    
 }
