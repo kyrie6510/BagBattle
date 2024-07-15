@@ -53,7 +53,7 @@ public class InputManager : Singleton<InputManager>
             if (_curSelectItem.RotateValue == 360) _curSelectItem.RotateValue = 0;
             
             UpdateMousePointSize();
-            
+            GridManager.Instance.RefreshState();
         }
         
         this._curSelectItem.transform.position = Input.mousePosition;

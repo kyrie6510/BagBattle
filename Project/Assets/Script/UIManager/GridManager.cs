@@ -9,9 +9,12 @@ namespace Script
     public class GridManager: Singleton<GridManager>
     {
         private List<UIGrid> _grids = new List<UIGrid>();
-        private List<GameObject> _gridAlphas = new List<GameObject>();
+        private List<GameObject> _gridViews = new List<GameObject>();
+        private List<GameObject> _gridStars = new List<GameObject>();
         private Dictionary<int, List<int>> _itemInGridInfoMap = new();
         private Dictionary<int, List<int>> _itemInGridBodyInfoMap = new();
+        private Dictionary<int, List<int>> _itemStarInfoMap = new();
+        
 
         private int _rowNum = 7;
         private int _colNum = 9;
@@ -19,8 +22,9 @@ namespace Script
         public override void Awake()
         {
             var gridObj = GameObject.Find("BagGrid");
-            var griAlphaObj = GameObject.Find("BagGridAlpha");
-
+            var gridViewObj = GameObject.Find("BagGridView");
+            var gridStarObj = GameObject.Find("BagStarView");
+            
             for (int i = 0; i < gridObj.transform.childCount; i++)
             {
                 var uiGrid = gridObj.transform.GetChild(i).GetComponent<UIGrid>();
@@ -29,12 +33,18 @@ namespace Script
                 uiGrid.transform.GetChild(0).GetComponent<Text>().text = $"{i}";
             }
             
-            for (int i = 0; i < griAlphaObj.transform.childCount; i++)
+            for (int i = 0; i < gridViewObj.transform.childCount; i++)
             {
-                var obj = griAlphaObj.transform.GetChild(i).gameObject;
-                _gridAlphas.Add(obj);
+                var obj = gridStarObj.transform.GetChild(i).gameObject;
+                _gridViews.Add(obj);
                 obj.gameObject.SetActive(false);
-                
+            }
+            
+            for (int i = 0; i < gridStarObj.transform.childCount; i++)
+            {
+                var obj = gridStarObj.transform.GetChild(i).gameObject;
+                _gridStars.Add(obj);
+                obj.gameObject.SetActive(false);
             }
         }
 
@@ -51,12 +61,20 @@ namespace Script
             return null;
         }
         
-        public void RefreshState(HashSet<UIGrid> touchGrids)
+        public void RefreshState()
         {
+            HashSet<UIGrid> touchGrids = _touchGrids;
+            
             foreach (var grid in _grids)
             {
                 grid.GetComponent<Image>().color = Color.cyan;
             }
+            
+            foreach (var star in _gridStars)
+            {
+                star.gameObject.SetActive(false);
+            }
+            
             
             var sortTouchGrids = touchGrids.ToList();
             sortTouchGrids.Sort((grid1, grid2) => grid1.Id < grid2.Id ?  -1 :1  );
@@ -93,13 +111,16 @@ namespace Script
                         continue;
                     }
 
+                    var curGrid = sortTouchGrids[index];
+                    
                     if (type == (int) ItemGridType.Star)
                     {
                         // index++;
                         // continue;
+                        _gridStars[curGrid.Id].SetActive(true);
                     }
 
-                    var curGrid = sortTouchGrids[index];
+                    
                     
                     var img = curGrid.GetComponent<Image>();
                     if (type == (int) ItemGridType.Body)
@@ -169,7 +190,7 @@ namespace Script
             this._touchGrids.Add(grid);
             if (InputManager.Instance.GetCurSelectItemGridCont() == _touchGrids.Count)
             {
-               RefreshState(_touchGrids);
+               RefreshState();
             }
 
         }
@@ -179,14 +200,14 @@ namespace Script
             this._touchGrids.Remove(grid);
             if (InputManager.Instance.GetCurSelectItemGridCont() == _touchGrids.Count)
             {
-                RefreshState(_touchGrids);
+                RefreshState();
             }
         }
 
         public void TouchClear()
         {
             _touchGrids.Clear();
-            RefreshState(_touchGrids);
+            RefreshState();
         }
 
         private bool CheckAndPut()
@@ -291,6 +312,11 @@ namespace Script
                     
                     var curGrid = touchGrids[index];
                     var type = gridTypeArray[i, j];
+
+                    if (type == (int) ItemGridType.Star)
+                    {
+                        //curGrid.
+                    }
                     
                     if (type == (int) ItemGridType.Body)
                     {
@@ -347,13 +373,13 @@ namespace Script
             {
                 if (isOpen)
                 {
-                    _gridAlphas[id].SetActive(isOpen);
+                    _gridViews[id].SetActive(isOpen);
                 }
                 else
                 {
                     if (_grids[id].LocalBagId == 0)
                     {
-                        _gridAlphas[id].SetActive(isOpen);
+                        _gridViews[id].SetActive(isOpen);
                     }
                 }
             }
