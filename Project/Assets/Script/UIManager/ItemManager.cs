@@ -176,6 +176,11 @@ namespace Script
         
         public void BackToBox(int localId)
         {
+            if (!_itemUIMap.ContainsKey(localId))
+            {
+                return;
+            }
+            
             var item = _itemUIMap[localId];
             
             item.transform.SetParent(BoxObj.transform);
