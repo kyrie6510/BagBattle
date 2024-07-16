@@ -174,8 +174,10 @@ namespace Script
         }
         
         
-        public void BackToBox(UIItem item)
+        public void BackToBox(int localId)
         {
+            var item = _itemUIMap[localId];
+            
             item.transform.SetParent(BoxObj.transform);
             item.transform.localPosition = Vector3.zero;
             item.SetRigState(true);

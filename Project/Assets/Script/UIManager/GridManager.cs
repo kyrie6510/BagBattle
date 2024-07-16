@@ -287,6 +287,11 @@ namespace Script
         }
 
 
+        /// <summary>
+        /// 当前选中道具选中之前所在的格子数据
+        /// </summary>
+        private HashSet<int> _catchCurSelectLastPosGrids = new HashSet<int>();
+        
         private void RemoveItemInGridInfo(int itemLocalId)
         {
             if (!_itemInGridInfoMap.TryGetValue(itemLocalId, out var grids))
@@ -294,9 +299,13 @@ namespace Script
                 return;
             }
 
+            _catchCurSelectLastPosGrids.Clear();
+            
             foreach (var id in grids)
             {
                 _gridsData[id].RemoveInfo(itemLocalId);
+                _catchCurSelectLastPosGrids.Add(id);
+
             }
         }
 
@@ -304,7 +313,7 @@ namespace Script
         public void OnDrop()
         {
             var curItem = InputManager.Instance.GetCurSelectItem();
-
+            
             if (_isCanPutData)
             {
                 PutData();
@@ -320,7 +329,27 @@ namespace Script
             else
             {
                 //飞向盒子
-                ItemManager.Instance.BackToBox(curItem);
+                ItemManager.Instance.BackToBox(curItem.LocalId);
+
+                var config = ConfigManager.Instance.GetConfigItem(curItem.ConfigId);
+
+                if (config.PropType == PropType.Bag)
+                {
+                    //如果当前选中为背包,则需要移除在背包中的物品
+                    foreach (var gridId in _catchCurSelectLastPosGrids)
+                    {
+                        var gridData = _gridsData[gridId];
+                        var bagItemLocalId = gridData.LocalIdItem;
+                        if (bagItemLocalId!= 0)
+                        {
+                            gridData.LocalIdItem = 0;
+                            ItemManager.Instance.BackToBox(bagItemLocalId);
+                        }
+                    }
+                }
+                
+              
+                
             }
 
             var info = _isCanPutData ? "可以放置" : "不可以放置";
