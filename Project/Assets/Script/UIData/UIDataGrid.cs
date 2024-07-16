@@ -1,3 +1,4 @@
+using Script;
 using UnityEngine;
 
 
@@ -26,4 +27,18 @@ public class UIDataGrid
         if (localId == LocalIdItem)  LocalIdItem = 0;
         if (localId == LocalIdBag) LocalIdBag = 0;
     }
+
+    public void PutItemData(int itemId,int itemConfigId)
+    {
+        var config = ConfigManager.Instance.GetConfigItem(itemConfigId);
+        if (config.PropType == PropType.Bag)
+        {
+            LocalIdBag = itemId;
+        }
+        else
+        {
+            LocalIdItem = itemId;
+        }
+    }
+    
 }

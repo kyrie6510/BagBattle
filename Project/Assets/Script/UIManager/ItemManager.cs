@@ -160,6 +160,8 @@ namespace Script
 
         public void OnItemSetToBag(UIItem item)
         {
+            item.SetRigState(false);
+            
             if (_itemMap[item.LocalId].PropType == PropType.Bag)
             {
                 item.transform.SetParent(BagItem.transform);
@@ -168,8 +170,7 @@ namespace Script
             {
                 item.transform.SetParent(PropItem.transform);
             }
-            
-            
+           
         }
         
         

@@ -1,20 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
+using Script.Event;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Script
 {
-    public class GridManager: Singleton<GridManager>
+    public class GridManager : Singleton<GridManager>
     {
         //UI
         private List<UIGrid> _grids = new List<UIGrid>();
         private List<GameObject> _gridViews = new List<GameObject>();
         private List<GameObject> _gridStars = new List<GameObject>();
-        
+
         //数据
+        /// <summary>
+        /// itemLocalId gridId
+        /// </summary>
         private Dictionary<int, List<int>> _itemInGridInfoMap = new();
+
         private Dictionary<int, List<int>> _itemInGridBodyInfoMap = new();
         private Dictionary<int, List<int>> _itemStarInfoMap = new();
 
@@ -23,13 +27,16 @@ namespace Script
 
         private int _rowNum = 7;
         private int _colNum = 9;
-        
+
         public override void Awake()
         {
             var gridObj = GameObject.Find("BagGrid");
             var gridViewObj = GameObject.Find("BagGridView");
             var gridStarObj = GameObject.Find("BagStarView");
-            
+
+            EventManager.Instance.AddListener<OnItemSelectEvent>(OnItemSelectFunction);
+
+
             for (int i = 0; i < gridObj.transform.childCount; i++)
             {
                 var uiGrid = gridObj.transform.GetChild(i).GetComponent<UIGrid>();
@@ -42,16 +49,15 @@ namespace Script
                     Id = i
                 };
                 _gridsData.Add(dataGrid);
-
             }
-            
+
             for (int i = 0; i < gridViewObj.transform.childCount; i++)
             {
                 var obj = gridStarObj.transform.GetChild(i).gameObject;
                 _gridViews.Add(obj);
                 obj.gameObject.SetActive(false);
             }
-            
+
             for (int i = 0; i < gridStarObj.transform.childCount; i++)
             {
                 var obj = gridStarObj.transform.GetChild(i).gameObject;
@@ -60,86 +66,79 @@ namespace Script
             }
         }
 
-        public UIGrid GetGrid(int x,int y)
+        private void OnItemSelectFunction(OnItemSelectEvent e)
         {
-            if (x < 0 || y < 0) return null;
-            
-            var id = y * 9 + x;
-            if (_grids.Count > id)
-            {
-                return _grids[id];
-            }
-
-            return null;
+            RemoveItemInGridInfo(e.LocalId);
         }
 
-        private HashSet<int> _tempStarMap = new HashSet<int>();
         
-        public void RefreshState()
+        
+        public void SetTouchGrid(Vector2 quadMin, Vector2 quadMax)
         {
+            _touchGrids.Clear();
+
             HashSet<UIGrid> touchGrids = _touchGrids;
+
+            //InitData
+            _catchStarLocalIdMap.Clear();
+            _catchBodyGrids.Clear();
+            _catchStarGrids.Clear();
+            SetCanPut(true);
             
+            
+            //UI Init
             foreach (var grid in _grids)
             {
                 grid.GetComponent<Image>().color = Color.cyan;
             }
-            
+
             foreach (var star in _gridStars)
             {
                 star.gameObject.SetActive(false);
             }
-            _tempStarMap.Clear();
             
-            
-            var sortTouchGrids = touchGrids.ToList();
-            sortTouchGrids.Sort((grid1, grid2) => grid1.Id < grid2.Id ?  -1 :1  );
-            
-            if (sortTouchGrids.Count == 0) return;
-            int index = 0;
-            int startId = sortTouchGrids[0].Id;
-            int startIdX = (startId) % _colNum;
-            int startIdY = (startId) / _colNum;
-
             int curSelectItemId = InputManager.Instance.GetCurSelectItemId();
-            
             var curItem = ItemManager.Instance.GetItemData(curSelectItemId);
             var curConfig = ConfigManager.Instance.GetConfigItem(curItem.ConfigId);
-            if(curItem==null) return;
+            var gridTypeArray = ConfigManager.Instance.GetConfigGridTypeArray(curItem.ConfigId, curItem.RotateValue);
             
-            
-            var gridTypeArray = ConfigManager.Instance.GetConfigGridTypeArray(curItem.ConfigId,curItem.RotateValue);
-            
-            //check
-            for (int i = 0; i < gridTypeArray.GetLength(0); i++)
+            // int x = 0;
+            // int y = 0;
+
+            for (int j = (int) quadMin.y,y = 0; j > quadMax.y; j-- , y++)
             {
-                for (int j = 0; j < gridTypeArray.GetLength(1); j++)
+                for (int i = (int) quadMin.x, x=0; i < quadMax.x; i++ , x++)
                 {
+                    var uiGrid = GetGridId(i, j);
                     
-                    var type = gridTypeArray[i, j];
-                    //安全校验
-                    if (startIdX + j >= _colNum || startIdY + i >= _rowNum)
+                    var type = gridTypeArray[y,x];
+                    
+                    if (uiGrid == null)
+                    {
+                        if (type == (int) ItemGridType.Body)
+                        {
+                            SetCanPut(false);
+                        }
+                        
+                        continue;
+                    }
+                    
+                    if (type == (int) ItemGridType.None || type == (int) ItemGridType.Target)
                     {
                         continue;
                     }
-
-                    if (type == (int)ItemGridType.None||type == (int)ItemGridType.Target)
-                    {
-                        index++;
-                        continue;
-                    }
-
-                    if (index >= sortTouchGrids.Count)
-                    {
-                        Debug.Log("dadada");
-                    }
                     
-                    var curGridUI = sortTouchGrids[index];
+                    
+                    var curGridUI = uiGrid;
+                   
+                    
                     var curGridData = _gridsData[curGridUI.Id];
-                    
-                    
+
                     var img = curGridUI.GetComponent<Image>();
                     if (type == (int) ItemGridType.Body)
                     {
+                        _catchBodyGrids.Add(curGridData.Id);
+
                         if (curConfig.PropType == PropType.Bag)
                         {
                             if (curGridData.LocalIdBag == 0)
@@ -148,6 +147,7 @@ namespace Script
                             }
                             else
                             {
+                                SetCanPut(false);
                                 img.color = Color.red;
                             }
                         }
@@ -155,16 +155,18 @@ namespace Script
                         {
                             if (curGridData.LocalIdBag == 0)
                             {
+                                SetCanPut(false);
                                 img.color = Color.red;
                             }
                             else
                             {
-                                if (curGridData.LocalIdItem==0)
+                                if (curGridData.LocalIdItem == 0)
                                 {
                                     img.color = Color.green;
                                 }
                                 else
                                 {
+                                    SetCanPut(false);
                                     img.color = Color.red;
                                 }
                             }
@@ -177,209 +179,111 @@ namespace Script
                         {
                             var targetPropType = ItemManager.Instance.GetItem(curGridData.LocalIdItem).PropType;
 
-                            foreach (var triggerType in curConfig.TriggerStarType)
+                            if (curConfig.TriggerStarType.Contains((int) targetPropType) &&
+                                !_catchStarLocalIdMap.Contains(curGridData.LocalIdItem))
                             {
-                                if (!_tempStarMap.Contains(curGridData.LocalIdItem)&&triggerType == (int) targetPropType)
-                                {
-                                    _gridStars[curGridUI.Id].SetActive(true);
-                                    _tempStarMap.Add(curGridData.LocalIdItem);
-                                }
+                                _gridStars[curGridUI.Id].SetActive(true);
+
+                                _catchStarLocalIdMap.Add(curGridData.LocalIdItem);
+                                _catchStarGrids.Add(curGridData.Id);
                             }
-                         
                         }
-           
                     }
-                    
-                    
-                    index++;
                     
                 }
             }
+
+            string info = "";
+            foreach (var uiGrid in _touchGrids)
+            {
+                info += $"Id:{uiGrid.Id} ";
+            }
+
+            //ClearConsole();
+            Debug.Log(info);
+        }
+
+
+        /// <summary>
+        ///  x y 必须在第二象限
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public UIGrid GetGridId(int x, int y)
+        {
+            if (x < 0 || y > 0) return null;
+            if (x >= _colNum || y >= _rowNum) return null;
+
+            y = Mathf.Abs(y);
+
+            var id = y * 9 + x;
+            if (_grids.Count > id)
+            {
+                return _grids[id];
+            }
+
+            return null;
+        }
+
+        private bool _isCanPutData = false;
+
+        private HashSet<UIGrid> _touchGrids = new HashSet<UIGrid>();
+
+        //缓存相关
+        //当前选中物提buffer对象
+        private HashSet<int> _catchStarLocalIdMap = new HashSet<int>();
+
+        //当前选中物体的bodyGris
+        private HashSet<int> _catchBodyGrids = new HashSet<int>();
+
+        //当前选中物体的starGrids
+        private HashSet<int> _catchStarGrids = new HashSet<int>();
+
+
+        private void SetCanPut(bool isCanPut)
+        {
+            _isCanPutData = isCanPut;
         }
         
-        private HashSet<UIGrid> _touchGrids = new HashSet<UIGrid>();
-    
-        public void AddTouchUIGrid(UIGrid grid)
-        {
-            this._touchGrids.Add(grid);
-            if (InputManager.Instance.GetCurSelectItemGridCont() == _touchGrids.Count)
-            {
-               RefreshState();
-            }
-
-        }
-
-        public void RemoveTouchUIGrid(UIGrid grid)
-        {
-            this._touchGrids.Remove(grid);
-            if (InputManager.Instance.GetCurSelectItemGridCont() == _touchGrids.Count)
-            {
-                RefreshState();
-            }
-        }
-
         public void TouchClear()
         {
             _touchGrids.Clear();
-            RefreshState();
         }
 
-        private bool CheckAndPut()
+
+        private void PutData()
         {
+            if (!_isCanPutData) return;
 
-            var curLocalId = InputManager.Instance.GetCurSelectItemId();
-            
-            var curItemData = ItemManager.Instance.GetItemData(curLocalId);
-            var curItemConfig = ConfigManager.Instance.GetConfigItem(curItemData.ConfigId);
-            var touchGrids = _touchGrids.ToList();
-            touchGrids.Sort((grid1, grid2) => grid1.Id < grid2.Id ?  -1 :1  );
-            
-            if (touchGrids.Count == 0) return false;
-            int index = 0;
-            int startId = touchGrids[0].Id;
-      
+            var curItemUI = InputManager.Instance.GetCurSelectItem();
+            if (curItemUI == null) return;
 
-            var gridTypeArray = ConfigManager.Instance.GetConfigGridTypeArray(curItemData.ConfigId,curItemData.RotateValue);
-            
-            int startIdX = (startId) % _colNum;
-            int startIdY = (startId) / _colNum;
-            
-            //check
-            for (int i = 0; i < gridTypeArray.GetLength(0); i++)
+            var curItemData = ItemManager.Instance.GetItemData(curItemUI.LocalId);
+            if (curItemData == null) return;
+
+            var localID = curItemData.LocalId;
+
+            if (!_itemInGridInfoMap.TryGetValue(localID, out var itemInGrids))
             {
-                for (int j = 0; j < gridTypeArray.GetLength(1); j++)
-                {
-                    
-                    
-                    var type = gridTypeArray[i, j];
-                    
-                    //安全校验
-                    if (startIdX + j >= _colNum || startIdY + i >= _rowNum)
-                    {
-                        if (type == (int) ItemGridType.Body)
-                        {
-                            return false;
-                        }
-                        continue;
-                    }
-                    
-                    //当前选中物品在该格子的格子类型
-                    if (type == (int) ItemGridType.None || type == (int) ItemGridType.Star ||
-                        type == (int) ItemGridType.Target)
-                    {
-                        index++;
-                        continue;
-                    }
-
-                    if (index >= touchGrids.Count)
-                    {
-                        Debug.Log("faffa");
-                    }
-                    
-                    var curGridUI = touchGrids[index];
-                    var curGridData = _gridsData[curGridUI.Id];
-                    
-                    if (type == (int)ItemGridType.Body)
-                    {
-
-                        if (curItemConfig.PropType == PropType.Bag)
-                        {
-                            if (curGridData.LocalIdBag != 0)
-                            {
-                                return false;
-                            }
-                        }
-                        else
-                        {
-                            if (curGridData.LocalIdBag  == 0)
-                            {
-                                return false;
-                            }
-                            if (curGridData.LocalIdItem != 0)
-                            {
-                                return false;
-                            }
-                        }
-                    }
-                    index++;
-                }
+                itemInGrids = new List<int>();
+                _itemInGridInfoMap.Add(localID, itemInGrids);
             }
-            
-            
-            //put data
 
-            if (!_itemInGridInfoMap.TryGetValue(curItemData.LocalId,out var insideGrids))
+            itemInGrids.Clear();
+
+            foreach (var id in _catchBodyGrids)
             {
-                _itemInGridInfoMap.Add(curItemData.LocalId,new List<int>());
-                insideGrids = _itemInGridInfoMap[curItemData.LocalId];
-                
-                _itemInGridBodyInfoMap.Add(curItemData.LocalId,new List<int>());
-                
+                _gridsData[id].PutItemData(curItemUI.LocalId, curItemUI.ConfigId);
+                itemInGrids.Add(id);
             }
-            insideGrids.Clear();
-            _itemInGridBodyInfoMap[curItemData.LocalId].Clear();
 
-            index = 0;
 
-            for (int i = 0; i < gridTypeArray.GetLength(0); i++)
+            curItemData.StarTargetLocalId.Clear();
+            foreach (var id in _catchStarLocalIdMap)
             {
-                for (int j = 0; j < gridTypeArray.GetLength(1); j++)
-                {
-                    
-                    //安全校验
-                    if (startIdX + j >= _colNum || startIdY + i >= _rowNum)
-                    {
-                        continue;
-                    }
-                    
-                    var curGridUI = touchGrids[index];
-                    var curGridData = _gridsData[curGridUI.Id];
-                
-                    var type = gridTypeArray[i, j];
-
-                    if (type == (int) ItemGridType.Star)
-                    {
-                        if (curGridData.LocalIdItem != 0)
-                        {
-                            var targetPropType = ItemManager.Instance.GetItem(curGridData.LocalIdItem).PropType;
-
-                            foreach (var triggerType in curItemConfig.TriggerStarType)
-                            {
-                                if (!curItemData.StarTargetLocalId.Contains(curGridData.LocalIdItem)&&triggerType == (int) targetPropType)
-                                {
-                                    _gridStars[curGridUI.Id].SetActive(true);
-                                    curItemData.StarTargetLocalId.Add(curGridData.LocalIdItem);
-                                }
-                            }
-                         
-                        }
-                    }
-                    
-                    if (type == (int) ItemGridType.Body)
-                    {
-                        //数据写入
-                        if (curItemConfig.PropType == PropType.Bag)
-                        {
-                            curGridData.LocalIdBag = curItemData.LocalId;
-                        }
-                        else
-                        {
-                            curGridData.LocalIdItem = curItemData.LocalId;
-                        }
-                        
-                        _itemInGridBodyInfoMap[curItemData.LocalId].Add(curGridUI.Id);
-                        
-                        //缓存物品在哪些格子信息
-                        insideGrids.Add(curGridUI.Id);
-                    }
-                
-                    index++;
-                    
-                }
+                curItemData.StarTargetLocalId.Add(id);
             }
-            
-            
-            return true;
         }
 
 
@@ -394,59 +298,33 @@ namespace Script
             {
                 _gridsData[id].RemoveInfo(itemLocalId);
             }
-            
-            SetAlphaGridByItemId(itemLocalId,false);
-         
         }
 
-        void SetAlphaGridByItemId(int itemLocalId,bool isOpen)
-        {
-            if (!_itemInGridBodyInfoMap.TryGetValue(itemLocalId, out var bodyGrids))
-            {
-                return;
-            }
 
-            foreach (var id in bodyGrids)
-            {
-                if (isOpen)
-                {
-                    _gridViews[id].SetActive(isOpen);
-                }
-                else
-                {
-                    if (_gridsData[id].LocalIdBag == 0)
-                    {
-                        _gridViews[id].SetActive(isOpen);
-                    }
-                }
-            }
-        }
-        
-        
         public void OnDrop()
         {
-            
             var curItem = InputManager.Instance.GetCurSelectItem();
-            var curLocalId = curItem.LocalId;
-            RemoveItemInGridInfo(curLocalId);
-            
-            if (CheckAndPut())
+
+            if (_isCanPutData)
             {
-                Debug.Log("可以放置");
+                PutData();
+
+
                 //显示打开
                 ItemManager.Instance.OnItemSetToBag(curItem);
-                SetAlphaGridByItemId(curLocalId,true);
-                curItem.SetRigState(false);
+                foreach (var gridId in _catchStarGrids)
+                {
+                    _gridStars[gridId].gameObject.SetActive(false);
+                }
             }
             else
             {
                 //飞向盒子
                 ItemManager.Instance.BackToBox(curItem);
-                Debug.Log("不可以放置");
             }
-            
-            TouchClear();
+
+            var info = _isCanPutData ? "可以放置" : "不可以放置";
+            Debug.Log(info);
         }
-        
     }
 }
