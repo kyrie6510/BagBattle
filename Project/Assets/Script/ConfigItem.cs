@@ -21,8 +21,16 @@ namespace Script
     public enum PropType
     {
         Bag = 0,
-        Weapon = 1,
-        Fruits = 2,
+        MeleeWeapon = 1,
+        RangedWeapon = 2,
+        Food = 3,
+        Accessory = 4,               //配饰
+        GemStone = 5,                //宝石
+        Pet = 6,                     //宠物
+        Potion = 7,                  //药水
+        Card = 8,                    //卡牌
+        Shield = 9,                  //盾牌
+        Glove = 10,                  //手套
     }
     
     
@@ -50,6 +58,8 @@ namespace Script
         //触发星物品的星物品类型
         public int[] TriggerStarType;
 
+        //冷却时间
+        public int Interval;
 
     }
 }

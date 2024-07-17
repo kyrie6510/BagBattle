@@ -66,7 +66,7 @@ namespace Script
             {
                 1, new ConfigItem()
                 {
-                    PropType = PropType.Weapon,
+                    PropType = PropType.MeleeWeapon,
                     Name = "木剑",
                     GridType = new int[,]
                     {
@@ -85,7 +85,7 @@ namespace Script
             {
                 2, new ConfigItem()
                 {
-                    PropType = PropType.Weapon,
+                    PropType = PropType.MeleeWeapon,
                     Name = "藤蔓",
                     GridType = new int[,]
                     {
@@ -144,7 +144,7 @@ namespace Script
             {
                 5, new ConfigItem()
                 {
-                    PropType = PropType.Fruits,
+                    PropType = PropType.Food,
                     Name = "香蕉",
                     GridType = new int[,]
                     {
@@ -160,14 +160,14 @@ namespace Script
                     UIWidth = 2,
                     UIHeight = 2,
                     TexturePath = "Banana",
-                    TriggerStarType = new []{(int)PropType.Fruits},
+                    TriggerStarType = new []{(int)PropType.Food},
                 }
             },
             
             {
                 6, new ConfigItem()
                 {
-                    PropType = PropType.Fruits,
+                    PropType = PropType.Food,
                     Name = "蘑菇",
                     GridType = new int[,]
                     {
@@ -183,7 +183,7 @@ namespace Script
                     UIWidth = 1,
                     UIHeight = 2,
                     TexturePath = "FlyAgaric",
-                    TriggerStarType = new []{(int)PropType.Fruits},
+                    TriggerStarType = new []{(int)PropType.Food},
                 }
             },
         };

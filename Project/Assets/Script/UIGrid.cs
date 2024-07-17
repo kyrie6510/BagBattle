@@ -8,7 +8,7 @@ public enum UIGridState
 {
     None = 0,
     Bag = 1,
-    BagAndItem =2 ,
+    BagAndItem = 2,
 }
 
 public class UIGrid : MonoBehaviour
@@ -17,10 +17,11 @@ public class UIGrid : MonoBehaviour
     private Image _imgBg;
 
     private UIGridState _state;
+
     public int Id;
     // public int LocalId;
     // public int LocalBagId;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,5 @@ public class UIGrid : MonoBehaviour
         _imgBg = GetComponent<Image>();
     }
 
-   
-
+    
 }
