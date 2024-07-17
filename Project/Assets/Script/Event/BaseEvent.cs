@@ -10,5 +10,11 @@
     {
         public int LocalId;
     }
+    
+    
+    public struct OnGamePlayEvent : BaseEvent
+    {
+        
+    }
    
 }
