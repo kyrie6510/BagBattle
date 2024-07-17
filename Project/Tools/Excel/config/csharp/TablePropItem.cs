@@ -17,28 +17,100 @@ public struct TablePropItemRowData : IFlatbufferObject
   public TablePropItemRowData __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
   public short Id { get { int o = __p.__offset(4); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
-  public short PropType { get { int o = __p.__offset(6); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
-  public short ItemGridType { get { int o = __p.__offset(8); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
-  public short MaxScore { get { int o = __p.__offset(10); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public string Name { get { int o = __p.__offset(6); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetNameBytes() { return __p.__vector_as_span<byte>(6, 1); }
+#else
+  public ArraySegment<byte>? GetNameBytes() { return __p.__vector_as_arraysegment(6); }
+#endif
+  public byte[] GetNameArray() { return __p.__vector_as_array<byte>(6); }
+  public short PropType { get { int o = __p.__offset(8); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public int ItemGridType(int j) { int o = __p.__offset(10); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
+  public int ItemGridTypeLength { get { int o = __p.__offset(10); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<int> GetItemGridTypeBytes() { return __p.__vector_as_span<int>(10, 4); }
+#else
+  public ArraySegment<byte>? GetItemGridTypeBytes() { return __p.__vector_as_arraysegment(10); }
+#endif
+  public int[] GetItemGridTypeArray() { return __p.__vector_as_array<int>(10); }
+  public short Power { get { int o = __p.__offset(12); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public float Rate { get { int o = __p.__offset(14); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
+  public short Interval { get { int o = __p.__offset(16); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public int Damage(int j) { int o = __p.__offset(18); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
+  public int DamageLength { get { int o = __p.__offset(18); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<int> GetDamageBytes() { return __p.__vector_as_span<int>(18, 4); }
+#else
+  public ArraySegment<byte>? GetDamageBytes() { return __p.__vector_as_arraysegment(18); }
+#endif
+  public int[] GetDamageArray() { return __p.__vector_as_array<int>(18); }
+  public short Cost { get { int o = __p.__offset(20); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public short Width { get { int o = __p.__offset(22); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public short Height { get { int o = __p.__offset(24); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public short UIWidth { get { int o = __p.__offset(26); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public short UIHeight { get { int o = __p.__offset(28); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public string TexturePath { get { int o = __p.__offset(30); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetTexturePathBytes() { return __p.__vector_as_span<byte>(30, 1); }
+#else
+  public ArraySegment<byte>? GetTexturePathBytes() { return __p.__vector_as_arraysegment(30); }
+#endif
+  public byte[] GetTexturePathArray() { return __p.__vector_as_array<byte>(30); }
 
   public static Offset<TablePropItemRowData> CreateTablePropItemRowData(FlatBufferBuilder builder,
       short Id = 0,
+      StringOffset NameOffset = default(StringOffset),
       short PropType = 0,
-      short ItemGridType = 0,
-      short MaxScore = 0) {
-    builder.StartTable(4);
-    TablePropItemRowData.AddMaxScore(builder, MaxScore);
-    TablePropItemRowData.AddItemGridType(builder, ItemGridType);
+      VectorOffset ItemGridTypeOffset = default(VectorOffset),
+      short Power = 0,
+      float Rate = 0.0f,
+      short Interval = 0,
+      VectorOffset DamageOffset = default(VectorOffset),
+      short Cost = 0,
+      short Width = 0,
+      short Height = 0,
+      short UIWidth = 0,
+      short UIHeight = 0,
+      StringOffset TexturePathOffset = default(StringOffset)) {
+    builder.StartTable(14);
+    TablePropItemRowData.AddTexturePath(builder, TexturePathOffset);
+    TablePropItemRowData.AddDamage(builder, DamageOffset);
+    TablePropItemRowData.AddRate(builder, Rate);
+    TablePropItemRowData.AddItemGridType(builder, ItemGridTypeOffset);
+    TablePropItemRowData.AddName(builder, NameOffset);
+    TablePropItemRowData.AddUIHeight(builder, UIHeight);
+    TablePropItemRowData.AddUIWidth(builder, UIWidth);
+    TablePropItemRowData.AddHeight(builder, Height);
+    TablePropItemRowData.AddWidth(builder, Width);
+    TablePropItemRowData.AddCost(builder, Cost);
+    TablePropItemRowData.AddInterval(builder, Interval);
+    TablePropItemRowData.AddPower(builder, Power);
     TablePropItemRowData.AddPropType(builder, PropType);
     TablePropItemRowData.AddId(builder, Id);
     return TablePropItemRowData.EndTablePropItemRowData(builder);
   }
 
-  public static void StartTablePropItemRowData(FlatBufferBuilder builder) { builder.StartTable(4); }
+  public static void StartTablePropItemRowData(FlatBufferBuilder builder) { builder.StartTable(14); }
   public static void AddId(FlatBufferBuilder builder, short Id) { builder.AddShort(0, Id, 0); }
-  public static void AddPropType(FlatBufferBuilder builder, short PropType) { builder.AddShort(1, PropType, 0); }
-  public static void AddItemGridType(FlatBufferBuilder builder, short ItemGridType) { builder.AddShort(2, ItemGridType, 0); }
-  public static void AddMaxScore(FlatBufferBuilder builder, short MaxScore) { builder.AddShort(3, MaxScore, 0); }
+  public static void AddName(FlatBufferBuilder builder, StringOffset NameOffset) { builder.AddOffset(1, NameOffset.Value, 0); }
+  public static void AddPropType(FlatBufferBuilder builder, short PropType) { builder.AddShort(2, PropType, 0); }
+  public static void AddItemGridType(FlatBufferBuilder builder, VectorOffset ItemGridTypeOffset) { builder.AddOffset(3, ItemGridTypeOffset.Value, 0); }
+  public static VectorOffset CreateItemGridTypeVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateItemGridTypeVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static void StartItemGridTypeVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddPower(FlatBufferBuilder builder, short Power) { builder.AddShort(4, Power, 0); }
+  public static void AddRate(FlatBufferBuilder builder, float Rate) { builder.AddFloat(5, Rate, 0.0f); }
+  public static void AddInterval(FlatBufferBuilder builder, short Interval) { builder.AddShort(6, Interval, 0); }
+  public static void AddDamage(FlatBufferBuilder builder, VectorOffset DamageOffset) { builder.AddOffset(7, DamageOffset.Value, 0); }
+  public static VectorOffset CreateDamageVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateDamageVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static void StartDamageVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddCost(FlatBufferBuilder builder, short Cost) { builder.AddShort(8, Cost, 0); }
+  public static void AddWidth(FlatBufferBuilder builder, short Width) { builder.AddShort(9, Width, 0); }
+  public static void AddHeight(FlatBufferBuilder builder, short Height) { builder.AddShort(10, Height, 0); }
+  public static void AddUIWidth(FlatBufferBuilder builder, short UIWidth) { builder.AddShort(11, UIWidth, 0); }
+  public static void AddUIHeight(FlatBufferBuilder builder, short UIHeight) { builder.AddShort(12, UIHeight, 0); }
+  public static void AddTexturePath(FlatBufferBuilder builder, StringOffset TexturePathOffset) { builder.AddOffset(13, TexturePathOffset.Value, 0); }
   public static Offset<TablePropItemRowData> EndTablePropItemRowData(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<TablePropItemRowData>(o);

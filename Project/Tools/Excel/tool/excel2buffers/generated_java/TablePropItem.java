@@ -18,55 +18,82 @@ public final class TablePropItemRowData extends Table {
   public ByteBuffer NameAsByteBuffer() { return __vector_as_bytebuffer(6, 1); }
   public ByteBuffer NameInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 6, 1); }
   public short PropType() { int o = __offset(8); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
-  public short ItemGridType(int j) { int o = __offset(10); return o != 0 ? bb.getShort(__vector(o) + j * 2) : 0; }
+  public int ItemGridType(int j) { int o = __offset(10); return o != 0 ? bb.getInt(__vector(o) + j * 4) : 0; }
   public int ItemGridTypeLength() { int o = __offset(10); return o != 0 ? __vector_len(o) : 0; }
-  public ShortVector ItemGridTypeVector() { return ItemGridTypeVector(new ShortVector()); }
-  public ShortVector ItemGridTypeVector(ShortVector obj) { int o = __offset(10); return o != 0 ? obj.__assign(__vector(o), bb) : null; }
-  public ByteBuffer ItemGridTypeAsByteBuffer() { return __vector_as_bytebuffer(10, 2); }
-  public ByteBuffer ItemGridTypeInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 10, 2); }
-  public short Width() { int o = __offset(12); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
-  public short Height() { int o = __offset(14); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
-  public short UIWidth() { int o = __offset(16); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
-  public short UIHeight() { int o = __offset(18); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
-  public String TexturePath() { int o = __offset(20); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer TexturePathAsByteBuffer() { return __vector_as_bytebuffer(20, 1); }
-  public ByteBuffer TexturePathInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 20, 1); }
+  public IntVector ItemGridTypeVector() { return ItemGridTypeVector(new IntVector()); }
+  public IntVector ItemGridTypeVector(IntVector obj) { int o = __offset(10); return o != 0 ? obj.__assign(__vector(o), bb) : null; }
+  public ByteBuffer ItemGridTypeAsByteBuffer() { return __vector_as_bytebuffer(10, 4); }
+  public ByteBuffer ItemGridTypeInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 10, 4); }
+  public short Power() { int o = __offset(12); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
+  public float Rate() { int o = __offset(14); return o != 0 ? bb.getFloat(o + bb_pos) : 0.0f; }
+  public short Interval() { int o = __offset(16); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
+  public int Damage(int j) { int o = __offset(18); return o != 0 ? bb.getInt(__vector(o) + j * 4) : 0; }
+  public int DamageLength() { int o = __offset(18); return o != 0 ? __vector_len(o) : 0; }
+  public IntVector DamageVector() { return DamageVector(new IntVector()); }
+  public IntVector DamageVector(IntVector obj) { int o = __offset(18); return o != 0 ? obj.__assign(__vector(o), bb) : null; }
+  public ByteBuffer DamageAsByteBuffer() { return __vector_as_bytebuffer(18, 4); }
+  public ByteBuffer DamageInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 18, 4); }
+  public short Cost() { int o = __offset(20); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
+  public short Width() { int o = __offset(22); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
+  public short Height() { int o = __offset(24); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
+  public short UIWidth() { int o = __offset(26); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
+  public short UIHeight() { int o = __offset(28); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
+  public String TexturePath() { int o = __offset(30); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer TexturePathAsByteBuffer() { return __vector_as_bytebuffer(30, 1); }
+  public ByteBuffer TexturePathInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 30, 1); }
 
   public static int createTablePropItemRowData(FlatBufferBuilder builder,
       short Id,
       int NameOffset,
       short PropType,
       int ItemGridTypeOffset,
+      short Power,
+      float Rate,
+      short Interval,
+      int DamageOffset,
+      short Cost,
       short Width,
       short Height,
       short UIWidth,
       short UIHeight,
       int TexturePathOffset) {
-    builder.startTable(9);
+    builder.startTable(14);
     TablePropItemRowData.addTexturePath(builder, TexturePathOffset);
+    TablePropItemRowData.addDamage(builder, DamageOffset);
+    TablePropItemRowData.addRate(builder, Rate);
     TablePropItemRowData.addItemGridType(builder, ItemGridTypeOffset);
     TablePropItemRowData.addName(builder, NameOffset);
     TablePropItemRowData.addUIHeight(builder, UIHeight);
     TablePropItemRowData.addUIWidth(builder, UIWidth);
     TablePropItemRowData.addHeight(builder, Height);
     TablePropItemRowData.addWidth(builder, Width);
+    TablePropItemRowData.addCost(builder, Cost);
+    TablePropItemRowData.addInterval(builder, Interval);
+    TablePropItemRowData.addPower(builder, Power);
     TablePropItemRowData.addPropType(builder, PropType);
     TablePropItemRowData.addId(builder, Id);
     return TablePropItemRowData.endTablePropItemRowData(builder);
   }
 
-  public static void startTablePropItemRowData(FlatBufferBuilder builder) { builder.startTable(9); }
+  public static void startTablePropItemRowData(FlatBufferBuilder builder) { builder.startTable(14); }
   public static void addId(FlatBufferBuilder builder, short Id) { builder.addShort(0, Id, 0); }
   public static void addName(FlatBufferBuilder builder, int NameOffset) { builder.addOffset(1, NameOffset, 0); }
   public static void addPropType(FlatBufferBuilder builder, short PropType) { builder.addShort(2, PropType, 0); }
   public static void addItemGridType(FlatBufferBuilder builder, int ItemGridTypeOffset) { builder.addOffset(3, ItemGridTypeOffset, 0); }
-  public static int createItemGridTypeVector(FlatBufferBuilder builder, short[] data) { builder.startVector(2, data.length, 2); for (int i = data.length - 1; i >= 0; i--) builder.addShort(data[i]); return builder.endVector(); }
-  public static void startItemGridTypeVector(FlatBufferBuilder builder, int numElems) { builder.startVector(2, numElems, 2); }
-  public static void addWidth(FlatBufferBuilder builder, short Width) { builder.addShort(4, Width, 0); }
-  public static void addHeight(FlatBufferBuilder builder, short Height) { builder.addShort(5, Height, 0); }
-  public static void addUIWidth(FlatBufferBuilder builder, short UIWidth) { builder.addShort(6, UIWidth, 0); }
-  public static void addUIHeight(FlatBufferBuilder builder, short UIHeight) { builder.addShort(7, UIHeight, 0); }
-  public static void addTexturePath(FlatBufferBuilder builder, int TexturePathOffset) { builder.addOffset(8, TexturePathOffset, 0); }
+  public static int createItemGridTypeVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addInt(data[i]); return builder.endVector(); }
+  public static void startItemGridTypeVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
+  public static void addPower(FlatBufferBuilder builder, short Power) { builder.addShort(4, Power, 0); }
+  public static void addRate(FlatBufferBuilder builder, float Rate) { builder.addFloat(5, Rate, 0.0f); }
+  public static void addInterval(FlatBufferBuilder builder, short Interval) { builder.addShort(6, Interval, 0); }
+  public static void addDamage(FlatBufferBuilder builder, int DamageOffset) { builder.addOffset(7, DamageOffset, 0); }
+  public static int createDamageVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addInt(data[i]); return builder.endVector(); }
+  public static void startDamageVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
+  public static void addCost(FlatBufferBuilder builder, short Cost) { builder.addShort(8, Cost, 0); }
+  public static void addWidth(FlatBufferBuilder builder, short Width) { builder.addShort(9, Width, 0); }
+  public static void addHeight(FlatBufferBuilder builder, short Height) { builder.addShort(10, Height, 0); }
+  public static void addUIWidth(FlatBufferBuilder builder, short UIWidth) { builder.addShort(11, UIWidth, 0); }
+  public static void addUIHeight(FlatBufferBuilder builder, short UIHeight) { builder.addShort(12, UIHeight, 0); }
+  public static void addTexturePath(FlatBufferBuilder builder, int TexturePathOffset) { builder.addOffset(13, TexturePathOffset, 0); }
   public static int endTablePropItemRowData(FlatBufferBuilder builder) {
     int o = builder.endTable();
     return o;

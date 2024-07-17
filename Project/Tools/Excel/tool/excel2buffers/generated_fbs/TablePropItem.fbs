@@ -3,7 +3,12 @@ table TablePropItemRowData {
     Id:int16;
     Name:string;
     PropType:int16;
-    ItemGridType:[int16];
+    ItemGridType:[int32];
+    Power:int16;
+    Rate:float;
+    Interval:int16;
+    Damage:[int32];
+    Cost:int16;
     Width:int16;
     Height:int16;
     UIWidth:int16;

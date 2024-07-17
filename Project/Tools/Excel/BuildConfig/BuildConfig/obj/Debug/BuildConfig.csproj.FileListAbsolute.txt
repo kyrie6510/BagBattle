@@ -20,3 +20,10 @@ D:\Users\admin\Desktop\Excel\BuildConfig\BuildConfig\obj\Debug\BuildConfig.cspro
 D:\Users\admin\Desktop\Excel\BuildConfig\BuildConfig\obj\Debug\BuildConfig.csproj.CoreCompileInputs.cache
 D:\Users\admin\Desktop\Excel\BuildConfig\BuildConfig\obj\Debug\BuildConfig.exe
 D:\Users\admin\Desktop\Excel\BuildConfig\BuildConfig\obj\Debug\BuildConfig.pdb
+E:\WorkSpace\UnityProject\BagBattle\Project\Tools\Excel\BuildConfig\BuildConfig\bin\Debug\BuildConfig.exe.config
+E:\WorkSpace\UnityProject\BagBattle\Project\Tools\Excel\BuildConfig\BuildConfig\bin\Debug\BuildConfig.exe
+E:\WorkSpace\UnityProject\BagBattle\Project\Tools\Excel\BuildConfig\BuildConfig\bin\Debug\BuildConfig.pdb
+E:\WorkSpace\UnityProject\BagBattle\Project\Tools\Excel\BuildConfig\BuildConfig\obj\Debug\BuildConfig.csproj.AssemblyReference.cache
+E:\WorkSpace\UnityProject\BagBattle\Project\Tools\Excel\BuildConfig\BuildConfig\obj\Debug\BuildConfig.csproj.CoreCompileInputs.cache
+E:\WorkSpace\UnityProject\BagBattle\Project\Tools\Excel\BuildConfig\BuildConfig\obj\Debug\BuildConfig.exe
+E:\WorkSpace\UnityProject\BagBattle\Project\Tools\Excel\BuildConfig\BuildConfig\obj\Debug\BuildConfig.pdb

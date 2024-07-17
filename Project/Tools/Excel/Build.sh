@@ -1,6 +1,9 @@
 current_dir=$(pwd)
 echo "当前项目文件夹路径：$current_dir"
 
+exec &> your_script.log
+
+
 excelPath="$current_dir/plan/excel"        #excel配表文件夹
 toolPath="$current_dir/tool/excel2buffers" #转表工具文件夹
 configPath="$current_dir/config"  
@@ -68,5 +71,7 @@ cp -f $targetCSharp/* $buildConfigPath
 #rm $targetCSharp/*.cs
 
 
-
-read -n 1 -s -r -p "按任意键关闭窗口..."
+echo 按任意键继续
+read -n 1
+echo 继续运行
+#read -n 1 -s -r -p "按任意键关闭窗口..."
