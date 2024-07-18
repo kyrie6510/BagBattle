@@ -111,6 +111,26 @@ namespace Script
                 for (int i = (int) quadMin.x, x=0; i < quadMax.x; i++ , x++)
                 {
                     var uiGrid = GetGridId(i, j);
+
+                    if (y >= gridTypeArray.GetLength(0))
+                    {
+                        int id = 0;
+                        if (uiGrid != null)
+                        {
+                            id = uiGrid.Id;
+                        }
+                        Debug.LogError($"id{id} wrongy{y}");
+                    }
+
+                    if (x >= gridTypeArray.GetLength(1))
+                    {
+                        int id = 0;
+                        if (uiGrid != null)
+                        {
+                            id = uiGrid.Id;
+                        }
+                        Debug.LogError($"id{id} wrongx{x}");
+                    }
                     
                     var type = gridTypeArray[y,x];
                     

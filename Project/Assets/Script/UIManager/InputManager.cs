@@ -100,8 +100,8 @@ public class InputManager : Singleton<InputManager>
         var offsetX = localPoint.x - gridLocalPos.x;
         var offsetY = localPoint.y - gridLocalPos.y;
 
-        var dirX = offsetX > 0 ? 1 : offsetX == 0 ? 0 : -1;
-        var dirY = offsetY > 0 ? 1 : offsetY == 0 ? 0 : -1;
+        var dirX = offsetX >= 0 ? 1 : -1;
+        var dirY = offsetY >= 0 ? 1 : -1;
 
         var config = ConfigManager.Instance.GetPropConfig(_curSelectItemData.ConfigId);
         
