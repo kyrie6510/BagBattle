@@ -13,9 +13,16 @@ namespace Script
     public class ItemManager: Singleton<ItemManager>
     {
         public List<GameObject> _prefabs;
-        public GameObject BagItem;
-        public GameObject PropItem;
-        public GameObject BoxObj;
+        
+        public GameObject ObjMyBagItems;
+        public GameObject ObjMyProps;
+        
+        public GameObject ObjBox;
+        
+        public GameObject ObjOtherBagItems;
+        public GameObject ObjOtherProps;
+        
+        public GameObject ObjOtherBag;
 
         private Dictionary<int, ConfigItem> _itemMap = new Dictionary<int, ConfigItem>();
         private Dictionary<int, UIDataItem> _itemDataMap = new Dictionary<int, UIDataItem>();
@@ -32,9 +39,15 @@ namespace Script
             
             
             _prefabs = new List<GameObject>();
-            BagItem = GameObject.Find("BagItem");
-            PropItem = GameObject.Find("PropItem");
-            BoxObj = GameObject.Find("Box");
+            
+            ObjMyBagItems = GameObject.Find("BagItem");
+            ObjMyProps = GameObject.Find("PropItem");
+            
+            ObjBox = GameObject.Find("Box");
+            
+            ObjOtherBagItems= GameObject.Find("OtherBagItem");
+            ObjOtherProps = GameObject.Find("OtherPropItem");
+            ObjOtherBag = GameObject.Find("OtherPropItem");
             GenerateItem();
         }
 
@@ -69,62 +82,90 @@ namespace Script
         
         
 
-        public void GenerateItem()
+        private void GenerateItem()
         {
             for (int j = 0; j < 3; j++)
             {
                 for (short i = 1; i <= 6; i++)
                 {
-                    var configId = i;
-                    var config = ConfigManager.Instance.GetPropConfig(i);
-
-                    var width = config.UIWidth;
-                    var height = config.UIHeight;
-
-                    GameObject obj = null;
-                    if (configId == 4)
-                    {
-                        obj = Resources.Load($"ItemPrefab/Pack_{width}x{height}") as GameObject;
-                    }
-                    else
-                    {
-                        obj = Resources.Load($"ItemPrefab/{width}x{height}") as GameObject;   
-                    }
-              
-                    _prefabs.Add(obj);
-                
-                    ViewItem item = null;
-             
-                    var go = GameObject.Instantiate(obj, BoxObj.transform);
-                    go.transform.localPosition = Vector3.zero;
-                    item = go.GetComponent<ViewItem>();
-               
-                    if (item == null)
-                    {
-                        item = go.AddComponent<ViewItem>();
-                    }
-                
-                    var size = item.GetComponent<RectTransform>().rect;
-                    var texture = Resources.Load<Texture>($"Texture/{config.TexturePath}") as Texture2D;
-                    var img = go.GetComponent<Image>();
-                    img.sprite = Sprite.Create(texture,new Rect(0,0,texture.width,texture.height),Vector2.zero);
-
-                    img.rectTransform.sizeDelta = new Vector2(texture.width / 2, texture.height / 2);
                     
-                    // _itemMap.Add(_localId,config);
+                    var go = CreatGameObject(i,ObjBox.transform);
+                    var item = go.GetComponent<ViewItem>();
                     
-
-                  
-                    _itemDataMap.Add(_localId,new UIDataItem(){ LocalId =  _localId, ConfigId =  i});
-                    _itemUIMap.Add(_localId,item);
-                    
-                    item.LocalId = _localId;
-                    _localId++;
-                    item.ConfigId = i;
+                    AddInfoForViewItem(go,i);
                 }
             }
+        }
+
+
+        private void AddInfoForViewItem(GameObject go,int configId)
+        {
+            var item = go.GetComponent<ViewItem>();
             
+            _itemDataMap.Add(_localId,new UIDataItem(){ LocalId =  _localId, ConfigId = (short)configId});
+            _itemUIMap.Add(_localId,item);
+                    
+            item.ConfigId = configId;
+            item.LocalId = _localId;
+            _localId++;
+        }
+
+        private GameObject CreatGameObject(int configId , Transform parent)
+        {
            
+            var config = ConfigManager.Instance.GetPropConfig((short)configId);
+
+            var width = config.UIWidth;
+            var height = config.UIHeight;
+
+            GameObject obj = null;
+            if (configId == 4)
+            {
+                obj = Resources.Load($"ItemPrefab/Pack_{width}x{height}") as GameObject;
+            }
+            else
+            {
+                obj = Resources.Load($"ItemPrefab/{width}x{height}") as GameObject;   
+            }
+              
+            _prefabs.Add(obj);
+                
+            ViewItem item = null;
+             
+            var go = GameObject.Instantiate(obj, parent);
+            go.transform.localPosition = Vector3.zero;
+            item = go.GetComponent<ViewItem>();
+               
+            if (item == null)
+            {
+                item = go.AddComponent<ViewItem>();
+            }
+                
+            var size = item.GetComponent<RectTransform>().rect;
+            var texture = Resources.Load<Texture>($"Texture/{config.TexturePath}") as Texture2D;
+            var img = go.GetComponent<Image>();
+            img.sprite = Sprite.Create(texture,new Rect(0,0,texture.width,texture.height),Vector2.zero);
+
+            img.rectTransform.sizeDelta = new Vector2(texture.width / 2, texture.height / 2);
+
+            return go;
+        }
+
+        public void GenerateItemForOther(List<UIDataItem> dates)
+        {
+            foreach (var data in dates)
+            {
+                var go = CreatGameObject(data.ConfigId, ObjOtherBag.transform);
+                AddInfoForViewItem(go,data.ConfigId);
+
+                var view = go.GetComponent<ViewItem>();
+                view.SetRigState(false);
+                OnItemSetToBag(view,false);
+                
+                go.transform.localPosition = data.LocalPos;
+                go.transform.rotation =  UnityEngine.Quaternion.Euler(0, 0, -data.RotateValue);
+                
+            }
         }
 
         
@@ -140,7 +181,7 @@ namespace Script
             return ConfigManager.Instance.GetPropConfig(_itemDataMap[localId].ConfigId).PropType;
         }
 
-        public void OnItemSetToBag(ViewItem item)
+        public void OnItemSetToBag(ViewItem item,bool isMyBag = true)
         {
             item.SetRigState(false);
 
@@ -149,11 +190,14 @@ namespace Script
 
             if (GetItemPropType(item.LocalId) == (int)PropType.Bag)
             {
-                item.transform.SetParent(BagItem.transform);
+                var parent = isMyBag ? ObjMyBagItems : ObjOtherBagItems;
+                
+                item.transform.SetParent(parent.transform);
             }
             else
             {
-                item.transform.SetParent(PropItem.transform);
+                var parent = isMyBag ? ObjMyProps : ObjOtherProps;
+                item.transform.SetParent(parent.transform);
             }
            
         }
@@ -172,7 +216,7 @@ namespace Script
             
             var item = _itemUIMap[localId];
             
-            item.transform.SetParent(BoxObj.transform);
+            item.transform.SetParent(ObjBox.transform);
             item.transform.localPosition = Vector3.zero;
             item.SetRigState(true);
         }
@@ -190,5 +234,28 @@ namespace Script
             
             return list;
         }
+
+        public List<UIDataItem> GetOtherData()
+        {
+            List<UIDataItem> list = new List<UIDataItem>();
+            foreach (var item in _itemDataMap.Values)
+            {
+                if (item.IsInBag)
+                {
+                    list.Add(item);
+                }
+            }
+            
+            return list;
+            
+        }
+
+        public void SetLeftData()
+        {
+            
+        }
+        
+        
+        
     }
 }

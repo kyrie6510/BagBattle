@@ -27,7 +27,7 @@ public class InputManager : Singleton<InputManager>
     public override void Awake()
     {
         base.Awake();
-        _bagObj = GameObject.Find("Bag");
+        _bagObj = GameObject.Find("MyBag");
         _mousePoint = GameObject.Find("MousePoint");
 
         _newCellSize = _cellSize + _offsetGrid;

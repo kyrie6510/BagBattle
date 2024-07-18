@@ -341,6 +341,8 @@ namespace Script
             {
                 PutData();
 
+                curData.LocalPos = curItem.gameObject.transform.localPosition;
+                
                 //显示打开
                 ItemManager.Instance.OnItemSetToBag(curItem);
                 foreach (var gridId in _catchStarGrids)
@@ -351,7 +353,8 @@ namespace Script
             else
             {
                 
-                
+                curData.LocalPos = Vector2.zero;
+
                 //飞向盒子
                 ItemManager.Instance.BackToBox(curItem.LocalId);
                 var config = ConfigManager.Instance.GetPropConfig((short)curItem.ConfigId);

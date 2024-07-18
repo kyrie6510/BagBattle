@@ -45,12 +45,18 @@ namespace Script
                 Items = ItemManager.Instance.GetAllItemData(),
                 ActorId =  1,
             };
+
+            var otherData = ItemManager.Instance.GetOtherData();
             
             GameUser user2 = new GameUser()
             {
-                Items = ItemManager.Instance.GetAllItemData(),
+                Items = otherData,
                 ActorId =  2,
             };
+            
+            //创建UI
+            ItemManager.Instance.GenerateItemForOther(otherData);
+            
             
             _simulation = new Simulation(new GameUser[] { user,user2 });
             _isGameStared = true;

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 
 public class UIDataItem : UIDataBase
@@ -14,4 +15,7 @@ public class UIDataItem : UIDataBase
    public HashSet<int> StarTargetLocalId = new HashSet<int>();
 
    public bool IsInBag;
+
+   public Vector2 LocalPos;
+
 }
