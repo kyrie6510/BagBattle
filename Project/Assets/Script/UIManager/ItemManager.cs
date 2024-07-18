@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Dynamic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Game;
 using Script.Event;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -17,7 +18,7 @@ namespace Script
 
         private Dictionary<int, ConfigItem> _itemMap = new Dictionary<int, ConfigItem>();
         private Dictionary<int, UIDataItem> _itemDataMap = new Dictionary<int, UIDataItem>();
-        private Dictionary<int, UIItem> _itemUIMap = new Dictionary<int, UIItem>();
+        private Dictionary<int, ViewItem> _itemUIMap = new Dictionary<int, ViewItem>();
         private int _localId = 1;
 
         private UIDataItem _curSelectItemData;
@@ -45,7 +46,7 @@ namespace Script
             
         }
 
-        public UIItem GetItemUI(int localId)
+        public ViewItem GetItemUI(int localId)
         {
             if (_itemUIMap.TryGetValue(localId,out var item))
             {
@@ -71,7 +72,7 @@ namespace Script
         //     return _curSelectItemData;
         // }
         //
-        // public UIItem GetCurSelectItemUI()
+        // public ViewItem GetCurSelectItemUI()
         // {
         //     if (_itemUIMap.ContainsKey(_curSelectItemData.LocalId))
         //     {
@@ -112,15 +113,15 @@ namespace Script
               
                     _prefabs.Add(obj);
                 
-                    UIItem item = null;
+                    ViewItem item = null;
              
                     var go = GameObject.Instantiate(obj, BoxObj.transform);
                     go.transform.localPosition = Vector3.zero;
-                    item = go.GetComponent<UIItem>();
+                    item = go.GetComponent<ViewItem>();
                
                     if (item == null)
                     {
-                        item = go.AddComponent<UIItem>();
+                        item = go.AddComponent<ViewItem>();
                     }
                 
                     var size = item.GetComponent<RectTransform>().rect;
@@ -158,7 +159,7 @@ namespace Script
             return null;
         }
 
-        public void OnItemSetToBag(UIItem item)
+        public void OnItemSetToBag(ViewItem item)
         {
             item.SetRigState(false);
             

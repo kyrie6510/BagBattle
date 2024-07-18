@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Game;
 using Script.Event;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ namespace Script
     public class GridManager : Singleton<GridManager>
     {
         //UI
-        private List<UIGrid> _grids = new List<UIGrid>();
+        private List<ViewGrid> _grids = new List<ViewGrid>();
         private List<GameObject> _gridViews = new List<GameObject>();
         private List<GameObject> _gridStars = new List<GameObject>();
 
@@ -39,7 +40,7 @@ namespace Script
 
             for (int i = 0; i < gridObj.transform.childCount; i++)
             {
-                var uiGrid = gridObj.transform.GetChild(i).GetComponent<UIGrid>();
+                var uiGrid = gridObj.transform.GetChild(i).GetComponent<ViewGrid>();
                 _grids.Add(uiGrid);
                 uiGrid.Id = i;
                 uiGrid.transform.GetChild(0).GetComponent<Text>().text = $"{i}";
@@ -77,7 +78,7 @@ namespace Script
         {
             _touchGrids.Clear();
 
-            HashSet<UIGrid> touchGrids = _touchGrids;
+            HashSet<ViewGrid> touchGrids = _touchGrids;
 
             //InitData
             _catchStarLocalIdMap.Clear();
@@ -100,7 +101,7 @@ namespace Script
             int curSelectItemId = InputManager.Instance.GetCurSelectItemId();
             var curItem = ItemManager.Instance.GetItemData(curSelectItemId);
             var curConfig = ConfigManager.Instance.GetConfigItem(curItem.ConfigId);
-            var gridTypeArray = ConfigManager.Instance.GetConfigGridTypeArray(curItem.ConfigId, curItem.RotateValue);
+            var gridTypeArray = ConfigManager.Instance.GetConfigGridTypeArray((short)curItem.ConfigId, curItem.RotateValue);
             
             // int x = 0;
             // int y = 0;
@@ -210,7 +211,7 @@ namespace Script
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public UIGrid GetGridId(int x, int y)
+        public ViewGrid GetGridId(int x, int y)
         {
             if (x < 0 || y > 0) return null;
             if (x >= _colNum || y >= _rowNum) return null;
@@ -228,7 +229,7 @@ namespace Script
 
         private bool _isCanPutData = false;
 
-        private HashSet<UIGrid> _touchGrids = new HashSet<UIGrid>();
+        private HashSet<ViewGrid> _touchGrids = new HashSet<ViewGrid>();
 
         //缓存相关
         //当前选中物提buffer对象

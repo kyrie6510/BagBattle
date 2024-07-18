@@ -8,15 +8,18 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int LocalId = 0;
+    public const int CoolDownTime = 0;
+    public const int LocalId = 1;
 
-    public const int TotalComponents = 1;
+    public const int TotalComponents = 2;
 
     public static readonly string[] componentNames = {
+        "CoolDownTime",
         "LocalId"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Game.CoolDownTimeComponent),
         typeof(Game.LocalIdComponent)
     };
 }

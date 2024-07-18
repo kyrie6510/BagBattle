@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIItem : MonoBehaviour ,IPointerDownHandler 
+public class ViewItem : MonoBehaviour ,IPointerDownHandler 
 {
     [SerializeField] 
     public int ConfigId;

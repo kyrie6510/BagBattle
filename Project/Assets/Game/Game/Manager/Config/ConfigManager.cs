@@ -4,11 +4,11 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using FlatBuffers;
+using Script;
 
-
-namespace Script
+namespace Game
 {
-    public class ConfigManager : Singleton<ConfigManager>
+    public partial class  ConfigManager : Singleton<ConfigManager>
     {
         public override void Awake()
         {
@@ -191,77 +191,7 @@ namespace Script
         
         
 
-        public int[,] GetConfigGridTypeArray(int configId,int rotateValue)
-        {
-            
-            if (!ConfigMap.ContainsKey(configId))
-            {
-                return null;
-            }
-            
-            var config = ConfigMap[configId];
-            
-            if (rotateValue == 0 || rotateValue == 360) return config.GridType;
-            
-            int m = config.GridType.GetLength(0);
-            int n = config.GridType.GetLength(1);
-            
-            //行列不等要开辟新的数组
-            if(config.Width != config.Height && rotateValue != 0 && rotateValue != 180)
-            {
-                // 创建一个 n × m 的数组
-                int[,] result = new int[n, m];
-                Rotate(config.GridType, result, rotateValue);
-                return result;
-            }
-            else
-            {
-                // 创建一个 m × n 的数组
-                int[,] result = new int[m, n];
-                Rotate(config.GridType, result, rotateValue);
-                return result;
-            }
-            
-        }
-
-        private void Rotate(int [,] inputArray,int[,]  rotatedArray,int angle)
-        {
-            int rows = inputArray.GetLength(0);
-            int cols = inputArray.GetLength(1);
-            
-            switch (angle)
-            {
-                case 90:
-                    for (int i = 0; i < rows; i++)
-                    {
-                        for (int j = 0; j < cols; j++)
-                        {
-                            rotatedArray[j, rows - 1 - i] = inputArray[i, j];
-                        }
-                    }
-                    break;
-                case 180:
-                    for (int i = 0; i < rows; i++)
-                    {
-                        for (int j = 0; j < cols; j++)
-                        {
-                            rotatedArray[rows - 1 - i, cols - 1 - j] = inputArray[i, j];
-                        }
-                    }
-                    break;
-                case 270:
-                    for (int i = 0; i < rows; i++)
-                    {
-                        for (int j = 0; j < cols; j++)
-                        {
-                            rotatedArray[cols - 1 - j, i] = inputArray[i, j];
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
+        
         
         
         public ConfigItem GetConfigItem(int id)

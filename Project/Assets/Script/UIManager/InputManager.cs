@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game;
 using Script;
 using Script.Event;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class InputManager : Singleton<InputManager>
     // public int CurItemId;
 
 
-    private UIItem _curSelectItemUI;
+    private ViewItem _curSelectItemView;
     private UIDataItem _curSelectItemData;
     private ConfigItem _curSelectConfig;
 
@@ -48,9 +49,9 @@ public class InputManager : Singleton<InputManager>
         if (Input.GetKeyDown(KeyCode.R))
         {
             //UI
-            var z = _curSelectItemUI.transform.rotation.eulerAngles.z;
+            var z = _curSelectItemView.transform.rotation.eulerAngles.z;
             z -= 90;
-            _curSelectItemUI.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, z);
+            _curSelectItemView.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, z);
             //Data
             _curSelectItemData.IsRoatete = !_curSelectItemData.IsRoatete;
             _curSelectItemData.RotateValue += 90;
@@ -59,7 +60,7 @@ public class InputManager : Singleton<InputManager>
             UpdateMousePointSize();
         }
 
-        this._curSelectItemUI.transform.position = Input.mousePosition;
+        this._curSelectItemView.transform.position = Input.mousePosition;
         var endPos = DealItemAndMousePos();
         CountTouchGrids(endPos);
         
@@ -74,7 +75,7 @@ public class InputManager : Singleton<InputManager>
 
             ClearMousePointSize();
 
-            _curSelectItemUI = null;
+            _curSelectItemView = null;
             _curSelectConfig = null;
             _curSelectItemData = null;
         }
@@ -158,7 +159,7 @@ public class InputManager : Singleton<InputManager>
         
         if (isDrop)
         {
-            _curSelectItemUI.transform.localPosition = endPos;
+            _curSelectItemView.transform.localPosition = endPos;
         }
         //在背包里
         // if (localPoint.x >= 0 && localPoint.x <= _witdth && localPoint.y <= 0 && localPoint.y >= -_height)
@@ -200,17 +201,17 @@ public class InputManager : Singleton<InputManager>
     {
         _curSelectItemId = e.LocalId;
 
-        _curSelectItemUI = ItemManager.Instance.GetItemUI(_curSelectItemId);
+        _curSelectItemView = ItemManager.Instance.GetItemUI(_curSelectItemId);
         _curSelectItemData = ItemManager.Instance.GetItemData(_curSelectItemId);
         _curSelectConfig = ConfigManager.Instance.GetConfigItem(_curSelectItemData.ConfigId);
 
-        _curSelectItemUI.transform.SetParent(_bagObj.transform);
+        _curSelectItemView.transform.SetParent(_bagObj.transform);
         _mousePoint.transform.position = Input.mousePosition;
         UpdateMousePointSize();
 
-        _curSelectItemUI.SetRigState(false);
+        _curSelectItemView.SetRigState(false);
 
-        _curSelectItemUI.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, -_curSelectItemData.RotateValue);
+        _curSelectItemView.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, -_curSelectItemData.RotateValue);
 
         GridManager.Instance.TouchClear();
     }
@@ -221,8 +222,8 @@ public class InputManager : Singleton<InputManager>
         return _curSelectItemId;
     }
 
-    public UIItem GetCurSelectItem()
+    public ViewItem GetCurSelectItem()
     {
-        return _curSelectItemUI;
+        return _curSelectItemView;
     }
 }

@@ -11,7 +11,7 @@ public enum UIGridState
     BagAndItem = 2,
 }
 
-public class UIGrid : MonoBehaviour
+public class ViewGrid : MonoBehaviour
 {
     private BoxCollider2D _collider;
     private Image _imgBg;

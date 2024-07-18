@@ -5,25 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ca6062b-63ef-4439-ace5-14dbf1b5210b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BuildConfig.dir/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Assets/Game/GameUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Assets/Game/GameUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Assets/Resources/Data/TablePropItem.bytes" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Assets/Resources/Data/TablePropItem.bytes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Assets/Script/UIManager/ConfigManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Assets/Script/UIManager/ConfigManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../../Build.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BuildConfig.dir/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuildConfig.dir/.idea/contentModel.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../Assets/Game/CoolDownTimeComponent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../Assets/Game/Game/CoolDownSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Assets/Game/Game/GameSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Assets/Game/Game/GameSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Assets/Game/Generated/Game/GameComponentsLookup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Assets/Game/Generated/Game/GameComponentsLookup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Assets/Game/World.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Assets/Game/World.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuildConfig.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuildConfig.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/csharp/TablePropItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/csharp/TablePropItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/BuildConfig.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/BuildConfig.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../config/bytes/TablePropItem.bytes" beforeDir="false" afterPath="$PROJECT_DIR$/../../config/bytes/TablePropItem.bytes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../config/csharp/TablePropItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../config/csharp/TablePropItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plan/excel/Common/TableEffect.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../plan/excel/Common/TableEffect.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plan/excel/Common/TablePropItem.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../plan/excel/Common/TablePropItem.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plan/excel/Common/TableTiming.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../plan/excel/Common/TableTiming.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../tool/excel2buffers/excel/Common/TablePropItem.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../tool/excel2buffers/excel/Common/TablePropItem.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../tool/excel2buffers/generated_csharp/TablePropItem.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../tool/excel2buffers/generated_fbs/TablePropItem.fbs" beforeDir="false" afterPath="$PROJECT_DIR$/../../tool/excel2buffers/generated_fbs/TablePropItem.fbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../tool/excel2buffers/generated_java/TablePropItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../tool/excel2buffers/generated_java/TablePropItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../tool/excel2buffers/generated_python/TablePropItemRowData.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../tool/excel2buffers/generated_python/TablePropItemRowData.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +76,7 @@
       <updated>1720770292941</updated>
       <workItem from="1720770296959" duration="1842000" />
       <workItem from="1720772810681" duration="3335000" />
-      <workItem from="1721208253694" duration="2104000" />
+      <workItem from="1721208253694" duration="2557000" />
     </task>
     <servers />
   </component>
