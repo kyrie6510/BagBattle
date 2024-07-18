@@ -9,14 +9,20 @@
 public static class ActorComponentsLookup {
 
     public const int ActorId = 0;
+    public const int Hp = 1;
+    public const int Stamina = 2;
 
-    public const int TotalComponents = 1;
+    public const int TotalComponents = 3;
 
     public static readonly string[] componentNames = {
-        "ActorId"
+        "ActorId",
+        "Hp",
+        "Stamina"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Game.ActorIdComponent)
+        typeof(Game.ActorIdComponent),
+        typeof(Game.HpComponent),
+        typeof(Game.StaminaComponent)
     };
 }

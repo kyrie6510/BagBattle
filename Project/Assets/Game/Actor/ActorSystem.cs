@@ -14,7 +14,10 @@ namespace Game.Actor
             {
                 var actorEntity = Contexts.sharedInstance.actor.CreateEntity();
                 actorEntity.AddActorId(actor.ActorId);
-
+                actorEntity.AddStamina(10,10);
+                actorEntity.AddHp(100,100);
+                
+                
                 //创建物品
                 foreach (var item in actor.Items)
                 {
