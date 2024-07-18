@@ -30,8 +30,8 @@ public class UIDataGrid
 
     public void PutItemData(int itemId,int itemConfigId)
     {
-        var config = ConfigManager.Instance.GetConfigItem(itemConfigId);
-        if (config.PropType == PropType.Bag)
+        var config = ConfigManager.Instance.GetPropConfig((short)itemConfigId);
+        if (config.PropType == (int)PropType.Bag)
         {
             LocalIdBag = itemId;
         }

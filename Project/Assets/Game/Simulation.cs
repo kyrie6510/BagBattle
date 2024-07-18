@@ -4,7 +4,7 @@ namespace Game
 {
     public class Simulation
     {
-        public int _tick;
+        //public int _tick;
 
         private World _world;
 
@@ -16,7 +16,7 @@ namespace Game
 
         public void Update()
         {
-            _tick++;
+            //_tick++;
             _world.Update();
             
         }

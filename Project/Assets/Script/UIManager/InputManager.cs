@@ -12,7 +12,7 @@ public class InputManager : Singleton<InputManager>
 
     private ViewItem _curSelectItemView;
     private UIDataItem _curSelectItemData;
-    private ConfigItem _curSelectConfig;
+   
 
     private GameObject _bagObj;
     private GameObject _mousePoint;
@@ -76,7 +76,6 @@ public class InputManager : Singleton<InputManager>
             ClearMousePointSize();
 
             _curSelectItemView = null;
-            _curSelectConfig = null;
             _curSelectItemData = null;
         }
     }
@@ -104,9 +103,11 @@ public class InputManager : Singleton<InputManager>
         var dirX = offsetX > 0 ? 1 : offsetX == 0 ? 0 : -1;
         var dirY = offsetY > 0 ? 1 : offsetY == 0 ? 0 : -1;
 
+        var config = ConfigManager.Instance.GetPropConfig(_curSelectItemData.ConfigId);
+        
         // 偶数要偏移奇数不用
-        var centerV2 = new Vector2(_curSelectConfig.Width % 2 == 0 ? 1 : 0,
-            _curSelectConfig.Height % 2 == 0 ? 1 : 0);
+        var centerV2 = new Vector2(config.Width % 2 == 0 ? 1 : 0,
+            config.Height % 2 == 0 ? 1 : 0);
         if (_curSelectItemData.IsRoatete)
         {
             centerV2 = new Vector2(centerV2.y, centerV2.x);
@@ -121,9 +122,12 @@ public class InputManager : Singleton<InputManager>
     private void CountTouchGrids(Vector2 endPos)
     {
         //计算周围格子
-        //获取宽高
-        var size = new Vector2(_curSelectConfig.Width * _newCellSize,
-            _curSelectConfig.Height * _newCellSize);
+        //
+
+        var config = ConfigManager.Instance.GetPropConfig(_curSelectItemData.ConfigId);
+        
+        var size = new Vector2(config.Width * _newCellSize,
+            config.Height * _newCellSize);
 
         if (_curSelectItemData.IsRoatete)
         {
@@ -184,8 +188,10 @@ public class InputManager : Singleton<InputManager>
 
     private void UpdateMousePointSize()
     {
-        var size = new Vector2(_curSelectConfig.Width * _newCellSize,
-            _curSelectConfig.Height * _newCellSize);
+        var config = ConfigManager.Instance.GetPropConfig(_curSelectItemData.ConfigId);
+        
+        var size = new Vector2(config.Width * _newCellSize,
+            config.Height * _newCellSize);
 
         if (_curSelectItemData.IsRoatete)
         {
@@ -203,7 +209,7 @@ public class InputManager : Singleton<InputManager>
 
         _curSelectItemView = ItemManager.Instance.GetItemUI(_curSelectItemId);
         _curSelectItemData = ItemManager.Instance.GetItemData(_curSelectItemId);
-        _curSelectConfig = ConfigManager.Instance.GetConfigItem(_curSelectItemData.ConfigId);
+        
 
         _curSelectItemView.transform.SetParent(_bagObj.transform);
         _mousePoint.transform.position = Input.mousePosition;

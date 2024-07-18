@@ -6,12 +6,12 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial interface ILocalIdEntity {
+public partial interface IActorIdEntity {
 
-    Game.LocalIdComponent localId { get; }
-    bool hasLocalId { get; }
+    Game.ActorIdComponent actorId { get; }
+    bool hasActorId { get; }
 
-    void AddLocalId(int newValue);
-    void ReplaceLocalId(int newValue);
-    void RemoveLocalId();
+    void AddActorId(FixMath.NET.Fix64 newValue);
+    void ReplaceActorId(FixMath.NET.Fix64 newValue);
+    void RemoveActorId();
 }

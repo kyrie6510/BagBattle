@@ -40,7 +40,19 @@ namespace Script
         
         private void OnGamePlay(OnGamePlayEvent e)
         {
-            _simulation = new Simulation(new GameUser[] { });
+            GameUser user = new GameUser()
+            {
+                Items = ItemManager.Instance.GetAllItemData(),
+                ActorId =  1,
+            };
+            
+            GameUser user2 = new GameUser()
+            {
+                Items = ItemManager.Instance.GetAllItemData(),
+                ActorId =  2,
+            };
+            
+            _simulation = new Simulation(new GameUser[] { user,user2 });
             _isGameStared = true;
         }
 

@@ -100,7 +100,7 @@ namespace Script
             
             int curSelectItemId = InputManager.Instance.GetCurSelectItemId();
             var curItem = ItemManager.Instance.GetItemData(curSelectItemId);
-            var curConfig = ConfigManager.Instance.GetConfigItem(curItem.ConfigId);
+            var curConfig = ConfigManager.Instance.GetPropConfig(curItem.ConfigId);
             var gridTypeArray = ConfigManager.Instance.GetConfigGridTypeArray((short)curItem.ConfigId, curItem.RotateValue);
             
             // int x = 0;
@@ -140,7 +140,7 @@ namespace Script
                     {
                         _catchBodyGrids.Add(curGridData.Id);
 
-                        if (curConfig.PropType == PropType.Bag)
+                        if (curConfig.PropType == (int)PropType.Bag)
                         {
                             if (curGridData.LocalIdBag == 0)
                             {
@@ -178,9 +178,11 @@ namespace Script
                     {
                         if (curGridData.LocalIdItem != 0)
                         {
-                            var targetPropType = ItemManager.Instance.GetItem(curGridData.LocalIdItem).PropType;
+                            var targetPropType = ItemManager.Instance.GetItemPropType(curGridData.LocalIdItem);
 
-                            if (curConfig.TriggerStarType.Contains((int) targetPropType) &&
+                            if (
+                                //TODO  表里添加 TriggerStarType
+                                //curConfig.TriggerStarType.Contains((int) targetPropType) &&
                                 !_catchStarLocalIdMap.Contains(curGridData.LocalIdItem))
                             {
                                 _gridStars[curGridUI.Id].SetActive(true);
@@ -314,11 +316,10 @@ namespace Script
         public void OnDrop()
         {
             var curItem = InputManager.Instance.GetCurSelectItem();
-            
+            var curData = ItemManager.Instance.GetItemData(curItem.LocalId);
             if (_isCanPutData)
             {
                 PutData();
-
 
                 //显示打开
                 ItemManager.Instance.OnItemSetToBag(curItem);
@@ -329,12 +330,12 @@ namespace Script
             }
             else
             {
+                
+                
                 //飞向盒子
                 ItemManager.Instance.BackToBox(curItem.LocalId);
-
-                var config = ConfigManager.Instance.GetConfigItem(curItem.ConfigId);
-
-                if (config.PropType == PropType.Bag)
+                var config = ConfigManager.Instance.GetPropConfig((short)curItem.ConfigId);
+                if (config.PropType == (int)PropType.Bag)
                 {
                     //如果当前选中为背包,则需要移除在背包中的物品
                     foreach (var gridId in _catchCurSelectLastPosGrids)

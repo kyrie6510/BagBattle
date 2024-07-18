@@ -10,7 +10,7 @@ namespace Game.Game
 
         public CoolDownSystem()
         {
-            _ens = Contexts.sharedInstance.game.GetGroup(GameMatcher.CoolDownTime);
+           // _ens = Contexts.sharedInstance.game.GetGroup(GameMatcher.CoolDownTime);
         }
         
         

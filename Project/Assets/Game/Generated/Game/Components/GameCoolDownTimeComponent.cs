@@ -11,17 +11,19 @@ public partial class GameEntity {
     public Game.CoolDownTimeComponent coolDownTime { get { return (Game.CoolDownTimeComponent)GetComponent(GameComponentsLookup.CoolDownTime); } }
     public bool hasCoolDownTime { get { return HasComponent(GameComponentsLookup.CoolDownTime); } }
 
-    public void AddCoolDownTime(FixMath.NET.Fix64 newTimeSpan) {
+    public void AddCoolDownTime(FixMath.NET.Fix64 newTimeSpan, FixMath.NET.Fix64 newValue) {
         var index = GameComponentsLookup.CoolDownTime;
         var component = (Game.CoolDownTimeComponent)CreateComponent(index, typeof(Game.CoolDownTimeComponent));
         component.TimeSpan = newTimeSpan;
+        component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceCoolDownTime(FixMath.NET.Fix64 newTimeSpan) {
+    public void ReplaceCoolDownTime(FixMath.NET.Fix64 newTimeSpan, FixMath.NET.Fix64 newValue) {
         var index = GameComponentsLookup.CoolDownTime;
         var component = (Game.CoolDownTimeComponent)CreateComponent(index, typeof(Game.CoolDownTimeComponent));
         component.TimeSpan = newTimeSpan;
+        component.Value = newValue;
         ReplaceComponent(index, component);
     }
 

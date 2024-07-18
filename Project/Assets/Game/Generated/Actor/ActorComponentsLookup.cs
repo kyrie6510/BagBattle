@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 public static class ActorComponentsLookup {
 
+    public const int ActorId = 0;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 1;
 
     public static readonly string[] componentNames = {
-
+        "ActorId"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(Game.ActorIdComponent)
     };
 }

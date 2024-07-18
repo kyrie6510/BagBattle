@@ -6,7 +6,7 @@ namespace Game
     [Game, Combat]
     public class LocalIdComponent:IComponent
     {
-        [PrimaryEntityIndex] public uint value;
+        [PrimaryEntityIndex] public int value;
     }
 }
 

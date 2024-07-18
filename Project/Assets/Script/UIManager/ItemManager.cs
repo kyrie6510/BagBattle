@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Game;
 using Script.Event;
@@ -67,36 +68,15 @@ namespace Script
         }
         
         
-        // public UIDataItem GetCurSelectItemData()
-        // {
-        //     return _curSelectItemData;
-        // }
-        //
-        // public ViewItem GetCurSelectItemUI()
-        // {
-        //     if (_itemUIMap.ContainsKey(_curSelectItemData.LocalId))
-        //     {
-        //         return _itemUIMap[_curSelectItemData.LocalId];
-        //     }
-        //     
-        //     return null;
-        // }
-        
-        
-        public override void Update()
-        {
-            base.Update();
-        }
-
 
         public void GenerateItem()
         {
             for (int j = 0; j < 3; j++)
             {
-                for (int i = 1; i <= 6; i++)
+                for (short i = 1; i <= 6; i++)
                 {
                     var configId = i;
-                    var config = ConfigManager.Instance.GetConfigItem(i);
+                    var config = ConfigManager.Instance.GetPropConfig(i);
 
                     var width = config.UIWidth;
                     var height = config.UIHeight;
@@ -131,7 +111,8 @@ namespace Script
 
                     img.rectTransform.sizeDelta = new Vector2(texture.width / 2, texture.height / 2);
                     
-                    _itemMap.Add(_localId,config);
+                    // _itemMap.Add(_localId,config);
+                    
 
                   
                     _itemDataMap.Add(_localId,new UIDataItem(){ LocalId =  _localId, ConfigId =  i});
@@ -149,21 +130,24 @@ namespace Script
         
         
         
-        public ConfigItem GetItem(int localId)
+        public int GetItemPropType(int localId)
         {
-            if (_itemMap.ContainsKey(localId))
+            if (!_itemDataMap.ContainsKey(localId))
             {
-                return _itemMap[localId];
+                return -1;
             }
-
-            return null;
+            
+            return ConfigManager.Instance.GetPropConfig(_itemDataMap[localId].ConfigId).PropType;
         }
 
         public void OnItemSetToBag(ViewItem item)
         {
             item.SetRigState(false);
-            
-            if (_itemMap[item.LocalId].PropType == PropType.Bag)
+
+            var data = GetItemData(item.LocalId);
+            data.IsInBag = true;
+
+            if (GetItemPropType(item.LocalId) == (int)PropType.Bag)
             {
                 item.transform.SetParent(BagItem.transform);
             }
@@ -182,12 +166,29 @@ namespace Script
                 return;
             }
             
+            var data = GetItemData(localId);
+            data.IsInBag = false;
+            
+            
             var item = _itemUIMap[localId];
             
             item.transform.SetParent(BoxObj.transform);
             item.transform.localPosition = Vector3.zero;
             item.SetRigState(true);
         }
-        
+
+        public List<UIDataItem> GetAllItemData()
+        {
+            List<UIDataItem> list = new List<UIDataItem>();
+            foreach (var item in _itemDataMap.Values)
+            {
+                if (item.IsInBag)
+                {
+                    list.Add(item);
+                }
+            }
+            
+            return list;
+        }
     }
 }

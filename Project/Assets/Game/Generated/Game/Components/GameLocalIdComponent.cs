@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Game.LocalIdComponent localId { get { return (Game.LocalIdComponent)GetComponent(GameComponentsLookup.LocalId); } }
     public bool hasLocalId { get { return HasComponent(GameComponentsLookup.LocalId); } }
 
-    public void AddLocalId(uint newValue) {
+    public void AddLocalId(int newValue) {
         var index = GameComponentsLookup.LocalId;
         var component = (Game.LocalIdComponent)CreateComponent(index, typeof(Game.LocalIdComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceLocalId(uint newValue) {
+    public void ReplaceLocalId(int newValue) {
         var index = GameComponentsLookup.LocalId;
         var component = (Game.LocalIdComponent)CreateComponent(index, typeof(Game.LocalIdComponent));
         component.value = newValue;
