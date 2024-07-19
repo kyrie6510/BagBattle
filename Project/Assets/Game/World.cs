@@ -1,24 +1,24 @@
-﻿using Game.Actor;
+﻿using System.Collections.Generic;
+using Game.Actor;
 using Game.Buff;
 using Game.Combat;
 using Game.Game;
 using Game.Generated;
+using UnityEngine;
 
 namespace Game
 {
-    
-    
-    
     public class World
     {
-
         private GameFeature _systems;
 
-        internal  int Tick;
-        
+        internal int Tick;
+
         public World(GameUser[] actors)
         {
-            FactoryEntity.Init();
+           
+
+            
             
             _systems = new GameFeature("world");
             _systems.Add(new ActorSystem(actors));
@@ -27,12 +27,27 @@ namespace Game
             // _systems.Add(new BuffSystem());
 
             _systems.Initialize();
+
             
+
         }
+
+
+        private float time = 0;
 
         public void Update()
         {
+            time += UnityEngine.Time.deltaTime;
+            if (time >= 1)
+            {
+                time = 0;
+                EventManager.Instance.TriggerEvent(new OnLog($"+++++++++++++++++{Tick}"));
+                
+            }
+            
             Tick++;
+
+            EventManager.Instance.TriggerEvent(new OnWorldTick(){Tick = Tick});
             
             _systems.Execute();
             _systems.Cleanup();

@@ -1,7 +1,6 @@
-using System.Collections.Generic;
+
 using Game;
 using Script;
-using Script.Event;
 using UnityEngine;
 
 public class InputManager : Singleton<InputManager>

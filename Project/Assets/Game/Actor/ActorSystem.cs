@@ -17,11 +17,14 @@ namespace Game.Actor
                 actorEntity.AddStamina(10,10);
                 actorEntity.AddHp(100,100);
                 
+                EventManager.Instance.TriggerEvent(new OnActorEntityCreat(){ActorId =  actor.ActorId, ActorEntity = actorEntity});
+                
                 
                 //创建物品
                 foreach (var item in actor.Items)
                 {
-                    FactoryEntity.CreatEntity(actor.ActorId, item.ConfigId);
+                    var e = FactoryEntity.CreatEntity(actor.ActorId, item.ConfigId);
+                    EventManager.Instance.TriggerEvent(new OnGameEntityCreat{ViewLocalId =  item.LocalId, Entity = e});
                 }
             }
         }

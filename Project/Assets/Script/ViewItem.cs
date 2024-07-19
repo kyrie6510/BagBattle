@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Script;
-using Script.Event;
+using Entitas.Unity;
+using Game;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,9 +10,8 @@ public class ViewItem : MonoBehaviour ,IPointerDownHandler
     public int ConfigId;
     public int LocalId;
     
-    //public ConfigItem ConfigItem;
+ 
     public Image _imgItem;
-   
     public Rigidbody2D _rig;
 
     
@@ -22,7 +19,7 @@ public class ViewItem : MonoBehaviour ,IPointerDownHandler
     void Awake()
     {
         
-       // this.ConfigItem = ConfigManager.Instance.GetConfigItem(ConfigId);
+     
         _imgItem = GetComponent<Image>();
         _rig = GetComponent<Rigidbody2D>();
     }
@@ -30,8 +27,6 @@ public class ViewItem : MonoBehaviour ,IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         EventManager.Instance.TriggerEvent(new OnItemSelectEvent(){ LocalId =   this.LocalId});
-        
-        //InputManager.Instance.SetCurSelectItem(this);
     }
 
     
@@ -39,6 +34,12 @@ public class ViewItem : MonoBehaviour ,IPointerDownHandler
     {
         if (isUseGravity) _rig.bodyType = RigidbodyType2D.Dynamic;
         else _rig.bodyType = RigidbodyType2D.Static;
+    }
+
+
+    public void SetGameEntity(GameEntity entity)
+    {
+        gameObject.Link(entity);
     }
    
 }

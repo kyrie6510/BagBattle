@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Script;
 
-namespace Script.Event
+namespace Game
 {
     public class EventManager : Singleton<EventManager>
     {

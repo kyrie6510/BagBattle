@@ -1,6 +1,6 @@
 ﻿using FixMath.NET;
 
-namespace Game.Game
+namespace Game
 {
     public static class FactoryEntity
     {
@@ -26,7 +26,7 @@ namespace Game.Game
             var atk = config.GetDamageArray();
             e.AddAttack(new[] {(Fix64) atk[0], (Fix64) atk[1]});
             e.AddStaminaCost(config.Power);
-            e.AddCoolDownTime(0,config.Interval);
+            e.AddCoolDownTime(0,config.Interval*10);
 
             return e;
         }

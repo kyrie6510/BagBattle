@@ -1,9 +1,10 @@
 ﻿using Entitas;
+using Entitas.CodeGeneration.Attributes;
 using FixMath.NET;
 
 namespace Game
 {
-    [Actor]
+    [Actor,Event(EventTarget.Self)]
     public class StaminaComponent : IComponent
     {
         public Fix64 MaxValue;

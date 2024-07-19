@@ -1,14 +1,10 @@
-﻿using Script;
-
-namespace Game.Game.Extern
+﻿
+public sealed  partial class GameEntity
 {
-    public sealed  partial class GameEntity
-    {
+        
+    
         
         
         
         
-        
-        
-    }
 }

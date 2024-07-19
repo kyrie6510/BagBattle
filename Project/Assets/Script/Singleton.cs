@@ -1,4 +1,4 @@
-﻿namespace Script
+﻿namespace Game
 {
     public class Singleton<T> where  T : new ()
     {

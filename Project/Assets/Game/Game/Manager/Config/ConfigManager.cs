@@ -13,12 +13,7 @@ namespace Game
         public override void Awake()
         {
             base.Awake();
-            var data = Load<TablePropItemRowData>();
             
-            foreach (var v in data)
-            {
-                Debug.Log(v.Key + ":"+ v.Value.PropType);
-            }
             
         }
 

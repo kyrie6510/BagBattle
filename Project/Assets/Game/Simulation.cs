@@ -1,4 +1,6 @@
-﻿using Script;
+﻿using FixMath.NET;
+using Game.Game;
+using Script;
 
 namespace Game
 {
@@ -10,14 +12,26 @@ namespace Game
 
         public Simulation(GameUser[] actors)
         {
+            FactoryEntity.Init();
+ 
             _world = new World(actors);
             Time.SetWorld(_world);
+            
         }
 
-        public void Update()
+        private float _tickTime = 0;
+        
+        public void Update(float deltaTime)
         {
-            //_tick++;
-            _world.Update();
+            _tickTime += deltaTime;
+            
+            if (_tickTime >= Time._frameMilliSecond)
+            {
+                _tickTime -= Time._frameMilliSecond;
+                _world.Update();
+            }
+            
+          
             
         }
 

@@ -1,7 +1,8 @@
 ﻿using System;
 using Game;
-using Script.Event;
+
 using UnityEngine;
+using Time = UnityEngine.Time;
 
 namespace Script
 {
@@ -13,14 +14,20 @@ namespace Script
         {
             
             EventManager.Instance.AddListener<OnGamePlayEvent>(OnGamePlay);
+            EventManager.Instance.AddListener<OnLog>(OnLog);
             
             ItemManager.Instance.Awake();
             InputManager.Instance.Awake();
             GridManager.Instance.Awake();
             ConfigManager.Instance.Awake();
-            
+            ViewManager.Instance.Awake();
         }
-        
+
+        private void OnLog(OnLog e)
+        {
+            Debug.Log(e.Info);
+        }
+
         private void Update()
         {
             ConfigManager.Instance.Update();
@@ -33,10 +40,16 @@ namespace Script
             {
                 return;
             }
+
+            time += Time.deltaTime;
             
-            _simulation.Update();
+            
+          //  Debug.Log($"Time.deltaTime{Time.deltaTime}");
+            
+            _simulation.Update(Time.deltaTime*1000);
         }
-        
+
+        private float time = 0;
         
         private void OnGamePlay(OnGamePlayEvent e)
         {
@@ -57,9 +70,9 @@ namespace Script
             //创建UI
             ItemManager.Instance.GenerateItemForOther(otherData);
             
-            
             _simulation = new Simulation(new GameUser[] { user,user2 });
             _isGameStared = true;
+            
         }
 
         

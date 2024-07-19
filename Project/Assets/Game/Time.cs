@@ -6,14 +6,14 @@ namespace Game
     {
         private static World _world;
         
-        //一帧多少毫秒
-        private static int _frameMilliSecond = 50;
+        //-帧多少秒
+        public static int _frameMilliSecond = 50;
         
         //倍速
         public static Fix64 TimeScale = 1;
         
         /// <summary>
-        /// 一帧的时间
+        /// 一帧的时间 ms
         /// </summary>
         public static Fix64 FrameTime{ get; private set; }
         
