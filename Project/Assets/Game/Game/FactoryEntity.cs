@@ -25,8 +25,8 @@ namespace Game
             //config
             var atk = config.GetDamageArray();
             e.AddAttack(new[] {(Fix64) atk[0], (Fix64) atk[1]});
-            e.AddStaminaCost(config.Power);
-            e.AddCoolDownTime(0,config.Interval);
+            e.AddStaminaCost((Fix64)config.Power);
+            e.AddCoolDownTime(0,(Fix64)config.Interval);
 
             return e;
         }
