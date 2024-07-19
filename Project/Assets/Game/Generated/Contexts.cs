@@ -62,10 +62,22 @@ public partial class Contexts : Entitas.IContexts {
 //------------------------------------------------------------------------------
 public partial class Contexts {
 
+    public const string ActorId = "ActorId";
+    public const string Id = "Id";
     public const string LocalId = "LocalId";
 
     [Entitas.CodeGeneration.Attributes.PostConstructor]
     public void InitializeEntityIndices() {
+        game.AddEntityIndex(new Entitas.EntityIndex<GameEntity, short>(
+            ActorId,
+            game.GetGroup(GameMatcher.ActorId),
+            (e, c) => ((Game.ActorIdComponent)c).Value));
+
+        actor.AddEntityIndex(new Entitas.PrimaryEntityIndex<ActorEntity, int>(
+            Id,
+            actor.GetGroup(ActorMatcher.Id),
+            (e, c) => ((Game.IdComponent)c).Value));
+
         game.AddEntityIndex(new Entitas.PrimaryEntityIndex<GameEntity, int>(
             LocalId,
             game.GetGroup(GameMatcher.LocalId),
@@ -78,6 +90,14 @@ public partial class Contexts {
 }
 
 public static class ContextsExtensions {
+
+    public static System.Collections.Generic.HashSet<GameEntity> GetEntitiesWithActorId(this GameContext context, short Value) {
+        return ((Entitas.EntityIndex<GameEntity, short>)context.GetEntityIndex(Contexts.ActorId)).GetEntities(Value);
+    }
+
+    public static ActorEntity GetEntityWithId(this ActorContext context, int Value) {
+        return ((Entitas.PrimaryEntityIndex<ActorEntity, int>)context.GetEntityIndex(Contexts.Id)).GetEntity(Value);
+    }
 
     public static GameEntity GetEntityWithLocalId(this GameContext context, int value) {
         return ((Entitas.PrimaryEntityIndex<GameEntity, int>)context.GetEntityIndex(Contexts.LocalId)).GetEntity(value);

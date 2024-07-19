@@ -56,7 +56,7 @@ namespace Script
             GameUser user = new GameUser()
             {
                 Items = ItemManager.Instance.GetAllItemData(),
-                ActorId =  1,
+                ActorId =  0,
             };
 
             var otherData = ItemManager.Instance.GetOtherData();
@@ -64,7 +64,7 @@ namespace Script
             GameUser user2 = new GameUser()
             {
                 Items = otherData,
-                ActorId =  2,
+                ActorId =  1,
             };
             
             //创建UI

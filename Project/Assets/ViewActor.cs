@@ -12,9 +12,20 @@ public class ViewActor : MonoBehaviour , IHpListener , IStaminaListener
     public void SetActorEntity(ActorEntity actor)
     {
         gameObject.Link(actor);
+        
+        // var eventListeners = gameObject.GetComponents<IGameEntiyEventListener>();
+        // foreach (var listener in eventListeners)
+        //     listener.RegisterListeners(e);
+        
+        // var eventListeners = gameObject.GetComponents<IGameEntiyEventListener>();
+        // foreach (var listener in eventListeners)
+        //     listener.RegisterListeners(e);
+        
         actor.AddHpListener(this);
         actor.AddStaminaListener(this);
 
+        
+        
     }
     
     // Start is called before the first frame update

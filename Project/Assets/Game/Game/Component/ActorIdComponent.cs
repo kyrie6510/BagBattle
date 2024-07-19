@@ -1,11 +1,12 @@
 ﻿using Entitas;
-using FixMath.NET;
+using Entitas.CodeGeneration.Attributes;
+
 
 namespace Game
 {
-    [Actor,Game]
+    [Game]
     public class ActorIdComponent: IComponent
     {
-        public Fix64 Value;
+        [EntityIndex] public short Value;
     }
-}
+} 

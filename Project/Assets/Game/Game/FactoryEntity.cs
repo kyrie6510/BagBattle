@@ -17,7 +17,7 @@ namespace Game
             e.AddLocalId(_localId);
             _localId++;
 
-            e.AddActorId(actorId);
+            e.AddActorId((short)actorId);
             e.AddConfigId(configId);
 
             var config = ConfigManager.Instance.GetPropConfig((short) configId);
@@ -27,7 +27,7 @@ namespace Game
             e.AddAttack(new[] {(Fix64) atk[0], (Fix64) atk[1]});
             e.AddStaminaCost((Fix64)config.Power);
             e.AddCoolDownTime(0,(Fix64)config.Interval);
-
+            
             return e;
         }
     }

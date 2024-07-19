@@ -29,7 +29,7 @@ namespace Script
 
         private void OnActorEntityCreat(OnActorEntityCreat e)
         {
-            if (e.ActorId == 1)
+            if (e.ActorId == 0)
             {
                 _actor1.SetActorEntity(e.ActorEntity);
             }
