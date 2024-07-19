@@ -25,9 +25,9 @@ namespace Game
         {
             _tickTime += deltaTime;
             
-            if (_tickTime >= Time._frameMilliSecond)
+            if (_tickTime >= Time.OneTickMilliSecond)
             {
-                _tickTime -= Time._frameMilliSecond;
+                _tickTime -= Time.OneTickMilliSecond;
                 _world.Update();
             }
             
