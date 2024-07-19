@@ -4,9 +4,9 @@ table TablePropItemRowData {
     Name:string;
     PropType:int16;
     ItemGridType:[int32];
-    Power:int16;
-    Rate:float;
-    Interval:int16;
+    Power:float;
+    Rate:int32;
+    Interval:float;
     Damage:[int32];
     Cost:int16;
     Width:int16;

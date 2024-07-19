@@ -33,9 +33,9 @@ public struct TablePropItemRowData : IFlatbufferObject
   public ArraySegment<byte>? GetItemGridTypeBytes() { return __p.__vector_as_arraysegment(10); }
 #endif
   public int[] GetItemGridTypeArray() { return __p.__vector_as_array<int>(10); }
-  public short Power { get { int o = __p.__offset(12); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
-  public float Rate { get { int o = __p.__offset(14); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
-  public short Interval { get { int o = __p.__offset(16); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public float Power { get { int o = __p.__offset(12); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
+  public int Rate { get { int o = __p.__offset(14); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public float Interval { get { int o = __p.__offset(16); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
   public int Damage(int j) { int o = __p.__offset(18); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
   public int DamageLength { get { int o = __p.__offset(18); return o != 0 ? __p.__vector_len(o) : 0; } }
 #if ENABLE_SPAN_T
@@ -62,9 +62,9 @@ public struct TablePropItemRowData : IFlatbufferObject
       StringOffset NameOffset = default(StringOffset),
       short PropType = 0,
       VectorOffset ItemGridTypeOffset = default(VectorOffset),
-      short Power = 0,
-      float Rate = 0.0f,
-      short Interval = 0,
+      float Power = 0.0f,
+      int Rate = 0,
+      float Interval = 0.0f,
       VectorOffset DamageOffset = default(VectorOffset),
       short Cost = 0,
       short Width = 0,
@@ -75,7 +75,9 @@ public struct TablePropItemRowData : IFlatbufferObject
     builder.StartTable(14);
     TablePropItemRowData.AddTexturePath(builder, TexturePathOffset);
     TablePropItemRowData.AddDamage(builder, DamageOffset);
+    TablePropItemRowData.AddInterval(builder, Interval);
     TablePropItemRowData.AddRate(builder, Rate);
+    TablePropItemRowData.AddPower(builder, Power);
     TablePropItemRowData.AddItemGridType(builder, ItemGridTypeOffset);
     TablePropItemRowData.AddName(builder, NameOffset);
     TablePropItemRowData.AddUIHeight(builder, UIHeight);
@@ -83,8 +85,6 @@ public struct TablePropItemRowData : IFlatbufferObject
     TablePropItemRowData.AddHeight(builder, Height);
     TablePropItemRowData.AddWidth(builder, Width);
     TablePropItemRowData.AddCost(builder, Cost);
-    TablePropItemRowData.AddInterval(builder, Interval);
-    TablePropItemRowData.AddPower(builder, Power);
     TablePropItemRowData.AddPropType(builder, PropType);
     TablePropItemRowData.AddId(builder, Id);
     return TablePropItemRowData.EndTablePropItemRowData(builder);
@@ -98,9 +98,9 @@ public struct TablePropItemRowData : IFlatbufferObject
   public static VectorOffset CreateItemGridTypeVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
   public static VectorOffset CreateItemGridTypeVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
   public static void StartItemGridTypeVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
-  public static void AddPower(FlatBufferBuilder builder, short Power) { builder.AddShort(4, Power, 0); }
-  public static void AddRate(FlatBufferBuilder builder, float Rate) { builder.AddFloat(5, Rate, 0.0f); }
-  public static void AddInterval(FlatBufferBuilder builder, short Interval) { builder.AddShort(6, Interval, 0); }
+  public static void AddPower(FlatBufferBuilder builder, float Power) { builder.AddFloat(4, Power, 0.0f); }
+  public static void AddRate(FlatBufferBuilder builder, int Rate) { builder.AddInt(5, Rate, 0); }
+  public static void AddInterval(FlatBufferBuilder builder, float Interval) { builder.AddFloat(6, Interval, 0.0f); }
   public static void AddDamage(FlatBufferBuilder builder, VectorOffset DamageOffset) { builder.AddOffset(7, DamageOffset.Value, 0); }
   public static VectorOffset CreateDamageVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
   public static VectorOffset CreateDamageVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }

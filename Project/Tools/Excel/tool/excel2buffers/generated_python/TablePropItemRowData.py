@@ -76,22 +76,22 @@ class TablePropItemRowData(object):
     def Power(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
         if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Int16Flags, o + self._tab.Pos)
-        return 0
+            return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
+        return 0.0
 
     # TablePropItemRowData
     def Rate(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
         if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
-        return 0.0
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
+        return 0
 
     # TablePropItemRowData
     def Interval(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(16))
         if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Int16Flags, o + self._tab.Pos)
-        return 0
+            return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
+        return 0.0
 
     # TablePropItemRowData
     def Damage(self, j):
@@ -186,15 +186,15 @@ def StartItemGridTypeVector(builder, numElems): return builder.StartVector(4, nu
 def TablePropItemRowDataStartItemGridTypeVector(builder, numElems):
     """This method is deprecated. Please switch to Start."""
     return StartItemGridTypeVector(builder, numElems)
-def AddPower(builder, Power): builder.PrependInt16Slot(4, Power, 0)
+def AddPower(builder, Power): builder.PrependFloat32Slot(4, Power, 0.0)
 def TablePropItemRowDataAddPower(builder, Power):
     """This method is deprecated. Please switch to AddPower."""
     return AddPower(builder, Power)
-def AddRate(builder, Rate): builder.PrependFloat32Slot(5, Rate, 0.0)
+def AddRate(builder, Rate): builder.PrependInt32Slot(5, Rate, 0)
 def TablePropItemRowDataAddRate(builder, Rate):
     """This method is deprecated. Please switch to AddRate."""
     return AddRate(builder, Rate)
-def AddInterval(builder, Interval): builder.PrependInt16Slot(6, Interval, 0)
+def AddInterval(builder, Interval): builder.PrependFloat32Slot(6, Interval, 0.0)
 def TablePropItemRowDataAddInterval(builder, Interval):
     """This method is deprecated. Please switch to AddInterval."""
     return AddInterval(builder, Interval)

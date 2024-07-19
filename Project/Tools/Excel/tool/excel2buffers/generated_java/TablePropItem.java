@@ -24,9 +24,9 @@ public final class TablePropItemRowData extends Table {
   public IntVector ItemGridTypeVector(IntVector obj) { int o = __offset(10); return o != 0 ? obj.__assign(__vector(o), bb) : null; }
   public ByteBuffer ItemGridTypeAsByteBuffer() { return __vector_as_bytebuffer(10, 4); }
   public ByteBuffer ItemGridTypeInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 10, 4); }
-  public short Power() { int o = __offset(12); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
-  public float Rate() { int o = __offset(14); return o != 0 ? bb.getFloat(o + bb_pos) : 0.0f; }
-  public short Interval() { int o = __offset(16); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
+  public float Power() { int o = __offset(12); return o != 0 ? bb.getFloat(o + bb_pos) : 0.0f; }
+  public int Rate() { int o = __offset(14); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
+  public float Interval() { int o = __offset(16); return o != 0 ? bb.getFloat(o + bb_pos) : 0.0f; }
   public int Damage(int j) { int o = __offset(18); return o != 0 ? bb.getInt(__vector(o) + j * 4) : 0; }
   public int DamageLength() { int o = __offset(18); return o != 0 ? __vector_len(o) : 0; }
   public IntVector DamageVector() { return DamageVector(new IntVector()); }
@@ -47,9 +47,9 @@ public final class TablePropItemRowData extends Table {
       int NameOffset,
       short PropType,
       int ItemGridTypeOffset,
-      short Power,
-      float Rate,
-      short Interval,
+      float Power,
+      int Rate,
+      float Interval,
       int DamageOffset,
       short Cost,
       short Width,
@@ -60,7 +60,9 @@ public final class TablePropItemRowData extends Table {
     builder.startTable(14);
     TablePropItemRowData.addTexturePath(builder, TexturePathOffset);
     TablePropItemRowData.addDamage(builder, DamageOffset);
+    TablePropItemRowData.addInterval(builder, Interval);
     TablePropItemRowData.addRate(builder, Rate);
+    TablePropItemRowData.addPower(builder, Power);
     TablePropItemRowData.addItemGridType(builder, ItemGridTypeOffset);
     TablePropItemRowData.addName(builder, NameOffset);
     TablePropItemRowData.addUIHeight(builder, UIHeight);
@@ -68,8 +70,6 @@ public final class TablePropItemRowData extends Table {
     TablePropItemRowData.addHeight(builder, Height);
     TablePropItemRowData.addWidth(builder, Width);
     TablePropItemRowData.addCost(builder, Cost);
-    TablePropItemRowData.addInterval(builder, Interval);
-    TablePropItemRowData.addPower(builder, Power);
     TablePropItemRowData.addPropType(builder, PropType);
     TablePropItemRowData.addId(builder, Id);
     return TablePropItemRowData.endTablePropItemRowData(builder);
@@ -82,9 +82,9 @@ public final class TablePropItemRowData extends Table {
   public static void addItemGridType(FlatBufferBuilder builder, int ItemGridTypeOffset) { builder.addOffset(3, ItemGridTypeOffset, 0); }
   public static int createItemGridTypeVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addInt(data[i]); return builder.endVector(); }
   public static void startItemGridTypeVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
-  public static void addPower(FlatBufferBuilder builder, short Power) { builder.addShort(4, Power, 0); }
-  public static void addRate(FlatBufferBuilder builder, float Rate) { builder.addFloat(5, Rate, 0.0f); }
-  public static void addInterval(FlatBufferBuilder builder, short Interval) { builder.addShort(6, Interval, 0); }
+  public static void addPower(FlatBufferBuilder builder, float Power) { builder.addFloat(4, Power, 0.0f); }
+  public static void addRate(FlatBufferBuilder builder, int Rate) { builder.addInt(5, Rate, 0); }
+  public static void addInterval(FlatBufferBuilder builder, float Interval) { builder.addFloat(6, Interval, 0.0f); }
   public static void addDamage(FlatBufferBuilder builder, int DamageOffset) { builder.addOffset(7, DamageOffset, 0); }
   public static int createDamageVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addInt(data[i]); return builder.endVector(); }
   public static void startDamageVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }

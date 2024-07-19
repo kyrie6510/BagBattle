@@ -6,7 +6,7 @@ namespace Game
 {
     public class Simulation
     {
-        //public int _tick;
+        
 
         private World _world;
 
