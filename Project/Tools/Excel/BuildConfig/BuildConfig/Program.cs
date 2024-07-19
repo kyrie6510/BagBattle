@@ -49,7 +49,7 @@ namespace BuildConfig
             Compile(Environment.CurrentDirectory+"/FlatBuffers.dll",Environment.CurrentDirectory +"/csharp","config-flat.dll");
             string currentDirectory = Environment.CurrentDirectory;
             Console.WriteLine("当前项目文件夹路径：" + currentDirectory);
-
+            Console.ReadKey();
         }
     }
 }
