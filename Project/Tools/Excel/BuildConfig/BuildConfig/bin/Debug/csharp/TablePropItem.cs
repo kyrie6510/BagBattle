@@ -47,15 +47,31 @@ public struct TablePropItemRowData : IFlatbufferObject
   public short Cost { get { int o = __p.__offset(20); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
   public short Width { get { int o = __p.__offset(22); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
   public short Height { get { int o = __p.__offset(24); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
-  public short UIWidth { get { int o = __p.__offset(26); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
-  public short UIHeight { get { int o = __p.__offset(28); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
-  public string TexturePath { get { int o = __p.__offset(30); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public int TarStarType(int j) { int o = __p.__offset(26); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
+  public int TarStarTypeLength { get { int o = __p.__offset(26); return o != 0 ? __p.__vector_len(o) : 0; } }
 #if ENABLE_SPAN_T
-  public Span<byte> GetTexturePathBytes() { return __p.__vector_as_span<byte>(30, 1); }
+  public Span<int> GetTarStarTypeBytes() { return __p.__vector_as_span<int>(26, 4); }
 #else
-  public ArraySegment<byte>? GetTexturePathBytes() { return __p.__vector_as_arraysegment(30); }
+  public ArraySegment<byte>? GetTarStarTypeBytes() { return __p.__vector_as_arraysegment(26); }
 #endif
-  public byte[] GetTexturePathArray() { return __p.__vector_as_array<byte>(30); }
+  public int[] GetTarStarTypeArray() { return __p.__vector_as_array<int>(26); }
+  public int ExTarStarId(int j) { int o = __p.__offset(28); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
+  public int ExTarStarIdLength { get { int o = __p.__offset(28); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<int> GetExTarStarIdBytes() { return __p.__vector_as_span<int>(28, 4); }
+#else
+  public ArraySegment<byte>? GetExTarStarIdBytes() { return __p.__vector_as_arraysegment(28); }
+#endif
+  public int[] GetExTarStarIdArray() { return __p.__vector_as_array<int>(28); }
+  public short UIWidth { get { int o = __p.__offset(30); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public short UIHeight { get { int o = __p.__offset(32); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public string TexturePath { get { int o = __p.__offset(34); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetTexturePathBytes() { return __p.__vector_as_span<byte>(34, 1); }
+#else
+  public ArraySegment<byte>? GetTexturePathBytes() { return __p.__vector_as_arraysegment(34); }
+#endif
+  public byte[] GetTexturePathArray() { return __p.__vector_as_array<byte>(34); }
 
   public static Offset<TablePropItemRowData> CreateTablePropItemRowData(FlatBufferBuilder builder,
       short Id = 0,
@@ -69,11 +85,15 @@ public struct TablePropItemRowData : IFlatbufferObject
       short Cost = 0,
       short Width = 0,
       short Height = 0,
+      VectorOffset TarStarTypeOffset = default(VectorOffset),
+      VectorOffset ExTarStarIdOffset = default(VectorOffset),
       short UIWidth = 0,
       short UIHeight = 0,
       StringOffset TexturePathOffset = default(StringOffset)) {
-    builder.StartTable(14);
+    builder.StartTable(16);
     TablePropItemRowData.AddTexturePath(builder, TexturePathOffset);
+    TablePropItemRowData.AddExTarStarId(builder, ExTarStarIdOffset);
+    TablePropItemRowData.AddTarStarType(builder, TarStarTypeOffset);
     TablePropItemRowData.AddDamage(builder, DamageOffset);
     TablePropItemRowData.AddInterval(builder, Interval);
     TablePropItemRowData.AddRate(builder, Rate);
@@ -90,7 +110,7 @@ public struct TablePropItemRowData : IFlatbufferObject
     return TablePropItemRowData.EndTablePropItemRowData(builder);
   }
 
-  public static void StartTablePropItemRowData(FlatBufferBuilder builder) { builder.StartTable(14); }
+  public static void StartTablePropItemRowData(FlatBufferBuilder builder) { builder.StartTable(16); }
   public static void AddId(FlatBufferBuilder builder, short Id) { builder.AddShort(0, Id, 0); }
   public static void AddName(FlatBufferBuilder builder, StringOffset NameOffset) { builder.AddOffset(1, NameOffset.Value, 0); }
   public static void AddPropType(FlatBufferBuilder builder, short PropType) { builder.AddShort(2, PropType, 0); }
@@ -108,9 +128,17 @@ public struct TablePropItemRowData : IFlatbufferObject
   public static void AddCost(FlatBufferBuilder builder, short Cost) { builder.AddShort(8, Cost, 0); }
   public static void AddWidth(FlatBufferBuilder builder, short Width) { builder.AddShort(9, Width, 0); }
   public static void AddHeight(FlatBufferBuilder builder, short Height) { builder.AddShort(10, Height, 0); }
-  public static void AddUIWidth(FlatBufferBuilder builder, short UIWidth) { builder.AddShort(11, UIWidth, 0); }
-  public static void AddUIHeight(FlatBufferBuilder builder, short UIHeight) { builder.AddShort(12, UIHeight, 0); }
-  public static void AddTexturePath(FlatBufferBuilder builder, StringOffset TexturePathOffset) { builder.AddOffset(13, TexturePathOffset.Value, 0); }
+  public static void AddTarStarType(FlatBufferBuilder builder, VectorOffset TarStarTypeOffset) { builder.AddOffset(11, TarStarTypeOffset.Value, 0); }
+  public static VectorOffset CreateTarStarTypeVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateTarStarTypeVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static void StartTarStarTypeVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddExTarStarId(FlatBufferBuilder builder, VectorOffset ExTarStarIdOffset) { builder.AddOffset(12, ExTarStarIdOffset.Value, 0); }
+  public static VectorOffset CreateExTarStarIdVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateExTarStarIdVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static void StartExTarStarIdVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddUIWidth(FlatBufferBuilder builder, short UIWidth) { builder.AddShort(13, UIWidth, 0); }
+  public static void AddUIHeight(FlatBufferBuilder builder, short UIHeight) { builder.AddShort(14, UIHeight, 0); }
+  public static void AddTexturePath(FlatBufferBuilder builder, StringOffset TexturePathOffset) { builder.AddOffset(15, TexturePathOffset.Value, 0); }
   public static Offset<TablePropItemRowData> EndTablePropItemRowData(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<TablePropItemRowData>(o);

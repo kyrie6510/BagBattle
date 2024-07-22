@@ -20,7 +20,7 @@ namespace Script
 
         public GameObject ObjOtherBag;
 
-        private Dictionary<int, ConfigItem> _itemMap = new Dictionary<int, ConfigItem>();
+      //  private Dictionary<int, ConfigItem> _itemMap = new Dictionary<int, ConfigItem>();
         private Dictionary<int, UIDataItem> _itemDataMap = new Dictionary<int, UIDataItem>();
         private Dictionary<int, ViewItem> _itemUIMap = new Dictionary<int, ViewItem>();
         private int _localId = 1;
@@ -78,7 +78,7 @@ namespace Script
 
         private void GenerateItem()
         {
-            for (short i = 1; i <= 6; i++)
+            for (short i = 1; i <= 8; i++)
             {
                 var configId = i;
 

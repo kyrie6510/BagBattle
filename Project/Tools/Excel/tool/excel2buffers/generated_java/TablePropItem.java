@@ -36,11 +36,23 @@ public final class TablePropItemRowData extends Table {
   public short Cost() { int o = __offset(20); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
   public short Width() { int o = __offset(22); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
   public short Height() { int o = __offset(24); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
-  public short UIWidth() { int o = __offset(26); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
-  public short UIHeight() { int o = __offset(28); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
-  public String TexturePath() { int o = __offset(30); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer TexturePathAsByteBuffer() { return __vector_as_bytebuffer(30, 1); }
-  public ByteBuffer TexturePathInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 30, 1); }
+  public int TarStarType(int j) { int o = __offset(26); return o != 0 ? bb.getInt(__vector(o) + j * 4) : 0; }
+  public int TarStarTypeLength() { int o = __offset(26); return o != 0 ? __vector_len(o) : 0; }
+  public IntVector TarStarTypeVector() { return TarStarTypeVector(new IntVector()); }
+  public IntVector TarStarTypeVector(IntVector obj) { int o = __offset(26); return o != 0 ? obj.__assign(__vector(o), bb) : null; }
+  public ByteBuffer TarStarTypeAsByteBuffer() { return __vector_as_bytebuffer(26, 4); }
+  public ByteBuffer TarStarTypeInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 26, 4); }
+  public int ExTarStarId(int j) { int o = __offset(28); return o != 0 ? bb.getInt(__vector(o) + j * 4) : 0; }
+  public int ExTarStarIdLength() { int o = __offset(28); return o != 0 ? __vector_len(o) : 0; }
+  public IntVector ExTarStarIdVector() { return ExTarStarIdVector(new IntVector()); }
+  public IntVector ExTarStarIdVector(IntVector obj) { int o = __offset(28); return o != 0 ? obj.__assign(__vector(o), bb) : null; }
+  public ByteBuffer ExTarStarIdAsByteBuffer() { return __vector_as_bytebuffer(28, 4); }
+  public ByteBuffer ExTarStarIdInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 28, 4); }
+  public short UIWidth() { int o = __offset(30); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
+  public short UIHeight() { int o = __offset(32); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
+  public String TexturePath() { int o = __offset(34); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer TexturePathAsByteBuffer() { return __vector_as_bytebuffer(34, 1); }
+  public ByteBuffer TexturePathInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 34, 1); }
 
   public static int createTablePropItemRowData(FlatBufferBuilder builder,
       short Id,
@@ -54,11 +66,15 @@ public final class TablePropItemRowData extends Table {
       short Cost,
       short Width,
       short Height,
+      int TarStarTypeOffset,
+      int ExTarStarIdOffset,
       short UIWidth,
       short UIHeight,
       int TexturePathOffset) {
-    builder.startTable(14);
+    builder.startTable(16);
     TablePropItemRowData.addTexturePath(builder, TexturePathOffset);
+    TablePropItemRowData.addExTarStarId(builder, ExTarStarIdOffset);
+    TablePropItemRowData.addTarStarType(builder, TarStarTypeOffset);
     TablePropItemRowData.addDamage(builder, DamageOffset);
     TablePropItemRowData.addInterval(builder, Interval);
     TablePropItemRowData.addRate(builder, Rate);
@@ -75,7 +91,7 @@ public final class TablePropItemRowData extends Table {
     return TablePropItemRowData.endTablePropItemRowData(builder);
   }
 
-  public static void startTablePropItemRowData(FlatBufferBuilder builder) { builder.startTable(14); }
+  public static void startTablePropItemRowData(FlatBufferBuilder builder) { builder.startTable(16); }
   public static void addId(FlatBufferBuilder builder, short Id) { builder.addShort(0, Id, 0); }
   public static void addName(FlatBufferBuilder builder, int NameOffset) { builder.addOffset(1, NameOffset, 0); }
   public static void addPropType(FlatBufferBuilder builder, short PropType) { builder.addShort(2, PropType, 0); }
@@ -91,9 +107,15 @@ public final class TablePropItemRowData extends Table {
   public static void addCost(FlatBufferBuilder builder, short Cost) { builder.addShort(8, Cost, 0); }
   public static void addWidth(FlatBufferBuilder builder, short Width) { builder.addShort(9, Width, 0); }
   public static void addHeight(FlatBufferBuilder builder, short Height) { builder.addShort(10, Height, 0); }
-  public static void addUIWidth(FlatBufferBuilder builder, short UIWidth) { builder.addShort(11, UIWidth, 0); }
-  public static void addUIHeight(FlatBufferBuilder builder, short UIHeight) { builder.addShort(12, UIHeight, 0); }
-  public static void addTexturePath(FlatBufferBuilder builder, int TexturePathOffset) { builder.addOffset(13, TexturePathOffset, 0); }
+  public static void addTarStarType(FlatBufferBuilder builder, int TarStarTypeOffset) { builder.addOffset(11, TarStarTypeOffset, 0); }
+  public static int createTarStarTypeVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addInt(data[i]); return builder.endVector(); }
+  public static void startTarStarTypeVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
+  public static void addExTarStarId(FlatBufferBuilder builder, int ExTarStarIdOffset) { builder.addOffset(12, ExTarStarIdOffset, 0); }
+  public static int createExTarStarIdVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addInt(data[i]); return builder.endVector(); }
+  public static void startExTarStarIdVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
+  public static void addUIWidth(FlatBufferBuilder builder, short UIWidth) { builder.addShort(13, UIWidth, 0); }
+  public static void addUIHeight(FlatBufferBuilder builder, short UIHeight) { builder.addShort(14, UIHeight, 0); }
+  public static void addTexturePath(FlatBufferBuilder builder, int TexturePathOffset) { builder.addOffset(15, TexturePathOffset, 0); }
   public static int endTablePropItemRowData(FlatBufferBuilder builder) {
     int o = builder.endTable();
     return o;

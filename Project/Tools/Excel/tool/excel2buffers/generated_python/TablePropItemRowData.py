@@ -142,27 +142,81 @@ class TablePropItemRowData(object):
         return 0
 
     # TablePropItemRowData
-    def UIWidth(self):
+    def TarStarType(self, j):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(26))
+        if o != 0:
+            a = self._tab.Vector(o)
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, a + flatbuffers.number_types.UOffsetTFlags.py_type(j * 4))
+        return 0
+
+    # TablePropItemRowData
+    def TarStarTypeAsNumpy(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(26))
+        if o != 0:
+            return self._tab.GetVectorAsNumpy(flatbuffers.number_types.Int32Flags, o)
+        return 0
+
+    # TablePropItemRowData
+    def TarStarTypeLength(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(26))
+        if o != 0:
+            return self._tab.VectorLen(o)
+        return 0
+
+    # TablePropItemRowData
+    def TarStarTypeIsNone(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(26))
+        return o == 0
+
+    # TablePropItemRowData
+    def ExTarStarId(self, j):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(28))
+        if o != 0:
+            a = self._tab.Vector(o)
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, a + flatbuffers.number_types.UOffsetTFlags.py_type(j * 4))
+        return 0
+
+    # TablePropItemRowData
+    def ExTarStarIdAsNumpy(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(28))
+        if o != 0:
+            return self._tab.GetVectorAsNumpy(flatbuffers.number_types.Int32Flags, o)
+        return 0
+
+    # TablePropItemRowData
+    def ExTarStarIdLength(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(28))
+        if o != 0:
+            return self._tab.VectorLen(o)
+        return 0
+
+    # TablePropItemRowData
+    def ExTarStarIdIsNone(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(28))
+        return o == 0
+
+    # TablePropItemRowData
+    def UIWidth(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(30))
         if o != 0:
             return self._tab.Get(flatbuffers.number_types.Int16Flags, o + self._tab.Pos)
         return 0
 
     # TablePropItemRowData
     def UIHeight(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(28))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(32))
         if o != 0:
             return self._tab.Get(flatbuffers.number_types.Int16Flags, o + self._tab.Pos)
         return 0
 
     # TablePropItemRowData
     def TexturePath(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(30))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(34))
         if o != 0:
             return self._tab.String(o + self._tab.Pos)
         return None
 
-def Start(builder): builder.StartObject(14)
+def Start(builder): builder.StartObject(16)
 def TablePropItemRowDataStart(builder):
     """This method is deprecated. Please switch to Start."""
     return Start(builder)
@@ -218,15 +272,31 @@ def AddHeight(builder, Height): builder.PrependInt16Slot(10, Height, 0)
 def TablePropItemRowDataAddHeight(builder, Height):
     """This method is deprecated. Please switch to AddHeight."""
     return AddHeight(builder, Height)
-def AddUIWidth(builder, UIWidth): builder.PrependInt16Slot(11, UIWidth, 0)
+def AddTarStarType(builder, TarStarType): builder.PrependUOffsetTRelativeSlot(11, flatbuffers.number_types.UOffsetTFlags.py_type(TarStarType), 0)
+def TablePropItemRowDataAddTarStarType(builder, TarStarType):
+    """This method is deprecated. Please switch to AddTarStarType."""
+    return AddTarStarType(builder, TarStarType)
+def StartTarStarTypeVector(builder, numElems): return builder.StartVector(4, numElems, 4)
+def TablePropItemRowDataStartTarStarTypeVector(builder, numElems):
+    """This method is deprecated. Please switch to Start."""
+    return StartTarStarTypeVector(builder, numElems)
+def AddExTarStarId(builder, ExTarStarId): builder.PrependUOffsetTRelativeSlot(12, flatbuffers.number_types.UOffsetTFlags.py_type(ExTarStarId), 0)
+def TablePropItemRowDataAddExTarStarId(builder, ExTarStarId):
+    """This method is deprecated. Please switch to AddExTarStarId."""
+    return AddExTarStarId(builder, ExTarStarId)
+def StartExTarStarIdVector(builder, numElems): return builder.StartVector(4, numElems, 4)
+def TablePropItemRowDataStartExTarStarIdVector(builder, numElems):
+    """This method is deprecated. Please switch to Start."""
+    return StartExTarStarIdVector(builder, numElems)
+def AddUIWidth(builder, UIWidth): builder.PrependInt16Slot(13, UIWidth, 0)
 def TablePropItemRowDataAddUIWidth(builder, UIWidth):
     """This method is deprecated. Please switch to AddUIWidth."""
     return AddUIWidth(builder, UIWidth)
-def AddUIHeight(builder, UIHeight): builder.PrependInt16Slot(12, UIHeight, 0)
+def AddUIHeight(builder, UIHeight): builder.PrependInt16Slot(14, UIHeight, 0)
 def TablePropItemRowDataAddUIHeight(builder, UIHeight):
     """This method is deprecated. Please switch to AddUIHeight."""
     return AddUIHeight(builder, UIHeight)
-def AddTexturePath(builder, TexturePath): builder.PrependUOffsetTRelativeSlot(13, flatbuffers.number_types.UOffsetTFlags.py_type(TexturePath), 0)
+def AddTexturePath(builder, TexturePath): builder.PrependUOffsetTRelativeSlot(15, flatbuffers.number_types.UOffsetTFlags.py_type(TexturePath), 0)
 def TablePropItemRowDataAddTexturePath(builder, TexturePath):
     """This method is deprecated. Please switch to AddTexturePath."""
     return AddTexturePath(builder, TexturePath)

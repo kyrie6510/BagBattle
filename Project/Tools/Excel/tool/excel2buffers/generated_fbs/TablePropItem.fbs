@@ -11,6 +11,8 @@ table TablePropItemRowData {
     Cost:int16;
     Width:int16;
     Height:int16;
+    TarStarType:[int32];
+    ExTarStarId:[int32];
     UIWidth:int16;
     UIHeight:int16;
     TexturePath:string;
