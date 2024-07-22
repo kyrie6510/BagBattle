@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Game;
 using UnityEngine;
 using UnityEngine.UI;
@@ -196,11 +197,13 @@ namespace Script
                     {
                         if (curGridData.LocalIdItem != 0)
                         {
-                            var targetPropType = ItemManager.Instance.GetItemPropType(curGridData.LocalIdItem);
-
+                            var localId = curGridData.LocalIdItem;
+                            var targetPropType = ItemManager.Instance.GetItemPropType(localId);
+                            var targetConfigId = ItemManager.Instance.GetItemPropConfigId(localId);
                             if (
                                 //TODO  表里添加 TriggerStarType
-                                //curConfig.TriggerStarType.Contains((int) targetPropType) &&
+                                curConfig.GetTarStarTypeArray().Contains(targetPropType) &&
+                                !curConfig.GetExTarStarIdArray().Contains(targetConfigId)&&
                                 !_catchStarLocalIdMap.Contains(curGridData.LocalIdItem))
                             {
                                 _gridStars[curGridUI.Id].SetActive(true);

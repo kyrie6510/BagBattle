@@ -112,15 +112,11 @@ namespace Script
             var height = config.UIHeight;
 
             GameObject obj = null;
-            if (configId == 4)
-            {
-                obj = Resources.Load($"ItemPrefab/Pack_{width}x{height}") as GameObject;
-            }
-            else
-            {
-                obj = Resources.Load($"ItemPrefab/{width}x{height}") as GameObject;
-            }
+            
+            obj = Resources.Load($"ItemPrefab/ViewItem") as GameObject;
 
+            obj.GetComponent<RectTransform>().sizeDelta = new Vector2(width*80,height*80 );
+            
             _prefabs.Add(obj);
 
             ViewItem item = null;
@@ -174,6 +170,16 @@ namespace Script
             }
 
             return ConfigManager.Instance.GetPropConfig(_itemDataMap[localId].ConfigId).PropType;
+        }
+        
+        public int GetItemPropConfigId(int localId)
+        {
+            if (!_itemDataMap.ContainsKey(localId))
+            {
+                return -1;
+            }
+
+            return _itemDataMap[localId].ConfigId;
         }
 
         public void OnItemSetToBag(ViewItem item, bool isMyBag = true)
