@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using FixMath.NET;
 using Game;
 using Game.Game;
 using Unity.VisualScripting;
 
-public partial class GameEntity
+public partial class GameEntity: IHpListener
 {
     public void DoAction()
     {
@@ -17,6 +18,21 @@ public partial class GameEntity
         //    actor.ReplaceHp(actor.hp.MaxValue,actor.hp.Value- v);
         // }
         
+        
+        
+        //以下全部针对buffEntity
+        
+        //攻击相关
+        
+        //2.玩家有一个攻击动作组件 攻击时  攻击未命中时 命中时 ,受到攻击组件 未收到攻击 受到攻击 受到未命中攻击 
+        //3.然后根据我们的config给物体添加组件是否监听该对象的组件
+        //4.在OnAttackActionCompt 每次replace中判断是否产生效果
+        
+        
+
+        
+
+
     }
 
     // public bool CanAttack()
@@ -24,127 +40,17 @@ public partial class GameEntity
     //     return attack.Value[0] != 0 || attack.Value[1] != 0;
     // }
 
-    private Dictionary<char, int> NumMap = new Dictionary<char, int>()
+    
+    
+  
+
+    public void OnAnyHp(ActorEntity entity, Fix64 maxValue, Fix64 value)
     {
-        {'I', 1},
-        {'V', 5},
-        {'X', 10},
-        {'L', 50},
-        {'C', 100},
-        {'D', 500},
-        {'M', 1000},
-    };
-    
-    
- 
-    private Dictionary<int,string > CharMap = new Dictionary<int,string >()
-    {
-        {1,"I"}, 
-        {5,"V"}, 
-        {10,"X"}, 
-        {50,"L"}, 
-        {100,"C"}, 
-        {500,"D"}, 
-        {1000,"M"}, 
-        {4,"IV"},
-        {9,"IX"},
-        {40,"XL"},
-        {90,"XC"},
-        {400,"CD"},
-        {900,"CM"},
-    };
-    
-    
-    public int RomanToInt(string s)
-    {
-
-        int res = 0;
-        int i = 0;
-        for (i = 0; i < s.Length-1; i++)
-        {
-            var c = s[i];
-            var cNext = s[i + 1];
-            
-            //小 大 = 大 - 小
-            if (NumMap[c] < NumMap[cNext]&& (c == 'I'|| c=='X'|| c== 'C'))
-            {
-                res += NumMap[cNext] - NumMap[c];
-                i++;
-            }
-            else
-            {
-                res += NumMap[c];
-            }
-            
-        }
-
-        if (i <= s.Length - 1)
-        {
-            res += NumMap[s[s.Length - 1]];
-        }
-       
-        
-        
-
-        return res;
-
-
+        throw new System.NotImplementedException();
     }
-    
-    
-    public string IntToRoman(int num)
-    {
-        string numStr = num.ToString();
-        int bitNum = numStr.Length;
-        string res = "";
-        int divideNum = 1000; 
-        //多少位
-        while (num != 0)
-        {
-            int resNum = num / divideNum;
-            
-            if (resNum == 0)
-            {
-                divideNum /= 10;
-                bitNum--;
-            }
-            else
-            {
-                int key = resNum * divideNum;
-                if (CharMap.ContainsKey(key))
-                {
-                    res += CharMap[resNum * divideNum];
-                }
-                else
-                {
-                    if (resNum < 4)
-                    {
-                        for (int i = 0; i < resNum; i++)
-                        {
-                            res += CharMap[divideNum];
-                        }
-                    }
-                    else
-                    {
-                        res += CharMap[5* divideNum];
-                        for (int i = 5; i < resNum; i++)
-                        {
-                            res += CharMap[divideNum];
-                        }
-                    }
-                    
-                    
-                }
-                
-                num = num % (divideNum * resNum);
-                divideNum /= 10;
-                bitNum--;
-                
-            }
-            
-        }
 
-        return res;
+    public void OnHp(ActorEntity entity, Fix64 maxValue, Fix64 value)
+    {
+        throw new System.NotImplementedException();
     }
-    
 }

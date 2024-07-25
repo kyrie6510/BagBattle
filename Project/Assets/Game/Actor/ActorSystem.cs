@@ -1,8 +1,4 @@
-﻿
-
-using Game.Game;
-
-namespace Game.Actor
+﻿namespace Game.Actor
 {
     public class ActorSystem : Feature
     {
@@ -20,10 +16,18 @@ namespace Game.Actor
                 EventManager.Instance.TriggerEvent(new OnActorEntityCreat(){ActorId =  actor.ActorId, ActorEntity = actorEntity});
                 
                 
+                
+                
                 //创建物品
                 foreach (var item in actor.Items)
                 {
                     var e = FactoryEntity.CreatEntity(actor.ActorId, item.ConfigId);
+                    var cfgId = e.configId.Value;
+                    //if(cfgId)
+                        
+                    
+                    
+                    actorEntity.AddHpListener(e);
                     EventManager.Instance.TriggerEvent(new OnGameEntityCreat{ViewLocalId =  item.LocalId, Entity = e});
                 }
             }
