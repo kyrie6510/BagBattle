@@ -6,9 +6,14 @@ using Unity.VisualScripting;
 
 public partial class GameEntity: IHpListener
 {
-    public void DoAction()
+    public void DoAttack()
     {
-       //EventManager.Instance.TriggerEvent(new OnLog($"冷却完成{localId.value}"));
+
+        var combat = Contexts.sharedInstance.combat.CreateEntity();
+        // combat
+
+
+        //EventManager.Instance.TriggerEvent(new OnLog($"冷却完成{localId.value}"));
 
         // if (CanAttack())
         // {
@@ -17,20 +22,20 @@ public partial class GameEntity: IHpListener
         //    var v = UtilityRandom.random.Next((int)attack.Value[0], (int)attack.Value[1] + 1);
         //    actor.ReplaceHp(actor.hp.MaxValue,actor.hp.Value- v);
         // }
-        
-        
-        
+
+
+
         //以下全部针对buffEntity
-        
+
         //攻击相关
-        
+
         //2.玩家有一个攻击动作组件 攻击时  攻击未命中时 命中时 ,受到攻击组件 未收到攻击 受到攻击 受到未命中攻击 
         //3.然后根据我们的config给物体添加组件是否监听该对象的组件
         //4.在OnAttackActionCompt 每次replace中判断是否产生效果
-        
-        
 
-        
+
+
+
 
 
     }
@@ -39,18 +44,15 @@ public partial class GameEntity: IHpListener
     // {
     //     return attack.Value[0] != 0 || attack.Value[1] != 0;
     // }
-
     
-    
-  
-
-    public void OnAnyHp(ActorEntity entity, Fix64 maxValue, Fix64 value)
-    {
-        throw new System.NotImplementedException();
-    }
 
     public void OnHp(ActorEntity entity, Fix64 maxValue, Fix64 value)
     {
+        var config = ConfigManager.Instance.GetPropConfig((short) this.configId.Value);
+        
+        
+        
+        
         throw new System.NotImplementedException();
     }
 }

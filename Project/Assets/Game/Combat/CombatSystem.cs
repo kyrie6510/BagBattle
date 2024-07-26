@@ -4,6 +4,9 @@ namespace Game.Combat
 {
     public class CombatSystem : Feature
     {
-        
+        public CombatSystem()
+        {
+            
+        }
     }
 }

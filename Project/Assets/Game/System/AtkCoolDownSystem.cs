@@ -2,13 +2,13 @@
 
 namespace Game
 {
-    public class CoolDownSystem : IExecuteSystem
+    public class AtkCoolDownSystem : IExecuteSystem
     {
 
         private IGroup<GameEntity> _ens;
 
 
-        public CoolDownSystem()
+        public AtkCoolDownSystem()
         {
             _ens = Contexts.sharedInstance.game.GetGroup(GameMatcher.CoolDownTime);
         }
@@ -22,7 +22,7 @@ namespace Game
                 if (value >= e.coolDownTime.Value)
                 {
                     e.coolDownTime.TimeSpan = Time.TimeFromStart;
-                    e.DoAction();
+                    e.DoAttack();
                 }
                  
             }

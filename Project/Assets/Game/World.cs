@@ -23,7 +23,7 @@ namespace Game
             _systems = new GameFeature("world");
             _systems.Add(new ActorSystem(actors));
             _systems.Add(new GameSystem());
-            // _systems.Add(new CombatSystem());
+             _systems.Add(new CombatSystem());
             // _systems.Add(new BuffSystem());
 
             _systems.Initialize();
