@@ -39,20 +39,34 @@ class TableEffectRowData(object):
         return None
 
     # TableEffectRowData
-    def Target(self):
+    def EffectTarget(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
         if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Int16Flags, o + self._tab.Pos)
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
         return 0
 
     # TableEffectRowData
-    def Type(self):
+    def EffectType(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
         if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Int16Flags, o + self._tab.Pos)
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
         return 0
 
-def Start(builder): builder.StartObject(4)
+    # TableEffectRowData
+    def EffectClass(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
+        if o != 0:
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
+        return 0
+
+    # TableEffectRowData
+    def EffectValue(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
+        if o != 0:
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
+        return 0
+
+def Start(builder): builder.StartObject(6)
 def TableEffectRowDataStart(builder):
     """This method is deprecated. Please switch to Start."""
     return Start(builder)
@@ -64,14 +78,22 @@ def AddName(builder, Name): builder.PrependUOffsetTRelativeSlot(1, flatbuffers.n
 def TableEffectRowDataAddName(builder, Name):
     """This method is deprecated. Please switch to AddName."""
     return AddName(builder, Name)
-def AddTarget(builder, Target): builder.PrependInt16Slot(2, Target, 0)
-def TableEffectRowDataAddTarget(builder, Target):
-    """This method is deprecated. Please switch to AddTarget."""
-    return AddTarget(builder, Target)
-def AddType(builder, Type): builder.PrependInt16Slot(3, Type, 0)
-def TableEffectRowDataAddType(builder, Type):
-    """This method is deprecated. Please switch to AddType."""
-    return AddType(builder, Type)
+def AddEffectTarget(builder, EffectTarget): builder.PrependInt32Slot(2, EffectTarget, 0)
+def TableEffectRowDataAddEffectTarget(builder, EffectTarget):
+    """This method is deprecated. Please switch to AddEffectTarget."""
+    return AddEffectTarget(builder, EffectTarget)
+def AddEffectType(builder, EffectType): builder.PrependInt32Slot(3, EffectType, 0)
+def TableEffectRowDataAddEffectType(builder, EffectType):
+    """This method is deprecated. Please switch to AddEffectType."""
+    return AddEffectType(builder, EffectType)
+def AddEffectClass(builder, EffectClass): builder.PrependInt32Slot(4, EffectClass, 0)
+def TableEffectRowDataAddEffectClass(builder, EffectClass):
+    """This method is deprecated. Please switch to AddEffectClass."""
+    return AddEffectClass(builder, EffectClass)
+def AddEffectValue(builder, EffectValue): builder.PrependInt32Slot(5, EffectValue, 0)
+def TableEffectRowDataAddEffectValue(builder, EffectValue):
+    """This method is deprecated. Please switch to AddEffectValue."""
+    return AddEffectValue(builder, EffectValue)
 def End(builder): return builder.EndObject()
 def TableEffectRowDataEnd(builder):
     """This method is deprecated. Please switch to End."""

@@ -13,6 +13,7 @@
                 actorEntity.AddStamina(10,10);
                 actorEntity.AddHp(100,100);
                 
+                //通知Actorview
                 EventManager.Instance.TriggerEvent(new OnActorEntityCreat(){ActorId =  actor.ActorId, ActorEntity = actorEntity});
                 
                 
@@ -28,6 +29,7 @@
                     
                     
                     actorEntity.AddHpListener(e);
+                    //通知EntityView
                     EventManager.Instance.TriggerEvent(new OnGameEntityCreat{ViewLocalId =  item.LocalId, Entity = e});
                 }
             }

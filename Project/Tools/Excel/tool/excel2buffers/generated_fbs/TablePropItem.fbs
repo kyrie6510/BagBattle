@@ -13,8 +13,14 @@ table TablePropItemRowData {
     Height:int16;
     TarStarType:[int32];
     ExTarStarId:[int32];
+    ListenTarget:[int32];
+    ListenType:[int32];
+    ListenValue:[int32];
+    EffectId:[int32];
+    EffectOfListen:[int32];
     UIWidth:int16;
     UIHeight:int16;
+    EffectDes:string;
     TexturePath:string;
 }
 

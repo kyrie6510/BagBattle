@@ -24,27 +24,35 @@ public struct TableEffectRowData : IFlatbufferObject
   public ArraySegment<byte>? GetNameBytes() { return __p.__vector_as_arraysegment(6); }
 #endif
   public byte[] GetNameArray() { return __p.__vector_as_array<byte>(6); }
-  public short Target { get { int o = __p.__offset(8); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
-  public short Type { get { int o = __p.__offset(10); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public int EffectTarget { get { int o = __p.__offset(8); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int EffectType { get { int o = __p.__offset(10); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int EffectClass { get { int o = __p.__offset(12); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int EffectValue { get { int o = __p.__offset(14); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
 
   public static Offset<TableEffectRowData> CreateTableEffectRowData(FlatBufferBuilder builder,
       short Id = 0,
       StringOffset NameOffset = default(StringOffset),
-      short Target = 0,
-      short Type = 0) {
-    builder.StartTable(4);
+      int EffectTarget = 0,
+      int EffectType = 0,
+      int EffectClass = 0,
+      int EffectValue = 0) {
+    builder.StartTable(6);
+    TableEffectRowData.AddEffectValue(builder, EffectValue);
+    TableEffectRowData.AddEffectClass(builder, EffectClass);
+    TableEffectRowData.AddEffectType(builder, EffectType);
+    TableEffectRowData.AddEffectTarget(builder, EffectTarget);
     TableEffectRowData.AddName(builder, NameOffset);
-    TableEffectRowData.AddType(builder, Type);
-    TableEffectRowData.AddTarget(builder, Target);
     TableEffectRowData.AddId(builder, Id);
     return TableEffectRowData.EndTableEffectRowData(builder);
   }
 
-  public static void StartTableEffectRowData(FlatBufferBuilder builder) { builder.StartTable(4); }
+  public static void StartTableEffectRowData(FlatBufferBuilder builder) { builder.StartTable(6); }
   public static void AddId(FlatBufferBuilder builder, short Id) { builder.AddShort(0, Id, 0); }
   public static void AddName(FlatBufferBuilder builder, StringOffset NameOffset) { builder.AddOffset(1, NameOffset.Value, 0); }
-  public static void AddTarget(FlatBufferBuilder builder, short Target) { builder.AddShort(2, Target, 0); }
-  public static void AddType(FlatBufferBuilder builder, short Type) { builder.AddShort(3, Type, 0); }
+  public static void AddEffectTarget(FlatBufferBuilder builder, int EffectTarget) { builder.AddInt(2, EffectTarget, 0); }
+  public static void AddEffectType(FlatBufferBuilder builder, int EffectType) { builder.AddInt(3, EffectType, 0); }
+  public static void AddEffectClass(FlatBufferBuilder builder, int EffectClass) { builder.AddInt(4, EffectClass, 0); }
+  public static void AddEffectValue(FlatBufferBuilder builder, int EffectValue) { builder.AddInt(5, EffectValue, 0); }
   public static Offset<TableEffectRowData> EndTableEffectRowData(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<TableEffectRowData>(o);

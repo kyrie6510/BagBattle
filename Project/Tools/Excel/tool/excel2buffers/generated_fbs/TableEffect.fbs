@@ -2,8 +2,10 @@
 table TableEffectRowData {
     Id:int16;
     Name:string;
-    Target:int16;
-    Type:int16;
+    EffectTarget:int32;
+    EffectType:int32;
+    EffectClass:int32;
+    EffectValue:int32;
 }
 
 

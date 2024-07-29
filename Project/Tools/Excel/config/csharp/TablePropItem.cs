@@ -63,15 +63,62 @@ public struct TablePropItemRowData : IFlatbufferObject
   public ArraySegment<byte>? GetExTarStarIdBytes() { return __p.__vector_as_arraysegment(28); }
 #endif
   public int[] GetExTarStarIdArray() { return __p.__vector_as_array<int>(28); }
-  public short UIWidth { get { int o = __p.__offset(30); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
-  public short UIHeight { get { int o = __p.__offset(32); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
-  public string TexturePath { get { int o = __p.__offset(34); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public int ListenTarget(int j) { int o = __p.__offset(30); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
+  public int ListenTargetLength { get { int o = __p.__offset(30); return o != 0 ? __p.__vector_len(o) : 0; } }
 #if ENABLE_SPAN_T
-  public Span<byte> GetTexturePathBytes() { return __p.__vector_as_span<byte>(34, 1); }
+  public Span<int> GetListenTargetBytes() { return __p.__vector_as_span<int>(30, 4); }
 #else
-  public ArraySegment<byte>? GetTexturePathBytes() { return __p.__vector_as_arraysegment(34); }
+  public ArraySegment<byte>? GetListenTargetBytes() { return __p.__vector_as_arraysegment(30); }
 #endif
-  public byte[] GetTexturePathArray() { return __p.__vector_as_array<byte>(34); }
+  public int[] GetListenTargetArray() { return __p.__vector_as_array<int>(30); }
+  public int ListenType(int j) { int o = __p.__offset(32); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
+  public int ListenTypeLength { get { int o = __p.__offset(32); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<int> GetListenTypeBytes() { return __p.__vector_as_span<int>(32, 4); }
+#else
+  public ArraySegment<byte>? GetListenTypeBytes() { return __p.__vector_as_arraysegment(32); }
+#endif
+  public int[] GetListenTypeArray() { return __p.__vector_as_array<int>(32); }
+  public int ListenValue(int j) { int o = __p.__offset(34); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
+  public int ListenValueLength { get { int o = __p.__offset(34); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<int> GetListenValueBytes() { return __p.__vector_as_span<int>(34, 4); }
+#else
+  public ArraySegment<byte>? GetListenValueBytes() { return __p.__vector_as_arraysegment(34); }
+#endif
+  public int[] GetListenValueArray() { return __p.__vector_as_array<int>(34); }
+  public int EffectId(int j) { int o = __p.__offset(36); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
+  public int EffectIdLength { get { int o = __p.__offset(36); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<int> GetEffectIdBytes() { return __p.__vector_as_span<int>(36, 4); }
+#else
+  public ArraySegment<byte>? GetEffectIdBytes() { return __p.__vector_as_arraysegment(36); }
+#endif
+  public int[] GetEffectIdArray() { return __p.__vector_as_array<int>(36); }
+  public int EffectOfListen(int j) { int o = __p.__offset(38); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
+  public int EffectOfListenLength { get { int o = __p.__offset(38); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<int> GetEffectOfListenBytes() { return __p.__vector_as_span<int>(38, 4); }
+#else
+  public ArraySegment<byte>? GetEffectOfListenBytes() { return __p.__vector_as_arraysegment(38); }
+#endif
+  public int[] GetEffectOfListenArray() { return __p.__vector_as_array<int>(38); }
+  public short UIWidth { get { int o = __p.__offset(40); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public short UIHeight { get { int o = __p.__offset(42); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public string EffectDes { get { int o = __p.__offset(44); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetEffectDesBytes() { return __p.__vector_as_span<byte>(44, 1); }
+#else
+  public ArraySegment<byte>? GetEffectDesBytes() { return __p.__vector_as_arraysegment(44); }
+#endif
+  public byte[] GetEffectDesArray() { return __p.__vector_as_array<byte>(44); }
+  public string TexturePath { get { int o = __p.__offset(46); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+#if ENABLE_SPAN_T
+  public Span<byte> GetTexturePathBytes() { return __p.__vector_as_span<byte>(46, 1); }
+#else
+  public ArraySegment<byte>? GetTexturePathBytes() { return __p.__vector_as_arraysegment(46); }
+#endif
+  public byte[] GetTexturePathArray() { return __p.__vector_as_array<byte>(46); }
 
   public static Offset<TablePropItemRowData> CreateTablePropItemRowData(FlatBufferBuilder builder,
       short Id = 0,
@@ -87,11 +134,23 @@ public struct TablePropItemRowData : IFlatbufferObject
       short Height = 0,
       VectorOffset TarStarTypeOffset = default(VectorOffset),
       VectorOffset ExTarStarIdOffset = default(VectorOffset),
+      VectorOffset ListenTargetOffset = default(VectorOffset),
+      VectorOffset ListenTypeOffset = default(VectorOffset),
+      VectorOffset ListenValueOffset = default(VectorOffset),
+      VectorOffset EffectIdOffset = default(VectorOffset),
+      VectorOffset EffectOfListenOffset = default(VectorOffset),
       short UIWidth = 0,
       short UIHeight = 0,
+      StringOffset EffectDesOffset = default(StringOffset),
       StringOffset TexturePathOffset = default(StringOffset)) {
-    builder.StartTable(16);
+    builder.StartTable(22);
     TablePropItemRowData.AddTexturePath(builder, TexturePathOffset);
+    TablePropItemRowData.AddEffectDes(builder, EffectDesOffset);
+    TablePropItemRowData.AddEffectOfListen(builder, EffectOfListenOffset);
+    TablePropItemRowData.AddEffectId(builder, EffectIdOffset);
+    TablePropItemRowData.AddListenValue(builder, ListenValueOffset);
+    TablePropItemRowData.AddListenType(builder, ListenTypeOffset);
+    TablePropItemRowData.AddListenTarget(builder, ListenTargetOffset);
     TablePropItemRowData.AddExTarStarId(builder, ExTarStarIdOffset);
     TablePropItemRowData.AddTarStarType(builder, TarStarTypeOffset);
     TablePropItemRowData.AddDamage(builder, DamageOffset);
@@ -110,7 +169,7 @@ public struct TablePropItemRowData : IFlatbufferObject
     return TablePropItemRowData.EndTablePropItemRowData(builder);
   }
 
-  public static void StartTablePropItemRowData(FlatBufferBuilder builder) { builder.StartTable(16); }
+  public static void StartTablePropItemRowData(FlatBufferBuilder builder) { builder.StartTable(22); }
   public static void AddId(FlatBufferBuilder builder, short Id) { builder.AddShort(0, Id, 0); }
   public static void AddName(FlatBufferBuilder builder, StringOffset NameOffset) { builder.AddOffset(1, NameOffset.Value, 0); }
   public static void AddPropType(FlatBufferBuilder builder, short PropType) { builder.AddShort(2, PropType, 0); }
@@ -136,9 +195,30 @@ public struct TablePropItemRowData : IFlatbufferObject
   public static VectorOffset CreateExTarStarIdVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
   public static VectorOffset CreateExTarStarIdVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
   public static void StartExTarStarIdVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
-  public static void AddUIWidth(FlatBufferBuilder builder, short UIWidth) { builder.AddShort(13, UIWidth, 0); }
-  public static void AddUIHeight(FlatBufferBuilder builder, short UIHeight) { builder.AddShort(14, UIHeight, 0); }
-  public static void AddTexturePath(FlatBufferBuilder builder, StringOffset TexturePathOffset) { builder.AddOffset(15, TexturePathOffset.Value, 0); }
+  public static void AddListenTarget(FlatBufferBuilder builder, VectorOffset ListenTargetOffset) { builder.AddOffset(13, ListenTargetOffset.Value, 0); }
+  public static VectorOffset CreateListenTargetVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateListenTargetVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static void StartListenTargetVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddListenType(FlatBufferBuilder builder, VectorOffset ListenTypeOffset) { builder.AddOffset(14, ListenTypeOffset.Value, 0); }
+  public static VectorOffset CreateListenTypeVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateListenTypeVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static void StartListenTypeVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddListenValue(FlatBufferBuilder builder, VectorOffset ListenValueOffset) { builder.AddOffset(15, ListenValueOffset.Value, 0); }
+  public static VectorOffset CreateListenValueVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateListenValueVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static void StartListenValueVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddEffectId(FlatBufferBuilder builder, VectorOffset EffectIdOffset) { builder.AddOffset(16, EffectIdOffset.Value, 0); }
+  public static VectorOffset CreateEffectIdVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateEffectIdVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static void StartEffectIdVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddEffectOfListen(FlatBufferBuilder builder, VectorOffset EffectOfListenOffset) { builder.AddOffset(17, EffectOfListenOffset.Value, 0); }
+  public static VectorOffset CreateEffectOfListenVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateEffectOfListenVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static void StartEffectOfListenVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
+  public static void AddUIWidth(FlatBufferBuilder builder, short UIWidth) { builder.AddShort(18, UIWidth, 0); }
+  public static void AddUIHeight(FlatBufferBuilder builder, short UIHeight) { builder.AddShort(19, UIHeight, 0); }
+  public static void AddEffectDes(FlatBufferBuilder builder, StringOffset EffectDesOffset) { builder.AddOffset(20, EffectDesOffset.Value, 0); }
+  public static void AddTexturePath(FlatBufferBuilder builder, StringOffset TexturePathOffset) { builder.AddOffset(21, TexturePathOffset.Value, 0); }
   public static Offset<TablePropItemRowData> EndTablePropItemRowData(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<TablePropItemRowData>(o);

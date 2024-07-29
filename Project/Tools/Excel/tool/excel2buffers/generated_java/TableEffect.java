@@ -17,27 +17,35 @@ public final class TableEffectRowData extends Table {
   public String Name() { int o = __offset(6); return o != 0 ? __string(o + bb_pos) : null; }
   public ByteBuffer NameAsByteBuffer() { return __vector_as_bytebuffer(6, 1); }
   public ByteBuffer NameInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 6, 1); }
-  public short Target() { int o = __offset(8); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
-  public short Type() { int o = __offset(10); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
+  public int EffectTarget() { int o = __offset(8); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
+  public int EffectType() { int o = __offset(10); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
+  public int EffectClass() { int o = __offset(12); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
+  public int EffectValue() { int o = __offset(14); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
 
   public static int createTableEffectRowData(FlatBufferBuilder builder,
       short Id,
       int NameOffset,
-      short Target,
-      short Type) {
-    builder.startTable(4);
+      int EffectTarget,
+      int EffectType,
+      int EffectClass,
+      int EffectValue) {
+    builder.startTable(6);
+    TableEffectRowData.addEffectValue(builder, EffectValue);
+    TableEffectRowData.addEffectClass(builder, EffectClass);
+    TableEffectRowData.addEffectType(builder, EffectType);
+    TableEffectRowData.addEffectTarget(builder, EffectTarget);
     TableEffectRowData.addName(builder, NameOffset);
-    TableEffectRowData.addType(builder, Type);
-    TableEffectRowData.addTarget(builder, Target);
     TableEffectRowData.addId(builder, Id);
     return TableEffectRowData.endTableEffectRowData(builder);
   }
 
-  public static void startTableEffectRowData(FlatBufferBuilder builder) { builder.startTable(4); }
+  public static void startTableEffectRowData(FlatBufferBuilder builder) { builder.startTable(6); }
   public static void addId(FlatBufferBuilder builder, short Id) { builder.addShort(0, Id, 0); }
   public static void addName(FlatBufferBuilder builder, int NameOffset) { builder.addOffset(1, NameOffset, 0); }
-  public static void addTarget(FlatBufferBuilder builder, short Target) { builder.addShort(2, Target, 0); }
-  public static void addType(FlatBufferBuilder builder, short Type) { builder.addShort(3, Type, 0); }
+  public static void addEffectTarget(FlatBufferBuilder builder, int EffectTarget) { builder.addInt(2, EffectTarget, 0); }
+  public static void addEffectType(FlatBufferBuilder builder, int EffectType) { builder.addInt(3, EffectType, 0); }
+  public static void addEffectClass(FlatBufferBuilder builder, int EffectClass) { builder.addInt(4, EffectClass, 0); }
+  public static void addEffectValue(FlatBufferBuilder builder, int EffectValue) { builder.addInt(5, EffectValue, 0); }
   public static int endTableEffectRowData(FlatBufferBuilder builder) {
     int o = builder.endTable();
     return o;

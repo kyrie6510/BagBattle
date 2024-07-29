@@ -1,11 +1,38 @@
-﻿using System.Collections.Generic;
-using FixMath.NET;
+﻿using FixMath.NET;
 using Game;
-using Game.Game;
-using Unity.VisualScripting;
+
 
 public partial class GameEntity: IHpListener
 {
+    // 输入：s = "the sky is blue"
+    // 输出："blue is sky the"
+    public string ReverseWords(string s)
+    {
+
+        string res = "";
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (s[i] == ' ')
+            {
+                continue;
+            }
+            
+            int left = i;
+            int right = i;
+            while (s[right]!= ' '&& right < s.Length)
+            {
+                right++;
+            }
+
+            string tempStr = s.Substring(i, right - left);
+            res = tempStr + " " + res;
+        }
+
+        return res;
+
+
+    }
+    
     public void DoAttack()
     {
 
