@@ -19,6 +19,7 @@
                 
                 
                 
+                
                 //创建物品
                 foreach (var item in actor.Items)
                 {
