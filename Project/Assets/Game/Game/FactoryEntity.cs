@@ -1,4 +1,5 @@
 ﻿using FixMath.NET;
+using Unity.VisualScripting;
 
 namespace Game
 {
@@ -26,6 +27,7 @@ namespace Game
         // 12.进入商店
         public static GameEntity CreatEntity(int actorId, int configId)
         {
+            var actor = Contexts.sharedInstance.actor.GetEntityWithId(actorId);
             var e = Contexts.sharedInstance.game.CreateEntity();
             e.AddLocalId(_localId);
             _localId++;
@@ -42,8 +44,30 @@ namespace Game
             e.AddCoolDownTime(0,(Fix64)config.Interval);
             
             //开始添加监听类型组件
+            
+            var listenTypeArray = config.GetListenTypeArray();
             var listenTargetArray = config.GetListenTargetArray();
+            var index = 0;
+            foreach (var type in listenTypeArray)
+            {
+                if (type <= (int)ListenType.Atked)
+                {
+                    if (e.hasTimingTypeActive)
+                    {
+                        e.AddTimingTypeAtk(0,listenTargetArray[index]);
+                        e.AddGameTimingTypeAtkListener(e);
+                    }
+                }
+                
 
+                index++;
+
+            }
+            
+            
+           
+
+        
             foreach (var target in listenTargetArray)
             {
                 if (target == (int)ListenTarget.Self)
@@ -52,7 +76,7 @@ namespace Game
                 }
             }
             
-            var listenTypeArray = config.GetListenTypeArray();
+           
             
             
             return e;

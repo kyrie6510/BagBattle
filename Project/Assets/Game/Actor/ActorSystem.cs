@@ -16,24 +16,22 @@
                 //通知Actorview
                 EventManager.Instance.TriggerEvent(new OnActorEntityCreat(){ActorId =  actor.ActorId, ActorEntity = actorEntity});
                 
-                
-                
-                
-                
+            }
+
+            foreach (var actor in actors)
+            {
                 //创建物品
                 foreach (var item in actor.Items)
                 {
                     var e = FactoryEntity.CreatEntity(actor.ActorId, item.ConfigId);
-                    var cfgId = e.configId.Value;
-                    //if(cfgId)
-                        
-                    
-                    
-                    actorEntity.AddHpListener(e);
+
+
                     //通知EntityView
                     EventManager.Instance.TriggerEvent(new OnGameEntityCreat{ViewLocalId =  item.LocalId, Entity = e});
                 }
             }
+            
+            
         }
     }
 }

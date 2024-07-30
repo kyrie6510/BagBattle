@@ -6,11 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class ActorEventSystems : Feature {
+public sealed class GameEventSystems : Feature {
 
-    public ActorEventSystems(Contexts contexts) {
-        Add(new HpEventSystem(contexts)); // priority: 0
-        Add(new StaminaEventSystem(contexts)); // priority: 0
-        Add(new ActorTimingTypeAtkEventSystem(contexts)); // priority: 0
+    public GameEventSystems(Contexts contexts) {
+        Add(new GameTimingTypeAtkEventSystem(contexts)); // priority: 0
     }
 }

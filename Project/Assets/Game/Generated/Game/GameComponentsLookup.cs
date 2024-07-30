@@ -19,8 +19,9 @@ public static class GameComponentsLookup {
     public const int TimingTypeGameStart = 8;
     public const int TimingTypeSecondPass = 9;
     public const int TimingTypeTriggerNum = 10;
+    public const int GameTimingTypeAtkListener = 11;
 
-    public const int TotalComponents = 11;
+    public const int TotalComponents = 12;
 
     public static readonly string[] componentNames = {
         "ActorId",
@@ -33,7 +34,8 @@ public static class GameComponentsLookup {
         "TimingTypeAtk",
         "TimingTypeGameStart",
         "TimingTypeSecondPass",
-        "TimingTypeTriggerNum"
+        "TimingTypeTriggerNum",
+        "GameTimingTypeAtkListener"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -47,6 +49,7 @@ public static class GameComponentsLookup {
         typeof(Game.TimingTypeAtkComponent),
         typeof(Game.TimingTypeGameStartComponent),
         typeof(Game.TimingTypeSecondPassComponent),
-        typeof(Game.TimingTypeTriggerNumComponent)
+        typeof(Game.TimingTypeTriggerNumComponent),
+        typeof(GameTimingTypeAtkListenerComponent)
     };
 }

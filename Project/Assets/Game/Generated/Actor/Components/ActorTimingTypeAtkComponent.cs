@@ -11,17 +11,19 @@ public partial class ActorEntity {
     public Game.TimingTypeAtkComponent timingTypeAtk { get { return (Game.TimingTypeAtkComponent)GetComponent(ActorComponentsLookup.TimingTypeAtk); } }
     public bool hasTimingTypeAtk { get { return HasComponent(ActorComponentsLookup.TimingTypeAtk); } }
 
-    public void AddTimingTypeAtk(int newValue) {
+    public void AddTimingTypeAtk(int newValue, int newListenType) {
         var index = ActorComponentsLookup.TimingTypeAtk;
         var component = (Game.TimingTypeAtkComponent)CreateComponent(index, typeof(Game.TimingTypeAtkComponent));
         component.Value = newValue;
+        component.ListenType = newListenType;
         AddComponent(index, component);
     }
 
-    public void ReplaceTimingTypeAtk(int newValue) {
+    public void ReplaceTimingTypeAtk(int newValue, int newListenType) {
         var index = ActorComponentsLookup.TimingTypeAtk;
         var component = (Game.TimingTypeAtkComponent)CreateComponent(index, typeof(Game.TimingTypeAtkComponent));
         component.Value = newValue;
+        component.ListenType = newListenType;
         ReplaceComponent(index, component);
     }
 
