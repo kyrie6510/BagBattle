@@ -24,8 +24,6 @@ namespace Game
         // 10.每n秒 
         // 11.进入xx状态
         // 12.进入商店
-
-        
         public static GameEntity CreatEntity(int actorId, int configId)
         {
             var e = Contexts.sharedInstance.game.CreateEntity();
@@ -43,8 +41,18 @@ namespace Game
             e.AddStaminaCost((Fix64)config.Power);
             e.AddCoolDownTime(0,(Fix64)config.Interval);
             
-            
             //开始添加监听类型组件
+            var listenTargetArray = config.GetListenTargetArray();
+
+            foreach (var target in listenTargetArray)
+            {
+                if (target == (int)ListenTarget.Self)
+                {
+                    
+                }
+            }
+            
+            var listenTypeArray = config.GetListenTypeArray();
             
             
             return e;
