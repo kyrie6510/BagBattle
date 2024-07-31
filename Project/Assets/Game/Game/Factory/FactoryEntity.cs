@@ -1,5 +1,8 @@
 ﻿using FixMath.NET;
+using Game.Game;
+using Game.Game.Factory;
 using Unity.VisualScripting;
+using UnityEngine.Rendering;
 
 namespace Game
 {
@@ -39,45 +42,13 @@ namespace Game
 
             //config
             var atk = config.GetDamageArray();
-            e.AddAttack(new[] {(Fix64) atk[0], (Fix64) atk[1]});
+
+            if (atk[1] != 0)
+            {
+                e.AddAttack(new[] {(Fix64) atk[0], (Fix64) atk[1]});
+                e.AddCoolDownTime(0,(Fix64)config.Interval);
+            }
             e.AddStaminaCost((Fix64)config.Power);
-            e.AddCoolDownTime(0,(Fix64)config.Interval);
-            
-            //开始添加监听类型组件
-            
-            var listenTypeArray = config.GetListenTypeArray();
-            var listenTargetArray = config.GetListenTargetArray();
-            var index = 0;
-            foreach (var type in listenTypeArray)
-            {
-                if (type <= (int)ListenType.Atked)
-                {
-                    if (e.hasTimingTypeActive)
-                    {
-                        e.AddTimingTypeAtk(0,listenTargetArray[index]);
-                        e.AddGameTimingTypeAtkListener(e);
-                    }
-                }
-                
-
-                index++;
-
-            }
-            
-            
-           
-
-        
-            foreach (var target in listenTargetArray)
-            {
-                if (target == (int)ListenTarget.Self)
-                {
-                    
-                }
-            }
-            
-           
-            
             
             return e;
         }

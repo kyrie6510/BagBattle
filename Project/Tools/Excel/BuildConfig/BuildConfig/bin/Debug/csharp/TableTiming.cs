@@ -24,23 +24,41 @@ public struct TableTimingRowData : IFlatbufferObject
   public ArraySegment<byte>? GetNameBytes() { return __p.__vector_as_arraysegment(6); }
 #endif
   public byte[] GetNameArray() { return __p.__vector_as_array<byte>(6); }
-  public short Type { get { int o = __p.__offset(8); return o != 0 ? __p.bb.GetShort(o + __p.bb_pos) : (short)0; } }
+  public int ListenTarget { get { int o = __p.__offset(8); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int ListenType { get { int o = __p.__offset(10); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
+  public int ListenValue(int j) { int o = __p.__offset(12); return o != 0 ? __p.bb.GetInt(__p.__vector(o) + j * 4) : (int)0; }
+  public int ListenValueLength { get { int o = __p.__offset(12); return o != 0 ? __p.__vector_len(o) : 0; } }
+#if ENABLE_SPAN_T
+  public Span<int> GetListenValueBytes() { return __p.__vector_as_span<int>(12, 4); }
+#else
+  public ArraySegment<byte>? GetListenValueBytes() { return __p.__vector_as_arraysegment(12); }
+#endif
+  public int[] GetListenValueArray() { return __p.__vector_as_array<int>(12); }
 
   public static Offset<TableTimingRowData> CreateTableTimingRowData(FlatBufferBuilder builder,
       short Id = 0,
       StringOffset NameOffset = default(StringOffset),
-      short Type = 0) {
-    builder.StartTable(3);
+      int ListenTarget = 0,
+      int ListenType = 0,
+      VectorOffset ListenValueOffset = default(VectorOffset)) {
+    builder.StartTable(5);
+    TableTimingRowData.AddListenValue(builder, ListenValueOffset);
+    TableTimingRowData.AddListenType(builder, ListenType);
+    TableTimingRowData.AddListenTarget(builder, ListenTarget);
     TableTimingRowData.AddName(builder, NameOffset);
-    TableTimingRowData.AddType(builder, Type);
     TableTimingRowData.AddId(builder, Id);
     return TableTimingRowData.EndTableTimingRowData(builder);
   }
 
-  public static void StartTableTimingRowData(FlatBufferBuilder builder) { builder.StartTable(3); }
+  public static void StartTableTimingRowData(FlatBufferBuilder builder) { builder.StartTable(5); }
   public static void AddId(FlatBufferBuilder builder, short Id) { builder.AddShort(0, Id, 0); }
   public static void AddName(FlatBufferBuilder builder, StringOffset NameOffset) { builder.AddOffset(1, NameOffset.Value, 0); }
-  public static void AddType(FlatBufferBuilder builder, short Type) { builder.AddShort(2, Type, 0); }
+  public static void AddListenTarget(FlatBufferBuilder builder, int ListenTarget) { builder.AddInt(2, ListenTarget, 0); }
+  public static void AddListenType(FlatBufferBuilder builder, int ListenType) { builder.AddInt(3, ListenType, 0); }
+  public static void AddListenValue(FlatBufferBuilder builder, VectorOffset ListenValueOffset) { builder.AddOffset(4, ListenValueOffset.Value, 0); }
+  public static VectorOffset CreateListenValueVector(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddInt(data[i]); return builder.EndVector(); }
+  public static VectorOffset CreateListenValueVectorBlock(FlatBufferBuilder builder, int[] data) { builder.StartVector(4, data.Length, 4); builder.Add(data); return builder.EndVector(); }
+  public static void StartListenValueVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
   public static Offset<TableTimingRowData> EndTableTimingRowData(FlatBufferBuilder builder) {
     int o = builder.EndTable();
     return new Offset<TableTimingRowData>(o);

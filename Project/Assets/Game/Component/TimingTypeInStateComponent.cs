@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using Entitas.CodeGeneration.Attributes;
 using FixMath.NET;
 
 namespace Game
@@ -6,7 +7,7 @@ namespace Game
     /// <summary>
     /// 11.进入xx状态
     /// </summary>
-    [Actor]
+    [Actor,Event(EventTarget.Self)]
     public class TimingTypeInStateComponent : IComponent
     {
         public int StateType;

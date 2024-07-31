@@ -1,17 +1,18 @@
-﻿using Entitas;
+﻿using System.Collections.Generic;
+using Entitas;
+using Entitas.CodeGeneration.Attributes;
 
 namespace Game
 {
     /// <summary>
     /// 获得n层b时
     /// </summary>
-    [Actor]
+    [Actor,Event(EventTarget.Self)]
     public class TimingTypeGetBuffComponent : IComponent
     {
         /// <summary>
-        /// 类型 5.获得n层b时 
+        /// 类型 5.获得n层b时  key buffId vale num 
         /// </summary>
-        public int BuffId;
-        public int TargetBuffNum;
+        public Dictionary<int,int>  Value;
     }
 }

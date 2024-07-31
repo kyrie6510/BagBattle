@@ -11,19 +11,17 @@ public partial class ActorEntity {
     public Game.TimingTypeHaveBuffComponent timingTypeHaveBuff { get { return (Game.TimingTypeHaveBuffComponent)GetComponent(ActorComponentsLookup.TimingTypeHaveBuff); } }
     public bool hasTimingTypeHaveBuff { get { return HasComponent(ActorComponentsLookup.TimingTypeHaveBuff); } }
 
-    public void AddTimingTypeHaveBuff(int newBuffId, int newTargetBuffNum) {
+    public void AddTimingTypeHaveBuff(System.Collections.Generic.Dictionary<int, int> newValue) {
         var index = ActorComponentsLookup.TimingTypeHaveBuff;
         var component = (Game.TimingTypeHaveBuffComponent)CreateComponent(index, typeof(Game.TimingTypeHaveBuffComponent));
-        component.BuffId = newBuffId;
-        component.TargetBuffNum = newTargetBuffNum;
+        component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceTimingTypeHaveBuff(int newBuffId, int newTargetBuffNum) {
+    public void ReplaceTimingTypeHaveBuff(System.Collections.Generic.Dictionary<int, int> newValue) {
         var index = ActorComponentsLookup.TimingTypeHaveBuff;
         var component = (Game.TimingTypeHaveBuffComponent)CreateComponent(index, typeof(Game.TimingTypeHaveBuffComponent));
-        component.BuffId = newBuffId;
-        component.TargetBuffNum = newTargetBuffNum;
+        component.Value = newValue;
         ReplaceComponent(index, component);
     }
 

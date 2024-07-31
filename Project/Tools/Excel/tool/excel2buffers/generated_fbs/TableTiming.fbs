@@ -2,7 +2,9 @@
 table TableTimingRowData {
     Id:int16;
     Name:string;
-    Type:int16;
+    ListenTarget:int32;
+    ListenType:int32;
+    ListenValue:[int32];
 }
 
 

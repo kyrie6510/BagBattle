@@ -20,8 +20,12 @@ public static class GameComponentsLookup {
     public const int TimingTypeSecondPass = 9;
     public const int TimingTypeTriggerNum = 10;
     public const int GameTimingTypeAtkListener = 11;
+    public const int TimingTypeActiveListener = 12;
+    public const int TimingTypeGameStartListener = 13;
+    public const int TimingTypeSecondPassListener = 14;
+    public const int TimingTypeTriggerNumListener = 15;
 
-    public const int TotalComponents = 12;
+    public const int TotalComponents = 16;
 
     public static readonly string[] componentNames = {
         "ActorId",
@@ -35,7 +39,11 @@ public static class GameComponentsLookup {
         "TimingTypeGameStart",
         "TimingTypeSecondPass",
         "TimingTypeTriggerNum",
-        "GameTimingTypeAtkListener"
+        "GameTimingTypeAtkListener",
+        "TimingTypeActiveListener",
+        "TimingTypeGameStartListener",
+        "TimingTypeSecondPassListener",
+        "TimingTypeTriggerNumListener"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -50,6 +58,10 @@ public static class GameComponentsLookup {
         typeof(Game.TimingTypeGameStartComponent),
         typeof(Game.TimingTypeSecondPassComponent),
         typeof(Game.TimingTypeTriggerNumComponent),
-        typeof(GameTimingTypeAtkListenerComponent)
+        typeof(GameTimingTypeAtkListenerComponent),
+        typeof(TimingTypeActiveListenerComponent),
+        typeof(TimingTypeGameStartListenerComponent),
+        typeof(TimingTypeSecondPassListenerComponent),
+        typeof(TimingTypeTriggerNumListenerComponent)
     };
 }

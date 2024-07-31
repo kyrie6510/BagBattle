@@ -20,8 +20,13 @@ public static class ActorComponentsLookup {
     public const int TimingTypeInStore = 9;
     public const int HpListener = 10;
     public const int StaminaListener = 11;
+    public const int TimingTypeGetBuffListener = 12;
+    public const int TimingTypeHaveBuffListener = 13;
+    public const int TimingTypeHpLessTargetListener = 14;
+    public const int TimingTypeInStateListener = 15;
+    public const int TimingTypeInStoreListener = 16;
 
-    public const int TotalComponents = 12;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
         "ActorTimingTypeAtkListener",
@@ -35,7 +40,12 @@ public static class ActorComponentsLookup {
         "TimingTypeInState",
         "TimingTypeInStore",
         "HpListener",
-        "StaminaListener"
+        "StaminaListener",
+        "TimingTypeGetBuffListener",
+        "TimingTypeHaveBuffListener",
+        "TimingTypeHpLessTargetListener",
+        "TimingTypeInStateListener",
+        "TimingTypeInStoreListener"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -50,6 +60,11 @@ public static class ActorComponentsLookup {
         typeof(Game.TimingTypeInStateComponent),
         typeof(Game.TimingTypeInStoreComponent),
         typeof(HpListenerComponent),
-        typeof(StaminaListenerComponent)
+        typeof(StaminaListenerComponent),
+        typeof(TimingTypeGetBuffListenerComponent),
+        typeof(TimingTypeHaveBuffListenerComponent),
+        typeof(TimingTypeHpLessTargetListenerComponent),
+        typeof(TimingTypeInStateListenerComponent),
+        typeof(TimingTypeInStoreListenerComponent)
     };
 }

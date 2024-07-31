@@ -7,12 +7,22 @@ namespace Game
         private Dictionary<short, TablePropItemRowData> _itemMap;
         private Dictionary<short, int[,]> _itemGridTypeMap = new Dictionary<short, int[,]>();
         
+        /// <summary>
+        /// <itemConfigID,<timId,EffectID>>
+        /// </summary>
+        private Dictionary<short, Dictionary<int,List<int>>> _itemTimForEffect = new ();
+        
         public TablePropItemRowData GetPropConfig(short id)
         {
             LoadPropItem();
             return _itemMap[id];
-            
         }
+
+        public Dictionary<int, List<int>> GetConfigTimEffectInfo(short configId)
+        {
+            return _itemTimForEffect[configId];
+        }
+        
 
         private void LoadPropItem()
         {
@@ -20,9 +30,12 @@ namespace Game
             if (_itemMap == null)
             {
                 _itemMap = Load<TablePropItemRowData>();
+              
                 foreach (var kv in _itemMap)
                 {
+                    //格子类型
                     var config = kv.Value;
+                    var configId = kv.Key;
                     int[,] array = new int[config.Height, config.Width];
 
                     int index = 0;
@@ -35,8 +48,28 @@ namespace Game
                             index++;
                         }
                     }
+                    _itemGridTypeMap.Add(configId,array);
                     
-                    _itemGridTypeMap.Add(kv.Key,array);
+                    //时机效果映射图
+                    var timArray = config.GetTimIdArray();
+                    var flashArray = config.GetEffectOfListenArray();
+                    var effectIndex = 0;
+                    var effectArray = config.GetEffectIdArray();
+                    
+                    _itemTimForEffect.Add(configId,new Dictionary<int, List<int>>());
+                    
+                    for (int i = 0; i < timArray.Length; i++)
+                    {
+                        var timId = timArray[i];
+                        var length = flashArray[i];
+                        
+                        _itemTimForEffect[configId].Add(timId,new List<int>());
+                        for (int j = 0; j < length; j++)
+                        {
+                            _itemTimForEffect[configId][timId].Add(effectArray[effectIndex]);
+                            effectIndex++;
+                        }
+                    }
                 }
             }
         }

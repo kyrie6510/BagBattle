@@ -17,23 +17,38 @@ public final class TableTimingRowData extends Table {
   public String Name() { int o = __offset(6); return o != 0 ? __string(o + bb_pos) : null; }
   public ByteBuffer NameAsByteBuffer() { return __vector_as_bytebuffer(6, 1); }
   public ByteBuffer NameInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 6, 1); }
-  public short Type() { int o = __offset(8); return o != 0 ? bb.getShort(o + bb_pos) : 0; }
+  public int ListenTarget() { int o = __offset(8); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
+  public int ListenType() { int o = __offset(10); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
+  public int ListenValue(int j) { int o = __offset(12); return o != 0 ? bb.getInt(__vector(o) + j * 4) : 0; }
+  public int ListenValueLength() { int o = __offset(12); return o != 0 ? __vector_len(o) : 0; }
+  public IntVector ListenValueVector() { return ListenValueVector(new IntVector()); }
+  public IntVector ListenValueVector(IntVector obj) { int o = __offset(12); return o != 0 ? obj.__assign(__vector(o), bb) : null; }
+  public ByteBuffer ListenValueAsByteBuffer() { return __vector_as_bytebuffer(12, 4); }
+  public ByteBuffer ListenValueInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 12, 4); }
 
   public static int createTableTimingRowData(FlatBufferBuilder builder,
       short Id,
       int NameOffset,
-      short Type) {
-    builder.startTable(3);
+      int ListenTarget,
+      int ListenType,
+      int ListenValueOffset) {
+    builder.startTable(5);
+    TableTimingRowData.addListenValue(builder, ListenValueOffset);
+    TableTimingRowData.addListenType(builder, ListenType);
+    TableTimingRowData.addListenTarget(builder, ListenTarget);
     TableTimingRowData.addName(builder, NameOffset);
-    TableTimingRowData.addType(builder, Type);
     TableTimingRowData.addId(builder, Id);
     return TableTimingRowData.endTableTimingRowData(builder);
   }
 
-  public static void startTableTimingRowData(FlatBufferBuilder builder) { builder.startTable(3); }
+  public static void startTableTimingRowData(FlatBufferBuilder builder) { builder.startTable(5); }
   public static void addId(FlatBufferBuilder builder, short Id) { builder.addShort(0, Id, 0); }
   public static void addName(FlatBufferBuilder builder, int NameOffset) { builder.addOffset(1, NameOffset, 0); }
-  public static void addType(FlatBufferBuilder builder, short Type) { builder.addShort(2, Type, 0); }
+  public static void addListenTarget(FlatBufferBuilder builder, int ListenTarget) { builder.addInt(2, ListenTarget, 0); }
+  public static void addListenType(FlatBufferBuilder builder, int ListenType) { builder.addInt(3, ListenType, 0); }
+  public static void addListenValue(FlatBufferBuilder builder, int ListenValueOffset) { builder.addOffset(4, ListenValueOffset, 0); }
+  public static int createListenValueVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addInt(data[i]); return builder.endVector(); }
+  public static void startListenValueVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
   public static int endTableTimingRowData(FlatBufferBuilder builder) {
     int o = builder.endTable();
     return o;

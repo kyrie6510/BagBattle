@@ -39,13 +39,47 @@ class TableTimingRowData(object):
         return None
 
     # TableTimingRowData
-    def Type(self):
+    def ListenTarget(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
         if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Int16Flags, o + self._tab.Pos)
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
         return 0
 
-def Start(builder): builder.StartObject(3)
+    # TableTimingRowData
+    def ListenType(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+        if o != 0:
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
+        return 0
+
+    # TableTimingRowData
+    def ListenValue(self, j):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
+        if o != 0:
+            a = self._tab.Vector(o)
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, a + flatbuffers.number_types.UOffsetTFlags.py_type(j * 4))
+        return 0
+
+    # TableTimingRowData
+    def ListenValueAsNumpy(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
+        if o != 0:
+            return self._tab.GetVectorAsNumpy(flatbuffers.number_types.Int32Flags, o)
+        return 0
+
+    # TableTimingRowData
+    def ListenValueLength(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
+        if o != 0:
+            return self._tab.VectorLen(o)
+        return 0
+
+    # TableTimingRowData
+    def ListenValueIsNone(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
+        return o == 0
+
+def Start(builder): builder.StartObject(5)
 def TableTimingRowDataStart(builder):
     """This method is deprecated. Please switch to Start."""
     return Start(builder)
@@ -57,10 +91,22 @@ def AddName(builder, Name): builder.PrependUOffsetTRelativeSlot(1, flatbuffers.n
 def TableTimingRowDataAddName(builder, Name):
     """This method is deprecated. Please switch to AddName."""
     return AddName(builder, Name)
-def AddType(builder, Type): builder.PrependInt16Slot(2, Type, 0)
-def TableTimingRowDataAddType(builder, Type):
-    """This method is deprecated. Please switch to AddType."""
-    return AddType(builder, Type)
+def AddListenTarget(builder, ListenTarget): builder.PrependInt32Slot(2, ListenTarget, 0)
+def TableTimingRowDataAddListenTarget(builder, ListenTarget):
+    """This method is deprecated. Please switch to AddListenTarget."""
+    return AddListenTarget(builder, ListenTarget)
+def AddListenType(builder, ListenType): builder.PrependInt32Slot(3, ListenType, 0)
+def TableTimingRowDataAddListenType(builder, ListenType):
+    """This method is deprecated. Please switch to AddListenType."""
+    return AddListenType(builder, ListenType)
+def AddListenValue(builder, ListenValue): builder.PrependUOffsetTRelativeSlot(4, flatbuffers.number_types.UOffsetTFlags.py_type(ListenValue), 0)
+def TableTimingRowDataAddListenValue(builder, ListenValue):
+    """This method is deprecated. Please switch to AddListenValue."""
+    return AddListenValue(builder, ListenValue)
+def StartListenValueVector(builder, numElems): return builder.StartVector(4, numElems, 4)
+def TableTimingRowDataStartListenValueVector(builder, numElems):
+    """This method is deprecated. Please switch to Start."""
+    return StartListenValueVector(builder, numElems)
 def End(builder): return builder.EndObject()
 def TableTimingRowDataEnd(builder):
     """This method is deprecated. Please switch to End."""

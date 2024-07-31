@@ -9,6 +9,10 @@
 public sealed class GameEventSystems : Feature {
 
     public GameEventSystems(Contexts contexts) {
+        Add(new TimingTypeActiveEventSystem(contexts)); // priority: 0
         Add(new GameTimingTypeAtkEventSystem(contexts)); // priority: 0
+        Add(new TimingTypeGameStartEventSystem(contexts)); // priority: 0
+        Add(new TimingTypeSecondPassEventSystem(contexts)); // priority: 0
+        Add(new TimingTypeTriggerNumEventSystem(contexts)); // priority: 0
     }
 }
