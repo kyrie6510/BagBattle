@@ -16,10 +16,9 @@
                     var actor = Contexts.sharedInstance.actor.GetEntityWithId(e.actorId.Value);
                     if (actor.hasTimingTypeHaveBuff)
                     {
-                        // actor.AddTimingTypeHaveBuff(new());
+                         actor.AddTimingTypeHaveBuff(new());
                     }
-                    //actor.timingTypeHaveBuff.
-                    
+                    actor.AddTimingTypeHaveBuffListener(e);
                     break;
                 
             }
