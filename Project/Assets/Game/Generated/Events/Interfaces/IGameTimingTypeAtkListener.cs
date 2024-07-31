@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IGameTimingTypeAtkListener {
-    void OnTimingTypeAtk(GameEntity entity, int value, int listenType);
+    void OnTimingTypeAtk(GameEntity entity, int value);
 }

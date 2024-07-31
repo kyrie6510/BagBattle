@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IActorTimingTypeAtkListener {
-    void OnTimingTypeAtk(ActorEntity entity, int value, int listenType);
+    void OnTimingTypeAtk(ActorEntity entity, int value);
 }

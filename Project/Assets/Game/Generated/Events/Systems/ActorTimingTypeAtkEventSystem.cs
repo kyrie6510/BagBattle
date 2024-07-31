@@ -30,7 +30,7 @@ public sealed class ActorTimingTypeAtkEventSystem : Entitas.ReactiveSystem<Actor
             _listenerBuffer.Clear();
             _listenerBuffer.AddRange(e.actorTimingTypeAtkListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnTimingTypeAtk(e, component.Value, component.ListenType);
+                listener.OnTimingTypeAtk(e, component.Value);
             }
         }
     }

@@ -30,7 +30,7 @@ public sealed class GameTimingTypeAtkEventSystem : Entitas.ReactiveSystem<GameEn
             _listenerBuffer.Clear();
             _listenerBuffer.AddRange(e.gameTimingTypeAtkListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnTimingTypeAtk(e, component.Value, component.ListenType);
+                listener.OnTimingTypeAtk(e, component.Value);
             }
         }
     }

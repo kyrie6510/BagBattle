@@ -15,7 +15,7 @@ public partial class ActorEntity {
         var index = ActorComponentsLookup.TimingTypeAtk;
         var component = (Game.TimingTypeAtkComponent)CreateComponent(index, typeof(Game.TimingTypeAtkComponent));
         component.Value = newValue;
-        component.ListenType = newListenType;
+     
         AddComponent(index, component);
     }
 
@@ -23,7 +23,7 @@ public partial class ActorEntity {
         var index = ActorComponentsLookup.TimingTypeAtk;
         var component = (Game.TimingTypeAtkComponent)CreateComponent(index, typeof(Game.TimingTypeAtkComponent));
         component.Value = newValue;
-        component.ListenType = newListenType;
+       
         ReplaceComponent(index, component);
     }
 
