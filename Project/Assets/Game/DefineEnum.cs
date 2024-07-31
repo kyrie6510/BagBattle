@@ -51,7 +51,7 @@
        HpLess =6,//生命值低于n时 
        HaveBuf =7,//拥有n层b时 
        GameBegin =8,//战斗开始 
-       TriggetNum =9,//战斗触发n次 
+       TriggerNum =9,//战斗触发n次 
        SecondPass =10,//每n秒 
        InState =11,//进入xx状态
        InStore =12,//进入商店
@@ -70,5 +70,7 @@
         Square = 5, //方块物品
         Game = 6, //本场游戏 
         Bag = 7, //包内物品
+        OtherActorWeapon = 8, //对手武器物品
+        OtherActorMeleeWeapon = 9,//对手近战武器
     }
 }
