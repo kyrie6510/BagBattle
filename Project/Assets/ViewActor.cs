@@ -45,8 +45,10 @@ public class ViewActor : MonoBehaviour , IHpListener , IStaminaListener
         TxtHp.text = $"{value}/{maxValue}";
     }
 
-    public void OnStamina(ActorEntity entity, Fix64 maxValue, Fix64 value)
+  
+
+    public void OnStamina(ActorEntity entity, Fix64 maxValue, Fix64 value, Fix64 lastCoverSpan)
     {
-        TxtStamina.text = $"{value}/{maxValue}";
+        TxtStamina.text = $"{Fix64.Round(value)}/{maxValue}";
     }
 }

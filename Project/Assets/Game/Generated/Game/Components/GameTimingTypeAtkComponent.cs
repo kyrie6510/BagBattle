@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Game.TimingTypeAtkComponent timingTypeAtk { get { return (Game.TimingTypeAtkComponent)GetComponent(GameComponentsLookup.TimingTypeAtk); } }
     public bool hasTimingTypeAtk { get { return HasComponent(GameComponentsLookup.TimingTypeAtk); } }
 
-    public void AddTimingTypeAtk(int newValue, int newListenType) {
+    public void AddTimingTypeAtk(int newValue) {
         var index = GameComponentsLookup.TimingTypeAtk;
         var component = (Game.TimingTypeAtkComponent)CreateComponent(index, typeof(Game.TimingTypeAtkComponent));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceTimingTypeAtk(int newValue, int newListenType) {
+    public void ReplaceTimingTypeAtk(int newValue) {
         var index = GameComponentsLookup.TimingTypeAtk;
         var component = (Game.TimingTypeAtkComponent)CreateComponent(index, typeof(Game.TimingTypeAtkComponent));
         component.Value = newValue;

@@ -11,7 +11,7 @@ public partial interface ITimingTypeAtkEntity {
     Game.TimingTypeAtkComponent timingTypeAtk { get; }
     bool hasTimingTypeAtk { get; }
 
-    void AddTimingTypeAtk(int newValue, int newListenType);
-    void ReplaceTimingTypeAtk(int newValue, int newListenType);
+    void AddTimingTypeAtk(int newValue);
+    void ReplaceTimingTypeAtk(int newValue);
     void RemoveTimingTypeAtk();
 }

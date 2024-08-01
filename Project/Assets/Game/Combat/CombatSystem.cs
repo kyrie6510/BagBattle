@@ -4,9 +4,10 @@ namespace Game.Combat
 {
     public class CombatSystem : Feature
     {
-        public CombatSystem()
+        public CombatSystem(): base("combat")
         {
-            
+            Add(new CombatMeleeSystem());
+            Add(new CombatRangedSystem());
         }
     }
 }

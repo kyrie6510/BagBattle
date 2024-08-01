@@ -4,10 +4,12 @@
     {
         public void Do(GameEntity e, int timConfigId)
         {
+            if (!ConfigManager.Instance.IsHaveTimingConfig((short) timConfigId))
+            {
+                return;
+            }
+            
             var timConfig = ConfigManager.Instance.GetTimConfig((short)timConfigId);
-
-            
-            
             
             var target = timConfig.ListenTarget;
             switch (target)
@@ -19,6 +21,8 @@
                          actor.AddTimingTypeHaveBuff(new());
                     }
                     actor.AddTimingTypeHaveBuffListener(e);
+                    
+                    
                     break;
                 
             }

@@ -9,5 +9,6 @@ namespace Game
     {
         public Fix64 MaxValue;
         public Fix64 Value;
+        public Fix64 LastCoverSpan;
     }
 }

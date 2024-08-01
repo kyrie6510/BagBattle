@@ -14,9 +14,17 @@ namespace Game
                 _timMap = Load<TableTimingRowData>();
             }
         }
+
+        public bool IsHaveTimingConfig(short id)
+        {
+            LoadTableTimConfig();
+            if (id == 0) return false;
+            return _timMap.ContainsKey(id);
+        }
         
         public TableTimingRowData GetTimConfig(short id)
         {
+    
             LoadTableTimConfig();
             return _timMap[id];
         }

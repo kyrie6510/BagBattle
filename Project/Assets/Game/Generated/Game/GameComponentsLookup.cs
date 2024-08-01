@@ -9,26 +9,28 @@
 public static class GameComponentsLookup {
 
     public const int ActorId = 0;
-    public const int Attack = 1;
-    public const int ConfigId = 2;
-    public const int CoolDownTime = 3;
-    public const int LocalId = 4;
-    public const int StaminaCost = 5;
-    public const int TimingTypeActive = 6;
-    public const int TimingTypeAtk = 7;
-    public const int TimingTypeGameStart = 8;
-    public const int TimingTypeSecondPass = 9;
-    public const int TimingTypeTriggerNum = 10;
-    public const int GameTimingTypeAtkListener = 11;
-    public const int TimingTypeActiveListener = 12;
-    public const int TimingTypeGameStartListener = 13;
-    public const int TimingTypeSecondPassListener = 14;
-    public const int TimingTypeTriggerNumListener = 15;
+    public const int AtkRate = 1;
+    public const int Attack = 2;
+    public const int ConfigId = 3;
+    public const int CoolDownTime = 4;
+    public const int LocalId = 5;
+    public const int StaminaCost = 6;
+    public const int TimingTypeActive = 7;
+    public const int TimingTypeAtk = 8;
+    public const int TimingTypeGameStart = 9;
+    public const int TimingTypeSecondPass = 10;
+    public const int TimingTypeTriggerNum = 11;
+    public const int GameTimingTypeAtkListener = 12;
+    public const int TimingTypeActiveListener = 13;
+    public const int TimingTypeGameStartListener = 14;
+    public const int TimingTypeSecondPassListener = 15;
+    public const int TimingTypeTriggerNumListener = 16;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
         "ActorId",
+        "AtkRate",
         "Attack",
         "ConfigId",
         "CoolDownTime",
@@ -48,6 +50,7 @@ public static class GameComponentsLookup {
 
     public static readonly System.Type[] componentTypes = {
         typeof(Game.ActorIdComponent),
+        typeof(Game.AtkRate),
         typeof(Game.AttackComponent),
         typeof(Game.ConfigIdComponent),
         typeof(Game.CoolDownTimeComponent),

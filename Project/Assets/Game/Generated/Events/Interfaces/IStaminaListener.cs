@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IStaminaListener {
-    void OnStamina(ActorEntity entity, FixMath.NET.Fix64 maxValue, FixMath.NET.Fix64 value);
+    void OnStamina(ActorEntity entity, FixMath.NET.Fix64 maxValue, FixMath.NET.Fix64 value, FixMath.NET.Fix64 lastCoverSpan);
 }

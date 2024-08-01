@@ -21,7 +21,7 @@ namespace Game
                 var value = Time.TimeFromStart - e.coolDownTime.TimeSpan;
                 if (value >= e.coolDownTime.Value)
                 {
-                    e.coolDownTime.TimeSpan = Time.TimeFromStart;
+                    e.ReplaceCoolDownTime(e.coolDownTime.TimeSpan+ e.coolDownTime.Value,e.coolDownTime.Value);
                     e.DoAttack();
                 }
                  

@@ -8,15 +8,21 @@
 //------------------------------------------------------------------------------
 public static class CombatComponentsLookup {
 
-    public const int LocalId = 0;
+    public const int CombatMeleeWeapon = 0;
+    public const int CombatRangedWeapon = 1;
+    public const int LocalId = 2;
 
-    public const int TotalComponents = 1;
+    public const int TotalComponents = 3;
 
     public static readonly string[] componentNames = {
+        "CombatMeleeWeapon",
+        "CombatRangedWeapon",
         "LocalId"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Game.CombatMeleeWeapon),
+        typeof(Game.CombatRangedWeaponComponent),
         typeof(Game.LocalIdComponent)
     };
 }

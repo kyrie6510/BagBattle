@@ -7,7 +7,7 @@ namespace Game.Game
         private static Random _random;
         private static int _useCount;
         
-        internal static Random random
+        internal static Random Random
         {
             get
             {

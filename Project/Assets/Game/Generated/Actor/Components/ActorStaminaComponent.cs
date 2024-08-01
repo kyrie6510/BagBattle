@@ -11,19 +11,21 @@ public partial class ActorEntity {
     public Game.StaminaComponent stamina { get { return (Game.StaminaComponent)GetComponent(ActorComponentsLookup.Stamina); } }
     public bool hasStamina { get { return HasComponent(ActorComponentsLookup.Stamina); } }
 
-    public void AddStamina(FixMath.NET.Fix64 newMaxValue, FixMath.NET.Fix64 newValue) {
+    public void AddStamina(FixMath.NET.Fix64 newMaxValue, FixMath.NET.Fix64 newValue, FixMath.NET.Fix64 newLastCoverSpan) {
         var index = ActorComponentsLookup.Stamina;
         var component = (Game.StaminaComponent)CreateComponent(index, typeof(Game.StaminaComponent));
         component.MaxValue = newMaxValue;
         component.Value = newValue;
+        component.LastCoverSpan = newLastCoverSpan;
         AddComponent(index, component);
     }
 
-    public void ReplaceStamina(FixMath.NET.Fix64 newMaxValue, FixMath.NET.Fix64 newValue) {
+    public void ReplaceStamina(FixMath.NET.Fix64 newMaxValue, FixMath.NET.Fix64 newValue, FixMath.NET.Fix64 newLastCoverSpan) {
         var index = ActorComponentsLookup.Stamina;
         var component = (Game.StaminaComponent)CreateComponent(index, typeof(Game.StaminaComponent));
         component.MaxValue = newMaxValue;
         component.Value = newValue;
+        component.LastCoverSpan = newLastCoverSpan;
         ReplaceComponent(index, component);
     }
 

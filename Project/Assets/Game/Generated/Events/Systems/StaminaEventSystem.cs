@@ -30,7 +30,7 @@ public sealed class StaminaEventSystem : Entitas.ReactiveSystem<ActorEntity> {
             _listenerBuffer.Clear();
             _listenerBuffer.AddRange(e.staminaListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnStamina(e, component.MaxValue, component.Value);
+                listener.OnStamina(e, component.MaxValue, component.Value, component.LastCoverSpan);
             }
         }
     }
