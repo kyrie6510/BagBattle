@@ -3,7 +3,7 @@ using Entitas.CodeGeneration.Attributes;
 
 namespace Game
 {
-    [Game,Event(EventTarget.Self)]
+    [Game,Buff,Event(EventTarget.Self)]
     public class TimingTypeActiveComponent : IComponent
     {
         /// <summary>

@@ -12,6 +12,8 @@
           
             var timConfig = ConfigManager.Instance.GetTimConfig((short)timConfigId);
 
+            
+            //
             if (!e.hasTimingTypeAtk)
             {
                 e.AddTimingTypeAtk(0);    
