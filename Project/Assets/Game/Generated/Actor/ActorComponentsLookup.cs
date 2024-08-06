@@ -8,19 +8,23 @@
 //------------------------------------------------------------------------------
 public static class ActorComponentsLookup {
 
-    public const int Hp = 0;
-    public const int Id = 1;
-    public const int Stamina = 2;
-    public const int TimingTypeInState = 3;
-    public const int TimingTypeInStore = 4;
-    public const int HpListener = 5;
-    public const int StaminaListener = 6;
-    public const int TimingTypeInStateListener = 7;
-    public const int TimingTypeInStoreListener = 8;
+    public const int ActorBuffListener = 0;
+    public const int ActorBuff = 1;
+    public const int Hp = 2;
+    public const int Id = 3;
+    public const int Stamina = 4;
+    public const int TimingTypeInState = 5;
+    public const int TimingTypeInStore = 6;
+    public const int HpListener = 7;
+    public const int StaminaListener = 8;
+    public const int TimingTypeInStateListener = 9;
+    public const int TimingTypeInStoreListener = 10;
 
-    public const int TotalComponents = 9;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
+        "ActorBuffListener",
+        "ActorBuff",
         "Hp",
         "Id",
         "Stamina",
@@ -33,6 +37,8 @@ public static class ActorComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(ActorBuffListenerComponent),
+        typeof(Game.ActorBuffComponent),
         typeof(Game.HpComponent),
         typeof(Game.IdComponent),
         typeof(Game.StaminaComponent),

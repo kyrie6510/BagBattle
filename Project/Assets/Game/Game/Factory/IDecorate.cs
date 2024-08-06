@@ -6,7 +6,8 @@
     public interface IDecorate
     {
         /// <summary>
-        /// 给entity添加 tim组件,在合适的时机 replace 组件,然后根据类型产生对应的buff entity ,buff entity用来监听
+        /// 给game entity,buff entity添加 tim组件,对于game entity tim就像相当于状态组件,在何时的时机replace改变状态,
+        /// 对于buff entity 来监听我们gameEntity的状态组件.
         /// </summary>
         /// <param name="e"></param>
         /// <param name="timConfigId"></param>

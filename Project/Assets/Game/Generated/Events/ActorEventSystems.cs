@@ -9,6 +9,7 @@
 public sealed class ActorEventSystems : Feature {
 
     public ActorEventSystems(Contexts contexts) {
+        Add(new ActorBuffEventSystem(contexts)); // priority: 0
         Add(new HpEventSystem(contexts)); // priority: 0
         Add(new StaminaEventSystem(contexts)); // priority: 0
         Add(new TimingTypeInStateEventSystem(contexts)); // priority: 0
