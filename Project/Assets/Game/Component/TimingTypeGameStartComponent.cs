@@ -6,8 +6,7 @@ namespace Game
     /// <summary>
     /// 8.战斗开始 
     /// </summary>
-    [Buff,Event(EventTarget.Self)
-    ]
+    [Buff]
     public class TimingTypeGameStartComponent: IComponent
     {
 

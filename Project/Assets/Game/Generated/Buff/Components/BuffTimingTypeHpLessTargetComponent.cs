@@ -6,27 +6,27 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class ActorEntity {
+public partial class BuffEntity {
 
-    public Game.TimingTypeHpLessTargetComponent timingTypeHpLessTarget { get { return (Game.TimingTypeHpLessTargetComponent)GetComponent(ActorComponentsLookup.TimingTypeHpLessTarget); } }
-    public bool hasTimingTypeHpLessTarget { get { return HasComponent(ActorComponentsLookup.TimingTypeHpLessTarget); } }
+    public Game.TimingTypeHpLessTargetComponent timingTypeHpLessTarget { get { return (Game.TimingTypeHpLessTargetComponent)GetComponent(BuffComponentsLookup.TimingTypeHpLessTarget); } }
+    public bool hasTimingTypeHpLessTarget { get { return HasComponent(BuffComponentsLookup.TimingTypeHpLessTarget); } }
 
     public void AddTimingTypeHpLessTarget(FixMath.NET.Fix64 newValue) {
-        var index = ActorComponentsLookup.TimingTypeHpLessTarget;
+        var index = BuffComponentsLookup.TimingTypeHpLessTarget;
         var component = (Game.TimingTypeHpLessTargetComponent)CreateComponent(index, typeof(Game.TimingTypeHpLessTargetComponent));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceTimingTypeHpLessTarget(FixMath.NET.Fix64 newValue) {
-        var index = ActorComponentsLookup.TimingTypeHpLessTarget;
+        var index = BuffComponentsLookup.TimingTypeHpLessTarget;
         var component = (Game.TimingTypeHpLessTargetComponent)CreateComponent(index, typeof(Game.TimingTypeHpLessTargetComponent));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }
 
     public void RemoveTimingTypeHpLessTarget() {
-        RemoveComponent(ActorComponentsLookup.TimingTypeHpLessTarget);
+        RemoveComponent(BuffComponentsLookup.TimingTypeHpLessTarget);
     }
 }
 
@@ -38,15 +38,15 @@ public partial class ActorEntity {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class ActorMatcher {
+public sealed partial class BuffMatcher {
 
-    static Entitas.IMatcher<ActorEntity> _matcherTimingTypeHpLessTarget;
+    static Entitas.IMatcher<BuffEntity> _matcherTimingTypeHpLessTarget;
 
-    public static Entitas.IMatcher<ActorEntity> TimingTypeHpLessTarget {
+    public static Entitas.IMatcher<BuffEntity> TimingTypeHpLessTarget {
         get {
             if (_matcherTimingTypeHpLessTarget == null) {
-                var matcher = (Entitas.Matcher<ActorEntity>)Entitas.Matcher<ActorEntity>.AllOf(ActorComponentsLookup.TimingTypeHpLessTarget);
-                matcher.componentNames = ActorComponentsLookup.componentNames;
+                var matcher = (Entitas.Matcher<BuffEntity>)Entitas.Matcher<BuffEntity>.AllOf(BuffComponentsLookup.TimingTypeHpLessTarget);
+                matcher.componentNames = BuffComponentsLookup.componentNames;
                 _matcherTimingTypeHpLessTarget = matcher;
             }
 

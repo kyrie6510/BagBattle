@@ -8,7 +8,7 @@ namespace Game
     /// <summary>
     /// 10.每n秒
     /// </summary>
-    [Game,Event(EventTarget.Self)]
+    [Buff]
     public class TimingTypeSecondPassComponent : IComponent
     {
         public Fix64 Value;

@@ -11,11 +11,7 @@
             {
                 case (int)ListenTarget.Game:
 
-                    if (!e.hasTimingTypeSecondPass)
-                    {
-                        e.AddTimingTypeSecondPass(timConfig.ListenValue(0),0);
-                    }
-                    
+               
                     break;
                 
             }

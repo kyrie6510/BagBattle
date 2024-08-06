@@ -6,27 +6,27 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class ActorEntity {
+public partial class BuffEntity {
 
-    public Game.TimingTypeHaveBuffComponent timingTypeHaveBuff { get { return (Game.TimingTypeHaveBuffComponent)GetComponent(ActorComponentsLookup.TimingTypeHaveBuff); } }
-    public bool hasTimingTypeHaveBuff { get { return HasComponent(ActorComponentsLookup.TimingTypeHaveBuff); } }
+    public Game.TimingTypeHaveBuffComponent timingTypeHaveBuff { get { return (Game.TimingTypeHaveBuffComponent)GetComponent(BuffComponentsLookup.TimingTypeHaveBuff); } }
+    public bool hasTimingTypeHaveBuff { get { return HasComponent(BuffComponentsLookup.TimingTypeHaveBuff); } }
 
     public void AddTimingTypeHaveBuff(System.Collections.Generic.Dictionary<int, int> newValue) {
-        var index = ActorComponentsLookup.TimingTypeHaveBuff;
+        var index = BuffComponentsLookup.TimingTypeHaveBuff;
         var component = (Game.TimingTypeHaveBuffComponent)CreateComponent(index, typeof(Game.TimingTypeHaveBuffComponent));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceTimingTypeHaveBuff(System.Collections.Generic.Dictionary<int, int> newValue) {
-        var index = ActorComponentsLookup.TimingTypeHaveBuff;
+        var index = BuffComponentsLookup.TimingTypeHaveBuff;
         var component = (Game.TimingTypeHaveBuffComponent)CreateComponent(index, typeof(Game.TimingTypeHaveBuffComponent));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }
 
     public void RemoveTimingTypeHaveBuff() {
-        RemoveComponent(ActorComponentsLookup.TimingTypeHaveBuff);
+        RemoveComponent(BuffComponentsLookup.TimingTypeHaveBuff);
     }
 }
 
@@ -38,15 +38,15 @@ public partial class ActorEntity {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class ActorMatcher {
+public sealed partial class BuffMatcher {
 
-    static Entitas.IMatcher<ActorEntity> _matcherTimingTypeHaveBuff;
+    static Entitas.IMatcher<BuffEntity> _matcherTimingTypeHaveBuff;
 
-    public static Entitas.IMatcher<ActorEntity> TimingTypeHaveBuff {
+    public static Entitas.IMatcher<BuffEntity> TimingTypeHaveBuff {
         get {
             if (_matcherTimingTypeHaveBuff == null) {
-                var matcher = (Entitas.Matcher<ActorEntity>)Entitas.Matcher<ActorEntity>.AllOf(ActorComponentsLookup.TimingTypeHaveBuff);
-                matcher.componentNames = ActorComponentsLookup.componentNames;
+                var matcher = (Entitas.Matcher<BuffEntity>)Entitas.Matcher<BuffEntity>.AllOf(BuffComponentsLookup.TimingTypeHaveBuff);
+                matcher.componentNames = BuffComponentsLookup.componentNames;
                 _matcherTimingTypeHaveBuff = matcher;
             }
 

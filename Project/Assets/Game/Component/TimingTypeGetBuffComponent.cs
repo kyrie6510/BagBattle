@@ -7,7 +7,7 @@ namespace Game
     /// <summary>
     /// 获得n层b时
     /// </summary>
-    [Actor,Event(EventTarget.Self)]
+    [Buff]
     public class TimingTypeGetBuffComponent : IComponent
     {
         /// <summary>

@@ -6,15 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity {
+public partial class BuffEntity {
 
     static readonly Game.TimingTypeGameStartComponent timingTypeGameStartComponent = new Game.TimingTypeGameStartComponent();
 
     public bool isTimingTypeGameStart {
-        get { return HasComponent(GameComponentsLookup.TimingTypeGameStart); }
+        get { return HasComponent(BuffComponentsLookup.TimingTypeGameStart); }
         set {
             if (value != isTimingTypeGameStart) {
-                var index = GameComponentsLookup.TimingTypeGameStart;
+                var index = BuffComponentsLookup.TimingTypeGameStart;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
@@ -38,15 +38,15 @@ public partial class GameEntity {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class GameMatcher {
+public sealed partial class BuffMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherTimingTypeGameStart;
+    static Entitas.IMatcher<BuffEntity> _matcherTimingTypeGameStart;
 
-    public static Entitas.IMatcher<GameEntity> TimingTypeGameStart {
+    public static Entitas.IMatcher<BuffEntity> TimingTypeGameStart {
         get {
             if (_matcherTimingTypeGameStart == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.TimingTypeGameStart);
-                matcher.componentNames = GameComponentsLookup.componentNames;
+                var matcher = (Entitas.Matcher<BuffEntity>)Entitas.Matcher<BuffEntity>.AllOf(BuffComponentsLookup.TimingTypeGameStart);
+                matcher.componentNames = BuffComponentsLookup.componentNames;
                 _matcherTimingTypeGameStart = matcher;
             }
 

@@ -6,7 +6,7 @@ namespace Game
     /// <summary>
     /// 9.战斗触发n次 
     /// </summary>
-    [Game,Event(EventTarget.Self)]
+    [Game,Buff]
     public class TimingTypeTriggerNumComponent : IComponent
     {
         public int Value;

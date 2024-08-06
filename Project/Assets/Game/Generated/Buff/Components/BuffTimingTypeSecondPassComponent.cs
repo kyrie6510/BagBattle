@@ -6,13 +6,13 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity {
+public partial class BuffEntity {
 
-    public Game.TimingTypeSecondPassComponent timingTypeSecondPass { get { return (Game.TimingTypeSecondPassComponent)GetComponent(GameComponentsLookup.TimingTypeSecondPass); } }
-    public bool hasTimingTypeSecondPass { get { return HasComponent(GameComponentsLookup.TimingTypeSecondPass); } }
+    public Game.TimingTypeSecondPassComponent timingTypeSecondPass { get { return (Game.TimingTypeSecondPassComponent)GetComponent(BuffComponentsLookup.TimingTypeSecondPass); } }
+    public bool hasTimingTypeSecondPass { get { return HasComponent(BuffComponentsLookup.TimingTypeSecondPass); } }
 
     public void AddTimingTypeSecondPass(FixMath.NET.Fix64 newValue, FixMath.NET.Fix64 newLastTimeSpan) {
-        var index = GameComponentsLookup.TimingTypeSecondPass;
+        var index = BuffComponentsLookup.TimingTypeSecondPass;
         var component = (Game.TimingTypeSecondPassComponent)CreateComponent(index, typeof(Game.TimingTypeSecondPassComponent));
         component.Value = newValue;
         component.LastTimeSpan = newLastTimeSpan;
@@ -20,7 +20,7 @@ public partial class GameEntity {
     }
 
     public void ReplaceTimingTypeSecondPass(FixMath.NET.Fix64 newValue, FixMath.NET.Fix64 newLastTimeSpan) {
-        var index = GameComponentsLookup.TimingTypeSecondPass;
+        var index = BuffComponentsLookup.TimingTypeSecondPass;
         var component = (Game.TimingTypeSecondPassComponent)CreateComponent(index, typeof(Game.TimingTypeSecondPassComponent));
         component.Value = newValue;
         component.LastTimeSpan = newLastTimeSpan;
@@ -28,7 +28,7 @@ public partial class GameEntity {
     }
 
     public void RemoveTimingTypeSecondPass() {
-        RemoveComponent(GameComponentsLookup.TimingTypeSecondPass);
+        RemoveComponent(BuffComponentsLookup.TimingTypeSecondPass);
     }
 }
 
@@ -40,15 +40,15 @@ public partial class GameEntity {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class GameMatcher {
+public sealed partial class BuffMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherTimingTypeSecondPass;
+    static Entitas.IMatcher<BuffEntity> _matcherTimingTypeSecondPass;
 
-    public static Entitas.IMatcher<GameEntity> TimingTypeSecondPass {
+    public static Entitas.IMatcher<BuffEntity> TimingTypeSecondPass {
         get {
             if (_matcherTimingTypeSecondPass == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.TimingTypeSecondPass);
-                matcher.componentNames = GameComponentsLookup.componentNames;
+                var matcher = (Entitas.Matcher<BuffEntity>)Entitas.Matcher<BuffEntity>.AllOf(BuffComponentsLookup.TimingTypeSecondPass);
+                matcher.componentNames = BuffComponentsLookup.componentNames;
                 _matcherTimingTypeSecondPass = matcher;
             }
 

@@ -23,7 +23,7 @@
             switch (target)
             {
                 case (int)ListenTarget.Self:
-                    e.AddGameTimingTypeAtkListener(e);
+                  
                     break;
             }
 

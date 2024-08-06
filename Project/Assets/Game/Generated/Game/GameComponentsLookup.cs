@@ -11,60 +11,42 @@ public static class GameComponentsLookup {
     public const int ActorId = 0;
     public const int AtkRate = 1;
     public const int Attack = 2;
-    public const int ConfigId = 3;
-    public const int CoolDownTime = 4;
-    public const int LocalId = 5;
-    public const int StaminaCost = 6;
-    public const int TimingTypeActive = 7;
-    public const int TimingTypeAtk = 8;
-    public const int TimingTypeGameStart = 9;
-    public const int TimingTypeSecondPass = 10;
-    public const int TimingTypeTriggerNum = 11;
-    public const int GameTimingTypeAtkListener = 12;
-    public const int TimingTypeActiveListener = 13;
-    public const int TimingTypeGameStartListener = 14;
-    public const int TimingTypeSecondPassListener = 15;
-    public const int TimingTypeTriggerNumListener = 16;
+    public const int BuffBlind = 3;
+    public const int ConfigId = 4;
+    public const int CoolDownTime = 5;
+    public const int LocalId = 6;
+    public const int StaminaCost = 7;
+    public const int TimingTypeActive = 8;
+    public const int TimingTypeAtk = 9;
+    public const int TimingTypeTriggerNum = 10;
 
-    public const int TotalComponents = 17;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
         "ActorId",
         "AtkRate",
         "Attack",
+        "BuffBlind",
         "ConfigId",
         "CoolDownTime",
         "LocalId",
         "StaminaCost",
         "TimingTypeActive",
         "TimingTypeAtk",
-        "TimingTypeGameStart",
-        "TimingTypeSecondPass",
-        "TimingTypeTriggerNum",
-        "GameTimingTypeAtkListener",
-        "TimingTypeActiveListener",
-        "TimingTypeGameStartListener",
-        "TimingTypeSecondPassListener",
-        "TimingTypeTriggerNumListener"
+        "TimingTypeTriggerNum"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(Game.ActorIdComponent),
         typeof(Game.AtkRate),
         typeof(Game.AttackComponent),
+        typeof(Game.Buff.BuffBlindComponent),
         typeof(Game.ConfigIdComponent),
         typeof(Game.CoolDownTimeComponent),
         typeof(Game.LocalIdComponent),
         typeof(Game.StaminaCostComponent),
         typeof(Game.TimingTypeActiveComponent),
         typeof(Game.TimingTypeAtkComponent),
-        typeof(Game.TimingTypeGameStartComponent),
-        typeof(Game.TimingTypeSecondPassComponent),
-        typeof(Game.TimingTypeTriggerNumComponent),
-        typeof(GameTimingTypeAtkListenerComponent),
-        typeof(TimingTypeActiveListenerComponent),
-        typeof(TimingTypeGameStartListenerComponent),
-        typeof(TimingTypeSecondPassListenerComponent),
-        typeof(TimingTypeTriggerNumListenerComponent)
+        typeof(Game.TimingTypeTriggerNumComponent)
     };
 }

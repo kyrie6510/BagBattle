@@ -7,7 +7,7 @@
             Add(new ActorEventSystems(Contexts.sharedInstance));
             Add(new AtkCoolDownSystem());
         
-            Add(new GameEventSystems(Contexts.sharedInstance));
+         
 
         }
         

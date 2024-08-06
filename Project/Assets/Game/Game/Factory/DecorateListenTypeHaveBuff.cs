@@ -16,12 +16,6 @@
             {
                 case (int)ListenTarget.MyActor:
                     var actor = Contexts.sharedInstance.actor.GetEntityWithId(e.actorId.Value);
-                    if (actor.hasTimingTypeHaveBuff)
-                    {
-                         actor.AddTimingTypeHaveBuff(new());
-                    }
-                    actor.AddTimingTypeHaveBuffListener(e);
-                    
                     
                     break;
                 

@@ -8,15 +8,39 @@
 //------------------------------------------------------------------------------
 public static class BuffComponentsLookup {
 
+    public const int BuffSpikes = 0;
+    public const int TimingTypeActive = 1;
+    public const int TimingTypeAtk = 2;
+    public const int TimingTypeGameStart = 3;
+    public const int TimingTypeGetBuff = 4;
+    public const int TimingTypeHaveBuff = 5;
+    public const int TimingTypeHpLessTarget = 6;
+    public const int TimingTypeSecondPass = 7;
+    public const int TimingTypeTriggerNum = 8;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
-
+        "BuffSpikes",
+        "TimingTypeActive",
+        "TimingTypeAtk",
+        "TimingTypeGameStart",
+        "TimingTypeGetBuff",
+        "TimingTypeHaveBuff",
+        "TimingTypeHpLessTarget",
+        "TimingTypeSecondPass",
+        "TimingTypeTriggerNum"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(Game.Buff.BuffSpikesComponent),
+        typeof(Game.TimingTypeActiveComponent),
+        typeof(Game.TimingTypeAtkComponent),
+        typeof(Game.TimingTypeGameStartComponent),
+        typeof(Game.TimingTypeGetBuffComponent),
+        typeof(Game.TimingTypeHaveBuffComponent),
+        typeof(Game.TimingTypeHpLessTargetComponent),
+        typeof(Game.TimingTypeSecondPassComponent),
+        typeof(Game.TimingTypeTriggerNumComponent)
     };
 }

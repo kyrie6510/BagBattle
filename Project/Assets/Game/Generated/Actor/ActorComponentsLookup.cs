@@ -8,62 +8,38 @@
 //------------------------------------------------------------------------------
 public static class ActorComponentsLookup {
 
-    public const int ActorTimingTypeAtkListener = 0;
-    public const int Hp = 1;
-    public const int Id = 2;
-    public const int Stamina = 3;
-    public const int TimingTypeAtk = 4;
-    public const int TimingTypeGetBuff = 5;
-    public const int TimingTypeHaveBuff = 6;
-    public const int TimingTypeHpLessTarget = 7;
-    public const int TimingTypeInState = 8;
-    public const int TimingTypeInStore = 9;
-    public const int HpListener = 10;
-    public const int StaminaListener = 11;
-    public const int TimingTypeGetBuffListener = 12;
-    public const int TimingTypeHaveBuffListener = 13;
-    public const int TimingTypeHpLessTargetListener = 14;
-    public const int TimingTypeInStateListener = 15;
-    public const int TimingTypeInStoreListener = 16;
+    public const int Hp = 0;
+    public const int Id = 1;
+    public const int Stamina = 2;
+    public const int TimingTypeInState = 3;
+    public const int TimingTypeInStore = 4;
+    public const int HpListener = 5;
+    public const int StaminaListener = 6;
+    public const int TimingTypeInStateListener = 7;
+    public const int TimingTypeInStoreListener = 8;
 
-    public const int TotalComponents = 17;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
-        "ActorTimingTypeAtkListener",
         "Hp",
         "Id",
         "Stamina",
-        "TimingTypeAtk",
-        "TimingTypeGetBuff",
-        "TimingTypeHaveBuff",
-        "TimingTypeHpLessTarget",
         "TimingTypeInState",
         "TimingTypeInStore",
         "HpListener",
         "StaminaListener",
-        "TimingTypeGetBuffListener",
-        "TimingTypeHaveBuffListener",
-        "TimingTypeHpLessTargetListener",
         "TimingTypeInStateListener",
         "TimingTypeInStoreListener"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(ActorTimingTypeAtkListenerComponent),
         typeof(Game.HpComponent),
         typeof(Game.IdComponent),
         typeof(Game.StaminaComponent),
-        typeof(Game.TimingTypeAtkComponent),
-        typeof(Game.TimingTypeGetBuffComponent),
-        typeof(Game.TimingTypeHaveBuffComponent),
-        typeof(Game.TimingTypeHpLessTargetComponent),
         typeof(Game.TimingTypeInStateComponent),
         typeof(Game.TimingTypeInStoreComponent),
         typeof(HpListenerComponent),
         typeof(StaminaListenerComponent),
-        typeof(TimingTypeGetBuffListenerComponent),
-        typeof(TimingTypeHaveBuffListenerComponent),
-        typeof(TimingTypeHpLessTargetListenerComponent),
         typeof(TimingTypeInStateListenerComponent),
         typeof(TimingTypeInStoreListenerComponent)
     };

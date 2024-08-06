@@ -11,10 +11,7 @@
             {
                 case (int)ListenTarget.Game:
 
-                    if (!e.isTimingTypeGameStart)
-                    {
-                        e.isTimingTypeGameStart = true;
-                    }
+                 
                     
                     break;
                 
