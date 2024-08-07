@@ -1,8 +1,12 @@
-﻿namespace Game.Game.Factory
+﻿using System.Collections.Generic;
+
+namespace Game.Game.Factory
 {
     public class DecorateListenTypeGameBegin: IDecorate
     {
-        public void Do(GameEntity e, int timConfigId)
+     
+
+        public void Do(GameEntity e, int timConfigId, List<int> effectId)
         {
             var timConfig = ConfigManager.Instance.GetTimConfig((short)timConfigId);
             

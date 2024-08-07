@@ -29,7 +29,7 @@ namespace Game.Actor
                 //创建物品
                 foreach (var item in actor.Items)
                 {
-                    var e = FactoryEntity.CreatEntity(actor.ActorId, item.ConfigId);
+                    var e = FactoryEntity.CreatGameEntity(actor.ActorId, item.ConfigId);
                     //通知EntityView
                     EventManager.Instance.TriggerEvent(new OnGameEntityCreat{ViewLocalId =  item.LocalId, Entity = e});
                 }
@@ -74,7 +74,7 @@ namespace Game.Actor
                     else if (type == ListenType.SecondPass) decorate = new DecorateListenTypeSecondPass();
                     else if (type == ListenType.GameBegin) decorate = new DecorateListenTypeSecondPass();
                    
-                    decorate?.Do(entity,timId);
+                    decorate?.Do(entity,timId,effectIds);
                 }
             }
         }

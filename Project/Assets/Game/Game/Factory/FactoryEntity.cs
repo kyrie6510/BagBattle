@@ -17,7 +17,7 @@ namespace Game
 
         
   
-        public static GameEntity CreatEntity(int actorId, int configId)
+        public static GameEntity CreatGameEntity(int actorId, int configId)
         {
             var actor = Contexts.sharedInstance.actor.GetEntityWithId(actorId);
             var e = Contexts.sharedInstance.game.CreateEntity();
@@ -42,5 +42,12 @@ namespace Game
             
             return e;
         }
+
+        public static BuffEntity CreatBuffEntity()
+        {
+            var e = Contexts.sharedInstance.buff.CreateEntity();
+            return e;
+        }
+        
     }
 }

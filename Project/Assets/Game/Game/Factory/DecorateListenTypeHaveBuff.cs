@@ -1,8 +1,11 @@
-﻿namespace Game.Game.Factory
+﻿using System.Collections.Generic;
+
+namespace Game.Game.Factory
 {
     public class DecorateListenTypeHaveBuff : IDecorate
     {
-        public void Do(GameEntity e, int timConfigId)
+        
+        public void Do(GameEntity e, int timConfigId, List<int> effectId)
         {
             if (!ConfigManager.Instance.IsHaveTimingConfig((short) timConfigId))
             {
@@ -20,7 +23,6 @@
                     break;
                 
             }
-
         }
     }
 }
