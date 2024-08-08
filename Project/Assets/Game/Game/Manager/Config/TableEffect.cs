@@ -16,10 +16,11 @@ namespace Game
         }
         
           
-        public TableEffectRowData GetEffectConfig(short id)
+        public TableEffectRowData GetEffectConfig(int id)
         {
             LoadTableEffectConfig();
-            return _effectMap[id];
+            
+            return _effectMap[(short)id];
         }
         
     }

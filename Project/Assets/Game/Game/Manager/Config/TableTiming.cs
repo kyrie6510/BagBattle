@@ -22,11 +22,12 @@ namespace Game
             return _timMap.ContainsKey(id);
         }
         
-        public TableTimingRowData GetTimConfig(short id)
+        public TableTimingRowData GetTimConfig(int id)
         {
-    
+
+            
             LoadTableTimConfig();
-            return _timMap[id];
+            return _timMap[(short) id];
         }
 
     }

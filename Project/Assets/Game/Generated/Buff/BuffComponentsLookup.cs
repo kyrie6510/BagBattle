@@ -8,22 +8,26 @@
 //------------------------------------------------------------------------------
 public static class BuffComponentsLookup {
 
-    public const int BuffSpikes = 0;
-    public const int BuffEffectId = 1;
-    public const int TimingTypeActive = 2;
-    public const int TimingTypeAtk = 3;
-    public const int TimingTypeGameStart = 4;
-    public const int TimingTypeGetBuff = 5;
-    public const int TimingTypeHaveBuff = 6;
-    public const int TimingTypeHpLessTarget = 7;
-    public const int TimingTypeSecondPass = 8;
-    public const int TimingTypeTriggerNum = 9;
+    public const int AttachId = 0;
+    public const int BuffSpikes = 1;
+    public const int BuffEffectId = 2;
+    public const int TimingConfigId = 3;
+    public const int TimingTypeActive = 4;
+    public const int TimingTypeAtk = 5;
+    public const int TimingTypeGameStart = 6;
+    public const int TimingTypeGetBuff = 7;
+    public const int TimingTypeHaveBuff = 8;
+    public const int TimingTypeHpLessTarget = 9;
+    public const int TimingTypeSecondPass = 10;
+    public const int TimingTypeTriggerNum = 11;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 12;
 
     public static readonly string[] componentNames = {
+        "AttachId",
         "BuffSpikes",
         "BuffEffectId",
+        "TimingConfigId",
         "TimingTypeActive",
         "TimingTypeAtk",
         "TimingTypeGameStart",
@@ -35,8 +39,10 @@ public static class BuffComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Game.AttachIdComponent),
         typeof(Game.Buff.BuffSpikesComponent),
         typeof(Game.BuffEffectIdComponent),
+        typeof(Game.TimingConfigIdComponent),
         typeof(Game.TimingTypeActiveComponent),
         typeof(Game.TimingTypeAtkComponent),
         typeof(Game.TimingTypeGameStartComponent),
