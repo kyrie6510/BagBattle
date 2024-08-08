@@ -1,4 +1,5 @@
-﻿using Game.Game;
+﻿using System.Collections.Generic;
+using Game.Game;
 using Game.Game.Factory;
 
 namespace Game.Actor
@@ -18,7 +19,7 @@ namespace Game.Actor
                 actorEntity.AddId(actor.ActorId);
                 actorEntity.AddStamina(6,6,0);
                 actorEntity.AddHp(100,100);
-                
+                actorEntity.AddActorBuff(new Dictionary<int, int>());
                 //通知ActorView
                 EventManager.Instance.TriggerEvent(new OnActorEntityCreat(){ActorId =  actor.ActorId, ActorEntity = actorEntity});
                 

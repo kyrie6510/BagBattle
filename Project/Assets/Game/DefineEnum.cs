@@ -104,4 +104,16 @@
         OtherActorWeapon = 8, //对手武器物品
         OtherActorMeleeWeapon = 9,//对手近战武器
     }
+    
+    public enum EffectType
+    {
+        TakDamage = 1, 
+        Attribute = 2, 
+        AddBuff = 3, 
+        Active = 4, 
+        PlayerAttribute = 5, 
+        Special = 6, 
+        Defend = 7,
+     
+    }
 }

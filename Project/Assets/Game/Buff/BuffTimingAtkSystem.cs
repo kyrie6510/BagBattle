@@ -28,6 +28,14 @@ namespace Game
                     {
                         var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
                         EventManager.Instance.TriggerEvent(new OnLog($"{effectConfig.Name}"));
+                        if (effectConfig.EffectType == (int)EffectType.AddBuff)
+                        {
+                            if (effectConfig.EffectTarget == (int) ListenTarget.MyActor)
+                            {
+                                var actor = Contexts.sharedInstance.actor.GetEntityWithId(e.actorId.Value);
+                                actor.AddBuff(effectConfig.EffectClass,effectConfig.EffectValue);
+                            }
+                        }
                     }
                 }
             }
