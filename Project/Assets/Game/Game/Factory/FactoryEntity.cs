@@ -8,11 +8,11 @@ namespace Game
 {
     public static class FactoryEntity
     {
-        private static int _localId;
+        private static int _gameEntityLocalId;
 
         public static void Init()
         {
-            _localId = 0;
+            _gameEntityLocalId = 0;
         }
 
         
@@ -21,8 +21,8 @@ namespace Game
         {
             var actor = Contexts.sharedInstance.actor.GetEntityWithId(actorId);
             var e = Contexts.sharedInstance.game.CreateEntity();
-            e.AddLocalId(_localId);
-            _localId++;
+            e.AddLocalId(_gameEntityLocalId);
+            _gameEntityLocalId++;
 
             e.AddActorId((short)actorId);
             e.AddConfigId(configId);
@@ -46,6 +46,13 @@ namespace Game
         public static BuffEntity CreatBuffEntity()
         {
             var e = Contexts.sharedInstance.buff.CreateEntity();
+            return e;
+        }
+        
+        
+        public static CombatEntity CreatCombatEntity()
+        {
+            var e = Contexts.sharedInstance.combat.CreateEntity();
             return e;
         }
         

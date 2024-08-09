@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Entitas;
+using FixMath.NET;
 
 namespace Game
 {
@@ -22,14 +23,14 @@ namespace Game
                 e.ReplaceTimingTypeAtk((int)ListenType.Atking);
                 return;
             }
-
+            
+            var attacker = GetMyActor(c.combatMeleeWeapon.AttackerActorId);
+            
             //判定阶段
             if (cmpt.Step == 1)
             {
-                var myActor = GetMyActor(c.combatMeleeWeapon.AttackerActorId);
-                
                 //耐力耗尽
-                if (myActor.stamina.Value <= e.staminaCost.Value)
+                if (attacker.stamina.Value <= e.staminaCost.Value)
                 {
                     c.Destroy();
                     e.ReplaceTimingTypeAtk(0);
@@ -38,36 +39,76 @@ namespace Game
                 }
 
                 //耐力消耗
-                var staminaCompt = myActor.stamina;
-                myActor.ReplaceStamina(staminaCompt.MaxValue,staminaCompt.Value - e.staminaCost.Value,staminaCompt.LastCoverSpan);
+                var staminaCompt = attacker.stamina;
+                attacker.ReplaceStamina(staminaCompt.MaxValue,staminaCompt.Value - e.staminaCost.Value,staminaCompt.LastCoverSpan);
                 
                 //命中率判定
-                if (!e.GetIsCanHit())
+                //命中也不能直接计算伤害,因为其他模块需要产生对应的效果
+                if (!e.JudgeCanHit())
                 {
                     c.Destroy();
                     e.ReplaceTimingTypeAtk((int)ListenType.AtkMis);
+                    cmpt.Step = 3;
                     return;
                 }
-            
-            
-                //伤害获取
-                var damage = e.GetDamage();
-                var otherActor = GetOtherActor(c.combatMeleeWeapon.AttackerActorId);
-                otherActor.GetDamage(damage);
-                
-                e.ReplaceTimingTypeAtk((int)ListenType.Atked);
+                else
+                {
+                    e.ReplaceTimingTypeAtk((int)ListenType.Atked);
+                    cmpt.Step = 2;
+                    return;
+                }
                 
             }
-            
-            
-            
-            
-         
-            
-          
-            
-            
 
+            //伤害计算
+            if (cmpt.Step == 2)
+            {
+                //伤害获取
+                var damageValue = e.GetDamage();
+                
+                var target = GetOtherActor(c.combatMeleeWeapon.AttackerActorId);
+                //otherActor.OnGetMeleeDamage(attacker.id.Value, e.localId.value,damage);
+                
+                //目标判断
+                var buffMap = target.actorBuff.Value;
+        
+                //护甲buff抵消判断
+                int defendValue = 0;
+                if (buffMap.ContainsKey((int) BuffType.Block_11))
+                {
+                    defendValue = buffMap[(int) BuffType.Block_11];
+                }
+
+                bool isHurt = defendValue - damageValue < 0;
+
+                //受伤
+                if (isHurt)
+                {
+                    //尖刺反伤
+                    if (buffMap.ContainsKey((int) BuffType.Spikes_6))
+                    {
+                        attacker.OnGetBuffSpikesDamage(buffMap[(int) BuffType.Spikes_6]);
+                    }
+            
+                    // TODO 盾牌防御判断
+                }
+                //防御
+                else
+                {
+                    //盾牌消耗
+                    buffMap[(int) BuffType.Block_11] -= (int)Fix64.Floor(damageValue);
+                }
+
+                cmpt.Step = 3;
+                
+                
+            }
+
+            //销毁
+            if (cmpt.Step == 3)
+            {
+                c.Destroy();
+            }
         }
     }
 }

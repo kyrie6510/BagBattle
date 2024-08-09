@@ -1,21 +1,16 @@
-﻿
-using Entitas;
+﻿using Entitas;
 
 namespace Game
 {
     public class BuffTimingAtkSystem : BuffBaseExecuteSystem
     {
-       
-
         public BuffTimingAtkSystem() : base(BuffMatcher.TimingTypeAtk)
         {
-            
         }
 
 
         protected override void Update(BuffEntity buff)
         {
-            
             var config = ConfigManager.Instance.GetTimConfig(buff.timingConfigId.Value);
 
             var e = Contexts.sharedInstance.game.GetEntityWithLocalId(buff.attachId.Value);
@@ -28,14 +23,8 @@ namespace Game
                     {
                         var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
                         EventManager.Instance.TriggerEvent(new OnLog($"{effectConfig.Name}"));
-                        if (effectConfig.EffectType == (int)EffectType.AddBuff)
-                        {
-                            if (effectConfig.EffectTarget == (int) ListenTarget.MyActor)
-                            {
-                                var actor = Contexts.sharedInstance.actor.GetEntityWithId(e.actorId.Value);
-                                actor.AddBuff(effectConfig.EffectClass,effectConfig.EffectValue);
-                            }
-                        }
+
+                        EffectManager.Instance.CreatEffect(effectId, e.actorId.Value, e.localId.value);
                     }
                 }
             }

@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class BuffEntity {
 
-    public Game.Buff.BuffSpikesComponent buffSpikes { get { return (Game.Buff.BuffSpikesComponent)GetComponent(BuffComponentsLookup.BuffSpikes); } }
-    public bool hasBuffSpikes { get { return HasComponent(BuffComponentsLookup.BuffSpikes); } }
+    static readonly Game.Buff.BuffSpikesComponent buffSpikesComponent = new Game.Buff.BuffSpikesComponent();
 
-    public void AddBuffSpikes(int newNum) {
-        var index = BuffComponentsLookup.BuffSpikes;
-        var component = (Game.Buff.BuffSpikesComponent)CreateComponent(index, typeof(Game.Buff.BuffSpikesComponent));
-        component.Num = newNum;
-        AddComponent(index, component);
-    }
+    public bool isBuffSpikes {
+        get { return HasComponent(BuffComponentsLookup.BuffSpikes); }
+        set {
+            if (value != isBuffSpikes) {
+                var index = BuffComponentsLookup.BuffSpikes;
+                if (value) {
+                    var componentPool = GetComponentPool(index);
+                    var component = componentPool.Count > 0
+                            ? componentPool.Pop()
+                            : buffSpikesComponent;
 
-    public void ReplaceBuffSpikes(int newNum) {
-        var index = BuffComponentsLookup.BuffSpikes;
-        var component = (Game.Buff.BuffSpikesComponent)CreateComponent(index, typeof(Game.Buff.BuffSpikesComponent));
-        component.Num = newNum;
-        ReplaceComponent(index, component);
-    }
-
-    public void RemoveBuffSpikes() {
-        RemoveComponent(BuffComponentsLookup.BuffSpikes);
+                    AddComponent(index, component);
+                } else {
+                    RemoveComponent(index);
+                }
+            }
+        }
     }
 }
 

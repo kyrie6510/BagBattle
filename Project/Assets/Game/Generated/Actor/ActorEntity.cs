@@ -7,29 +7,4 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public sealed partial class ActorEntity : Entitas.Entity {
-
-
-    public void AddBuff(int buffId, int num)
-    {
-
-        if (hasActorBuff)
-        {
-            var buffMap = actorBuff.Value;
-            if (!buffMap.ContainsKey(buffId))
-            {
-                buffMap.Add(buffId,num);
-            }
-            else
-            {
-                buffMap[buffId] += num;
-            }
-            ReplaceActorBuff(buffMap);
-        }
-        
-        
-        
-        
-    }
-    
-    
 }

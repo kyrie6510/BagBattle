@@ -3,7 +3,7 @@ using Game;
 using Game.Game;
 
 
-public partial class GameEntity: IHpListener
+public partial class GameEntity
 {
     
     
@@ -51,7 +51,7 @@ public partial class GameEntity: IHpListener
         return value;
     }
     
-    public bool GetIsCanHit()
+    public bool JudgeCanHit()
     {
         if (!hasAtkRate) return false;
         var value = UtilityRandom.Random.Next(0, 100);
@@ -59,9 +59,5 @@ public partial class GameEntity: IHpListener
     }
 
 
-    public void OnHp(ActorEntity entity, Fix64 maxValue, Fix64 value)
-    {
-        var config = ConfigManager.Instance.GetPropConfig((short) this.configId.Value);
-        throw new System.NotImplementedException();
-    }
+ 
 }
