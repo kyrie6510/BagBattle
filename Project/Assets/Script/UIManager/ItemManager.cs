@@ -81,16 +81,30 @@ namespace Script
             for (short i = 1; i <= 8; i++)
             {
                 var configId = i;
+                
+                var cfgData  =  ConfigManager.Instance.GetPropConfig(configId);
 
-                var data = CreatUIData(configId);
+                var times = cfgData.PropType == (int) PropType.Bag ? 2 : 1;
 
-                var go = CreatGameObject(i, ObjBox.transform);
-                var item = go.GetComponent<ViewItem>();
+                for (int j = 0; j < times; j++)
+                {
+                    var data = CreatUIData(configId);
 
-                item.ConfigId = configId;
-                item.LocalId = data.LocalId;
+                    var go = CreatGameObject(configId, ObjBox.transform);
+                    var item = go.GetComponent<ViewItem>();
 
-                _itemUIMap.Add(data.LocalId, item);
+                    item.ConfigId = configId;
+                    item.LocalId = data.LocalId;
+                    _itemUIMap.Add(data.LocalId, item);
+                }
+                
+             
+            
+
+               
+               
+
+             
             }
         }
 

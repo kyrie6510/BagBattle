@@ -15,12 +15,18 @@ namespace Script
             
             EventManager.Instance.AddListener<OnGamePlayEvent>(OnGamePlay);
             EventManager.Instance.AddListener<OnLog>(OnLog);
+            EventManager.Instance.AddListener<BattleLog>(OnBattleLog);
             
             ItemManager.Instance.Awake();
             InputManager.Instance.Awake();
             GridManager.Instance.Awake();
             ConfigManager.Instance.Awake();
             ViewManager.Instance.Awake();
+        }
+
+        private void OnBattleLog(BattleLog e)
+        {
+            Debug.Log(e.Info);
         }
 
         private void OnLog(OnLog e)

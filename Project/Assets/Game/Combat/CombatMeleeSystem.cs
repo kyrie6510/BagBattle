@@ -34,7 +34,7 @@ namespace Game
                 {
                     c.Destroy();
                     e.ReplaceTimingTypeAtk(0);
-                    EventManager.Instance.TriggerEvent(new OnLog("耐力耗尽"));
+                    EventManager.Instance.TriggerEvent(new BattleLog(attacker.id.Value,"耐力耗尽"));
                     return;
                 }
 
@@ -47,7 +47,7 @@ namespace Game
                 if (!e.JudgeCanHit())
                 {
                     
-                    EventManager.Instance.TriggerEvent(new OnLog($"actor:{attacker.id.Value} local:{cmpt.AttackerLocalId} 未命中"));
+                    EventManager.Instance.TriggerEvent(new BattleLog(attacker.id.Value,$"actor:{attacker.id.Value} local:{cmpt.AttackerLocalId} 未命中"));
                     e.ReplaceTimingTypeAtk((int)ListenType.AtkMis);
                     cmpt.Step = 2;
                     return;
