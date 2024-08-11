@@ -9,10 +9,11 @@ namespace Game
     public static class FactoryEntity
     {
         private static int _gameEntityLocalId;
-
+        private static int _buffEntityLocalId;
         public static void Init()
         {
             _gameEntityLocalId = 0;
+            _buffEntityLocalId = 0;
         }
 
         
@@ -46,6 +47,8 @@ namespace Game
         public static BuffEntity CreatBuffEntity()
         {
             var e = Contexts.sharedInstance.buff.CreateEntity();
+            e.AddLocalId(_buffEntityLocalId);
+            _buffEntityLocalId++;
             return e;
         }
         

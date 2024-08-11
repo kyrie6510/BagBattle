@@ -3,7 +3,7 @@ using Entitas.CodeGeneration.Attributes;
 
 namespace Game
 {
-    [Game, Combat]
+    [Game, Combat,Buff]
     public class LocalIdComponent:IComponent
     {
         [PrimaryEntityIndex] public int value;

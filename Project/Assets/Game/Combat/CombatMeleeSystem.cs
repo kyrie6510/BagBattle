@@ -49,65 +49,60 @@ namespace Game
                     
                     EventManager.Instance.TriggerEvent(new OnLog($"actor:{attacker.id.Value} local:{cmpt.AttackerLocalId} 未命中"));
                     e.ReplaceTimingTypeAtk((int)ListenType.AtkMis);
-                    cmpt.Step = 3;
+                    cmpt.Step = 2;
                     return;
                 }
                 else
                 {
                     e.ReplaceTimingTypeAtk((int)ListenType.Atked);
+                    
+                    //伤害计算
+                    //伤害获取
+                    var damageValue = e.GetDamage();
+                
+                    var target = GetOtherActor(c.combatMeleeWeapon.AttackerActorId);
+                    //otherActor.OnGetMeleeDamage(attacker.id.Value, e.localId.value,damage);
+                
+                    //目标判断
+                    var buffMap = target.actorBuff.Value;
+        
+                    //护甲buff抵消判断
+                    int defendValue = 0;
+                    if (buffMap.ContainsKey((int) BuffType.Block_11))
+                    {
+                        defendValue = buffMap[(int) BuffType.Block_11];
+                    }
+
+                    bool isHurt = defendValue - damageValue < 0;
+
+                    //受伤
+                    if (isHurt)
+                    {
+                        //尖刺反伤
+                        if (buffMap.ContainsKey((int) BuffType.Spikes_6))
+                        {
+                            attacker.OnGetBuffSpikesDamage(buffMap[(int) BuffType.Spikes_6]);
+                        }
+            
+                        // TODO 盾牌防御判断
+                        target.GetHurt(damageValue);
+                    }
+                    //防御
+                    else
+                    {
+                        //盾牌消耗
+                        buffMap[(int) BuffType.Block_11] -= (int)Fix64.Floor(damageValue);
+                    }
+
                     cmpt.Step = 2;
                     return;
                 }
                 
             }
 
-            //伤害计算
-            if (cmpt.Step == 2)
-            {
-                //伤害获取
-                var damageValue = e.GetDamage();
-                
-                var target = GetOtherActor(c.combatMeleeWeapon.AttackerActorId);
-                //otherActor.OnGetMeleeDamage(attacker.id.Value, e.localId.value,damage);
-                
-                //目标判断
-                var buffMap = target.actorBuff.Value;
-        
-                //护甲buff抵消判断
-                int defendValue = 0;
-                if (buffMap.ContainsKey((int) BuffType.Block_11))
-                {
-                    defendValue = buffMap[(int) BuffType.Block_11];
-                }
-
-                bool isHurt = defendValue - damageValue < 0;
-
-                //受伤
-                if (isHurt)
-                {
-                    //尖刺反伤
-                    if (buffMap.ContainsKey((int) BuffType.Spikes_6))
-                    {
-                        attacker.OnGetBuffSpikesDamage(buffMap[(int) BuffType.Spikes_6]);
-                    }
             
-                    // TODO 盾牌防御判断
-                    target.GetHurt(damageValue);
-                }
-                //防御
-                else
-                {
-                    //盾牌消耗
-                    buffMap[(int) BuffType.Block_11] -= (int)Fix64.Floor(damageValue);
-                }
-
-                cmpt.Step = 3;
-                
-                
-            }
-
             //销毁
-            if (cmpt.Step == 3)
+            if (cmpt.Step == 2)
             {
                 e.ReplaceTimingTypeAtk(0);
                 c.Destroy();

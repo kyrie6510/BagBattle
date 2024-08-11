@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using Entitas.CodeGeneration.Attributes;
 
 namespace Game
 {
@@ -8,6 +9,7 @@ namespace Game
     [Buff]
     public class AttachIdComponent : IComponent
     {
+        [EntityIndex]
         public int Value;
     }
 }

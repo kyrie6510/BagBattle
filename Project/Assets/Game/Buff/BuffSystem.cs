@@ -7,6 +7,7 @@ namespace Game.Buff
         public BuffSystem()
         {
             Add(new BuffTimingAtkSystem());    
+            Add(new BuffTimingEverHaveBuffSystem());    
         }
         
         

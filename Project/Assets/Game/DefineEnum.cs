@@ -55,6 +55,7 @@
        SecondPass =10,//每n秒 
        InState =11,//进入xx状态
        InStore =12,//进入商店
+       EverHaveBuff=13,//每拥有一层b
     }
     //
     // 1.充能

@@ -11,17 +11,19 @@ public partial class BuffEntity {
     public Game.TimingTypeHaveBuffComponent timingTypeHaveBuff { get { return (Game.TimingTypeHaveBuffComponent)GetComponent(BuffComponentsLookup.TimingTypeHaveBuff); } }
     public bool hasTimingTypeHaveBuff { get { return HasComponent(BuffComponentsLookup.TimingTypeHaveBuff); } }
 
-    public void AddTimingTypeHaveBuff(System.Collections.Generic.Dictionary<int, int> newValue) {
+    public void AddTimingTypeHaveBuff(int newBuffId, int newBuffNum) {
         var index = BuffComponentsLookup.TimingTypeHaveBuff;
         var component = (Game.TimingTypeHaveBuffComponent)CreateComponent(index, typeof(Game.TimingTypeHaveBuffComponent));
-        component.Value = newValue;
+        component.BuffId = newBuffId;
+        component.BuffNum = newBuffNum;
         AddComponent(index, component);
     }
 
-    public void ReplaceTimingTypeHaveBuff(System.Collections.Generic.Dictionary<int, int> newValue) {
+    public void ReplaceTimingTypeHaveBuff(int newBuffId, int newBuffNum) {
         var index = BuffComponentsLookup.TimingTypeHaveBuff;
         var component = (Game.TimingTypeHaveBuffComponent)CreateComponent(index, typeof(Game.TimingTypeHaveBuffComponent));
-        component.Value = newValue;
+        component.BuffId = newBuffId;
+        component.BuffNum = newBuffNum;
         ReplaceComponent(index, component);
     }
 

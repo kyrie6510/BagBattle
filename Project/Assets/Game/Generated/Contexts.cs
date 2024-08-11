@@ -63,6 +63,7 @@ public partial class Contexts : Entitas.IContexts {
 public partial class Contexts {
 
     public const string ActorId = "ActorId";
+    public const string AttachId = "AttachId";
     public const string Id = "Id";
     public const string LocalId = "LocalId";
 
@@ -72,6 +73,11 @@ public partial class Contexts {
             ActorId,
             game.GetGroup(GameMatcher.ActorId),
             (e, c) => ((Game.ActorIdComponent)c).Value));
+
+        buff.AddEntityIndex(new Entitas.EntityIndex<BuffEntity, int>(
+            AttachId,
+            buff.GetGroup(BuffMatcher.AttachId),
+            (e, c) => ((Game.AttachIdComponent)c).Value));
 
         actor.AddEntityIndex(new Entitas.PrimaryEntityIndex<ActorEntity, int>(
             Id,
@@ -86,6 +92,10 @@ public partial class Contexts {
             LocalId,
             combat.GetGroup(CombatMatcher.LocalId),
             (e, c) => ((Game.LocalIdComponent)c).value));
+        buff.AddEntityIndex(new Entitas.PrimaryEntityIndex<BuffEntity, int>(
+            LocalId,
+            buff.GetGroup(BuffMatcher.LocalId),
+            (e, c) => ((Game.LocalIdComponent)c).value));
     }
 }
 
@@ -93,6 +103,10 @@ public static class ContextsExtensions {
 
     public static System.Collections.Generic.HashSet<GameEntity> GetEntitiesWithActorId(this GameContext context, short Value) {
         return ((Entitas.EntityIndex<GameEntity, short>)context.GetEntityIndex(Contexts.ActorId)).GetEntities(Value);
+    }
+
+    public static System.Collections.Generic.HashSet<BuffEntity> GetEntitiesWithAttachId(this BuffContext context, int Value) {
+        return ((Entitas.EntityIndex<BuffEntity, int>)context.GetEntityIndex(Contexts.AttachId)).GetEntities(Value);
     }
 
     public static ActorEntity GetEntityWithId(this ActorContext context, int Value) {
@@ -105,6 +119,10 @@ public static class ContextsExtensions {
 
     public static CombatEntity GetEntityWithLocalId(this CombatContext context, int value) {
         return ((Entitas.PrimaryEntityIndex<CombatEntity, int>)context.GetEntityIndex(Contexts.LocalId)).GetEntity(value);
+    }
+
+    public static BuffEntity GetEntityWithLocalId(this BuffContext context, int value) {
+        return ((Entitas.PrimaryEntityIndex<BuffEntity, int>)context.GetEntityIndex(Contexts.LocalId)).GetEntity(value);
     }
 }
 //------------------------------------------------------------------------------

@@ -10,9 +10,12 @@ namespace Game
     [Buff]
     public class TimingTypeHaveBuffComponent : IComponent
     {
+        
         /// <summary>
-        ///  key buffId vale num 
+        /// 
         /// </summary>
-        public Dictionary<int,int>  Value;
+        public int BuffId;
+        public int BuffNum;
+
     }
 }

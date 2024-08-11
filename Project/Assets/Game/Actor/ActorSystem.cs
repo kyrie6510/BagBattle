@@ -74,7 +74,8 @@ namespace Game.Actor
                     if ( type <=  ListenType.Atked&& type>0)  decorate = new DecorateListenTypeAtk();
                     else if (type == ListenType.SecondPass) decorate = new DecorateListenTypeSecondPass();
                     else if (type == ListenType.GameBegin) decorate = new DecorateListenTypeSecondPass();
-                   
+                    else if (type == ListenType.HaveBuf) decorate = new DecorateListenTypeHaveBuff();
+                    else if (type == ListenType.EverHaveBuff) decorate = new DecorateListenTypeEverHaveBuff();
                     decorate?.Do(entity,timId,effectIds);
                 }
             }

@@ -24,7 +24,7 @@ namespace Game
                         var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
                         EventManager.Instance.TriggerEvent(new OnLog($"actor:{e.actorId.Value} {effectConfig.Name}"));
 
-                        EffectManager.Instance.CreatEffect(effectId, e.actorId.Value, e.localId.value);
+                        EffectManager.Instance.CreatEffect(effectId, e.actorId.Value, e.localId.value,buff.localId.value);
                     }
                 }
             }

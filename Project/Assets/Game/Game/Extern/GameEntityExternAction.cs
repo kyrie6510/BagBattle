@@ -44,10 +44,19 @@ public partial class GameEntity
     }
 
 
-    public int GetDamage()
+    public Fix64 GetDamage()
     {
         if (!hasAttack) return 0;
         var value = UtilityRandom.Random.Next((int)attack.Value[0], (int)attack.Value[1]);
+        var buffs = Contexts.sharedInstance.buff.GetEntitiesWithAttachId(localId.value);
+        foreach (var buff in buffs)
+        {
+            if (buff.hasBuffAdditionAttack)
+            {
+                value += (int)buff.buffAdditionAttack.Value;
+            }
+        }
+        
         return value;
     }
     

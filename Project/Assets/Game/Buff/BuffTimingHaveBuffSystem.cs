@@ -11,7 +11,7 @@
         
         protected override void Update(BuffEntity buff)
         {
-            
+           
         }
 
 

@@ -10,23 +10,29 @@ public static class BuffComponentsLookup {
 
     public const int AttachId = 0;
     public const int BuffSpikes = 1;
-    public const int BuffEffectId = 2;
-    public const int TimingConfigId = 3;
-    public const int TimingTypeActive = 4;
-    public const int TimingTypeAtk = 5;
-    public const int TimingTypeGameStart = 6;
-    public const int TimingTypeGetBuff = 7;
-    public const int TimingTypeHaveBuff = 8;
-    public const int TimingTypeHpLessTarget = 9;
-    public const int TimingTypeSecondPass = 10;
-    public const int TimingTypeTriggerNum = 11;
+    public const int BuffAdditionAttack = 2;
+    public const int BuffEffectId = 3;
+    public const int TimingTypeEverHaveBuff = 4;
+    public const int LocalId = 5;
+    public const int TimingConfigId = 6;
+    public const int TimingTypeActive = 7;
+    public const int TimingTypeAtk = 8;
+    public const int TimingTypeGameStart = 9;
+    public const int TimingTypeGetBuff = 10;
+    public const int TimingTypeHaveBuff = 11;
+    public const int TimingTypeHpLessTarget = 12;
+    public const int TimingTypeSecondPass = 13;
+    public const int TimingTypeTriggerNum = 14;
 
-    public const int TotalComponents = 12;
+    public const int TotalComponents = 15;
 
     public static readonly string[] componentNames = {
         "AttachId",
         "BuffSpikes",
+        "BuffAdditionAttack",
         "BuffEffectId",
+        "TimingTypeEverHaveBuff",
+        "LocalId",
         "TimingConfigId",
         "TimingTypeActive",
         "TimingTypeAtk",
@@ -41,7 +47,10 @@ public static class BuffComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(Game.AttachIdComponent),
         typeof(Game.Buff.BuffSpikesComponent),
+        typeof(Game.BuffAdditionAttackComponent),
         typeof(Game.BuffEffectIdComponent),
+        typeof(Game.Combat.TimingTypeEverHaveBuffComponent),
+        typeof(Game.LocalIdComponent),
         typeof(Game.TimingConfigIdComponent),
         typeof(Game.TimingTypeActiveComponent),
         typeof(Game.TimingTypeAtkComponent),
