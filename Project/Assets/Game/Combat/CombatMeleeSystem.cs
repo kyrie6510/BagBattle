@@ -46,7 +46,8 @@ namespace Game
                 //命中也不能直接计算伤害,因为其他模块需要产生对应的效果
                 if (!e.JudgeCanHit())
                 {
-                    c.Destroy();
+                    
+                    EventManager.Instance.TriggerEvent(new OnLog($"actor:{attacker.id.Value} local:{cmpt.AttackerLocalId} 未命中"));
                     e.ReplaceTimingTypeAtk((int)ListenType.AtkMis);
                     cmpt.Step = 3;
                     return;
@@ -91,6 +92,7 @@ namespace Game
                     }
             
                     // TODO 盾牌防御判断
+                    target.GetHurt(damageValue);
                 }
                 //防御
                 else
@@ -107,6 +109,7 @@ namespace Game
             //销毁
             if (cmpt.Step == 3)
             {
+                e.ReplaceTimingTypeAtk(0);
                 c.Destroy();
             }
         }

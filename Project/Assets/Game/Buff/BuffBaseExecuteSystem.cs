@@ -29,11 +29,10 @@ namespace Game
         
         public void Execute()
         {
-            for (var i = 0; i < _list.Count; i++)
+            for(int i= _list.Count-1;i>=0;i--)
             {
                 Update(_list[i]);
             }
-                
         }
         protected virtual void Update(BuffEntity e)
         {

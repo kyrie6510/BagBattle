@@ -22,7 +22,7 @@ namespace Game
                     foreach (var effectId in buff.buffEffectId.Value)
                     {
                         var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
-                        EventManager.Instance.TriggerEvent(new OnLog($"{effectConfig.Name}"));
+                        EventManager.Instance.TriggerEvent(new OnLog($"actor:{e.actorId.Value} {effectConfig.Name}"));
 
                         EffectManager.Instance.CreatEffect(effectId, e.actorId.Value, e.localId.value);
                     }

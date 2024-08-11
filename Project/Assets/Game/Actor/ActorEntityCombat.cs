@@ -61,6 +61,9 @@ public sealed partial class ActorEntity
     /// </summary>
     public void OnGetBuffSpikesDamage(Fix64 value)
     {
+        
+        EventManager.Instance.TriggerEvent(new OnLog($"actor:{id.Value} 受到尖刺伤害{value}"));
+        
         GetHurt(value);
     }
     
@@ -71,6 +74,7 @@ public sealed partial class ActorEntity
     /// <param name="damageValue"></param>
     public void GetHurt(Fix64 damageValue)
     {
+        EventManager.Instance.TriggerEvent(new OnLog($"actor:{id.Value} 受伤害{damageValue}"));
         ReplaceHp(hp.MaxValue, hp.Value - damageValue);
     }
     

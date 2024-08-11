@@ -13,7 +13,7 @@ namespace Game
         public Simulation(GameUser[] actors)
         {
             FactoryEntity.Init();
-            UtilityRandom.InitRandom(10);
+            UtilityRandom.InitRandom(1);
             
             _world = new World(actors);
             Time.SetWorld(_world);

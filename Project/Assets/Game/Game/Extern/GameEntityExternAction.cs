@@ -55,6 +55,9 @@ public partial class GameEntity
     {
         if (!hasAtkRate) return false;
         var value = UtilityRandom.Random.Next(0, 100);
+        
+        EventManager.Instance.TriggerEvent(new OnLog($"local:{localId.value} 概率判断：{value}"));
+        
         return value <= atkRate.Value;
     }
 
