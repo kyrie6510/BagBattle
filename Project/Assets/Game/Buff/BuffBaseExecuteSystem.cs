@@ -5,8 +5,7 @@ namespace Game
 {
     public class BuffBaseExecuteSystem: IExecuteSystem
     {
-        private IGroup<BuffEntity> _group;
-
+        protected IGroup<BuffEntity> _group;
         private readonly List<BuffEntity> _list = new List<BuffEntity>();
         
         
@@ -37,6 +36,12 @@ namespace Game
         protected virtual void Update(BuffEntity e)
         {
             
+        }
+
+        protected ActorEntity GetOtherActor(int actorId)
+        {
+            actorId = actorId == 1 ? 0 : 1;
+            return Contexts.sharedInstance.actor.GetEntityWithId(actorId);
         }
     }
 }

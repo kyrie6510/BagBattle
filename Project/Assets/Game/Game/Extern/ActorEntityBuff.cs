@@ -21,6 +21,23 @@ public sealed partial class ActorEntity : Entitas.Entity
         {
             buffMap[buffId] += num;
         }
+
+        if (buffId == (int)BuffType.Poison_10)
+        {
+            var buff = Contexts.sharedInstance.buff.GetEntityWithAttachActorId(id.Value);
+            if (buff == null)
+            {
+                buff = FactoryEntity.CreatBuffEntity();
+                buff.AddAttachActorId(this.id.Value);
+                buff.AddBuffPoison(num,Time.TimeFromStart,2);
+            }
+            else
+            {
+                var curNum = buff.buffPoison.Num;
+                buff.ReplaceBuffPoison(curNum+ num,buff.buffPoison.LastSpan,2);
+            }
+            
+        }
         
         ReplaceActorBuff(buffMap);
     }

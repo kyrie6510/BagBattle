@@ -67,6 +67,15 @@ public sealed partial class ActorEntity
         GetHurt(value);
     }
     
+    /// <summary>
+    /// 当受到尖刺伤害
+    /// </summary>
+    public void OnGetBuffPoisonDamage(Fix64 value)
+    {
+        EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"actor:{id.Value} 受到毒伤害{value}"));
+        GetHurt(value);
+    }
+    
     
     /// <summary>
     /// 直接伤害

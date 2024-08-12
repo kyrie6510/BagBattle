@@ -8,18 +8,23 @@ namespace Game.Game.Factory
 
         public void Do(GameEntity e, int timConfigId, List<int> effectId)
         {
+            if (!ConfigManager.Instance.IsHaveTimingConfig((short) timConfigId))
+            {
+                return;
+            }
+            
             var timConfig = ConfigManager.Instance.GetTimConfig((short)timConfigId);
             
-            var target = timConfig.ListenTarget;
-            switch (target)
+            if (!e.hasTimingTypeAtk)
             {
-                case (int)ListenTarget.Game:
-
-                 
-                    
-                    break;
-                
+                e.AddTimingTypeAtk(0);    
             }
+
+            var buffEntity = FactoryEntity.CreatBuffEntity();
+            
+            buffEntity.AddBuffEffectId(effectId);
+            buffEntity.AddTimingTypeSecondPass(timConfig.ListenValue(0),0);
+            buffEntity.AddAttachId(e.localId.value);
         }
     }
 }

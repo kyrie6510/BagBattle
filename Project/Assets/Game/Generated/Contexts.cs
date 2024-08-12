@@ -63,6 +63,7 @@ public partial class Contexts : Entitas.IContexts {
 public partial class Contexts {
 
     public const string ActorId = "ActorId";
+    public const string AttachActorId = "AttachActorId";
     public const string AttachId = "AttachId";
     public const string Id = "Id";
     public const string LocalId = "LocalId";
@@ -73,6 +74,11 @@ public partial class Contexts {
             ActorId,
             game.GetGroup(GameMatcher.ActorId),
             (e, c) => ((Game.ActorIdComponent)c).Value));
+
+        buff.AddEntityIndex(new Entitas.PrimaryEntityIndex<BuffEntity, int>(
+            AttachActorId,
+            buff.GetGroup(BuffMatcher.AttachActorId),
+            (e, c) => ((Game.Buff.AttachActorIdComponent)c).Value));
 
         buff.AddEntityIndex(new Entitas.EntityIndex<BuffEntity, int>(
             AttachId,
@@ -103,6 +109,10 @@ public static class ContextsExtensions {
 
     public static System.Collections.Generic.HashSet<GameEntity> GetEntitiesWithActorId(this GameContext context, short Value) {
         return ((Entitas.EntityIndex<GameEntity, short>)context.GetEntityIndex(Contexts.ActorId)).GetEntities(Value);
+    }
+
+    public static BuffEntity GetEntityWithAttachActorId(this BuffContext context, int Value) {
+        return ((Entitas.PrimaryEntityIndex<BuffEntity, int>)context.GetEntityIndex(Contexts.AttachActorId)).GetEntity(Value);
     }
 
     public static System.Collections.Generic.HashSet<BuffEntity> GetEntitiesWithAttachId(this BuffContext context, int Value) {
