@@ -19,12 +19,16 @@ namespace Game.Game.Factory
                 e.AddTimingTypeAtk(0);    
             }
 
+            
             var buffEntity = FactoryEntity.CreatBuffEntity();
             buffEntity.AddBuffEffectId(effectId);
             buffEntity.AddTimingConfigId(timConfigId);
             
             buffEntity.AddTimingTypeAtk(timConfig.ListenType);
             buffEntity.AddAttachId(e.localId.value);
+            buffEntity.AddAttachActorId(e.actorId.Value);
+            buffEntity.AddBuffTimingListenTarget(timConfig.ListenTarget);
+        
         }
     }
 }

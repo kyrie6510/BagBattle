@@ -1,10 +1,24 @@
-﻿namespace Game
+﻿using Game.Game;
+
+namespace Game
 {
     public class EffectManager : Singleton<EffectManager>
     {
         public void CreatEffect(int effectId,int actorId,int entityId,int buffLocalId)
         {
             var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
+
+            if (effectConfig.EffectProbably != 100)
+            {
+                var value = UtilityRandom.Random.Next(0, 100);
+                if (value > effectConfig.EffectProbably)
+                {
+                    EventManager.Instance.TriggerEvent(new BattleLog(actorId,$"{effectId}概率判断失败"));
+                }
+            }
+            
+            
+            
             var buff = Contexts.sharedInstance.buff.GetEntityWithLocalId(buffLocalId);
             var actor = Contexts.sharedInstance.actor.GetEntityWithId(actorId);
             //处理添加buff类型
