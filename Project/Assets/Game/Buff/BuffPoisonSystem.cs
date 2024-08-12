@@ -31,11 +31,14 @@ namespace Game.Buff
         protected override void Update(BuffEntity buff)
         {
             //触发
-            if (Time.TimeFromStart - buff.buffPoison.LastSpan >= buff.buffPoison.PerActiveTime)
+            var perActiveTime = buff.buffPoison.PerActiveTime;
+            var lastSpan = buff.buffPoison.LastSpan;
+            var num = buff.buffPoison.Num;
+            if (Time.TimeFromStart - lastSpan>=perActiveTime)
             {
                 var otherActor = GetOtherActor(buff.attachActorId.Value);
-                otherActor.OnGetBuffSpikesDamage(buff.buffPoison.Num);
-                buff.ReplaceBuffPoison(buff.buffPoison.Num,buff.buffPoison.PerActiveTime+ buff.buffPoison.LastSpan,buff.buffPoison.PerActiveTime);
+                otherActor.OnGetBuffSpikesDamage(num);
+                buff.ReplaceBuffPoison(num,perActiveTime+ lastSpan,perActiveTime);
             }
             
             
