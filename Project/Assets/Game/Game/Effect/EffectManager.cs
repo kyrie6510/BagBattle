@@ -36,9 +36,9 @@ namespace Game
                 if (effectConfig.EffectTarget == (int) ListenTarget.Self)
                 {
                     //额外伤害
-                    if (effectConfig.EffectClass == 2)
+                    if (effectConfig.EffectClass == 1)
                     {
-                        if (buff.hasBuffAdditionAttack)
+                        if (!buff.hasBuffAdditionAttack)
                         {
                             buff.AddBuffAdditionAttack(effectConfig.EffectValue,entityId);
                         }

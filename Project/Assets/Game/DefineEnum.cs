@@ -95,7 +95,7 @@
     
     public enum ListenTarget
     {
-        Self = 1, //自身物品 
+         Self = 1, //自身物品 
         MyActor = 2, //玩家自己
         OtherActor = 3, //对手玩家
         Star = 4, //星物品

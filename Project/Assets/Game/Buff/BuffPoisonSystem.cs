@@ -7,25 +7,15 @@ namespace Game.Buff
     public class BuffPoisonSystem : BuffBaseExecuteSystem
     {
         
-        private IGroup<BuffEntity> _group;
-        private readonly List<BuffEntity> _list = new ();
-
+       
+       
 
         public BuffPoisonSystem(): base(BuffMatcher.BuffPoison)
         {
-            _group.OnEntityAdded += OnAdd;
-            _group.OnEntityRemoved += OnRemove;
+          
         }
 
-        private void OnRemove(IGroup<BuffEntity> @group, BuffEntity entity, int index, IComponent component)
-        {
-            this._list.Remove(entity);
-        }
-
-        private void OnAdd(IGroup<BuffEntity> @group, BuffEntity entity, int index, IComponent component)
-        {
-            this._list.Add(entity);
-        }
+        
 
 
         protected override void Update(BuffEntity buff)
