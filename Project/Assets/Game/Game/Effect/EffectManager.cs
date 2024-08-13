@@ -53,6 +53,13 @@ namespace Game
                             buff.ReplaceBuffAdditionAttack(buff.buffAdditionAttack.Value+ effectConfig.EffectValue,entityId);
                         }
                     }
+
+                    //下次攻击伤害
+                    if (effectConfig.EffectClass == 5)
+                    {
+                        
+                    }
+                    
                     
                     
                 }

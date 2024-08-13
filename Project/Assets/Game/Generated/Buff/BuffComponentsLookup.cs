@@ -14,20 +14,22 @@ public static class BuffComponentsLookup {
     public const int BuffSpikes = 3;
     public const int BuffTimingListenTarget = 4;
     public const int BuffAdditionAttack = 5;
-    public const int BuffEffectId = 6;
-    public const int TimingTypeEverHaveBuff = 7;
-    public const int LocalId = 8;
-    public const int TimingConfigId = 9;
-    public const int TimingTypeActive = 10;
-    public const int TimingTypeAtk = 11;
-    public const int TimingTypeGameStart = 12;
-    public const int TimingTypeGetBuff = 13;
-    public const int TimingTypeHaveBuff = 14;
-    public const int TimingTypeHpLessTarget = 15;
-    public const int TimingTypeSecondPass = 16;
-    public const int TimingTypeTriggerNum = 17;
+    public const int BuffAdditionAttackOnce = 6;
+    public const int BuffEffectId = 7;
+    public const int TimingTypeEverHaveBuff = 8;
+    public const int Destroy = 9;
+    public const int LocalId = 10;
+    public const int TimingConfigId = 11;
+    public const int TimingTypeActive = 12;
+    public const int TimingTypeAtk = 13;
+    public const int TimingTypeGameStart = 14;
+    public const int TimingTypeGetBuff = 15;
+    public const int TimingTypeHaveBuff = 16;
+    public const int TimingTypeHpLessTarget = 17;
+    public const int TimingTypeSecondPass = 18;
+    public const int TimingTypeTriggerNum = 19;
 
-    public const int TotalComponents = 18;
+    public const int TotalComponents = 20;
 
     public static readonly string[] componentNames = {
         "AttachId",
@@ -36,8 +38,10 @@ public static class BuffComponentsLookup {
         "BuffSpikes",
         "BuffTimingListenTarget",
         "BuffAdditionAttack",
+        "BuffAdditionAttackOnce",
         "BuffEffectId",
         "TimingTypeEverHaveBuff",
+        "Destroy",
         "LocalId",
         "TimingConfigId",
         "TimingTypeActive",
@@ -57,8 +61,10 @@ public static class BuffComponentsLookup {
         typeof(Game.Buff.BuffSpikesComponent),
         typeof(Game.Buff.BuffTimingListenTargetComponent),
         typeof(Game.BuffAdditionAttackComponent),
+        typeof(Game.BuffAdditionAttackOnceComponent),
         typeof(Game.BuffEffectIdComponent),
         typeof(Game.Combat.TimingTypeEverHaveBuffComponent),
+        typeof(Game.DestroyComponent),
         typeof(Game.LocalIdComponent),
         typeof(Game.TimingConfigIdComponent),
         typeof(Game.TimingTypeActiveComponent),
