@@ -41,4 +41,12 @@ public sealed partial class ActorEntity : Entitas.Entity
         
         ReplaceActorBuff(buffMap);
     }
+
+
+    public ActorEntity GetOtherActor()
+    {
+        var actorId = id.Value;
+        actorId = actorId == 1 ? 0 : 1;
+        return Contexts.sharedInstance.actor.GetEntityWithId(actorId);
+    }
 }

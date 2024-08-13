@@ -15,16 +15,17 @@ namespace Game.Game.Factory
             
             var timConfig = ConfigManager.Instance.GetTimConfig((short)timConfigId);
             
-            if (!e.hasTimingTypeAtk)
-            {
-                e.AddTimingTypeAtk(0);    
-            }
+            // if (!e.hasTimingTypeAtk)
+            // {
+            //     e.AddTimingTypeAtk(0);    
+            // }
 
             var buffEntity = FactoryEntity.CreatBuffEntity();
             
             buffEntity.AddBuffEffectId(effectId);
             buffEntity.AddTimingTypeSecondPass(timConfig.ListenValue(0),0);
             buffEntity.AddAttachId(e.localId.value);
+            buffEntity.AddTimingConfigId(timConfigId);
         }
     }
 }

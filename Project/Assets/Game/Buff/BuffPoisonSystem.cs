@@ -27,7 +27,7 @@ namespace Game.Buff
             if (Time.TimeFromStart - lastSpan>=perActiveTime)
             {
                 var otherActor = GetOtherActor(buff.attachActorId.Value);
-                otherActor.OnGetBuffSpikesDamage(num);
+                otherActor.OnGetBuffPoisonDamage(num);
                 buff.ReplaceBuffPoison(num,perActiveTime+ lastSpan,perActiveTime);
             }
             

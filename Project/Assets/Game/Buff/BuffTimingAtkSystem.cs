@@ -42,7 +42,7 @@ namespace Game
                 foreach (var targetWeapon in targetList)
                 {
                     if (!targetWeapon.hasTimingTypeAtk) continue;
-                    if (targetWeapon.timingTypeActive.Value == buff.timingTypeAtk.Value)
+                    if (targetWeapon.timingTypeAtk.Value == buff.timingTypeAtk.Value)
                     {
                         //触发效果
                         foreach (var effectId in buff.buffEffectId.Value)

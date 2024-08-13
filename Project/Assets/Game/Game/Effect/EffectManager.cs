@@ -8,7 +8,7 @@ namespace Game
         {
             var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
 
-            if (effectConfig.EffectProbably != 100)
+               if (effectConfig.EffectProbably != 100)
             {
                 var value = UtilityRandom.Random.Next(0, 100);
                 if (value > effectConfig.EffectProbably)
@@ -27,6 +27,12 @@ namespace Game
                 if (effectConfig.EffectTarget == (int) ListenTarget.MyActor)
                 {
                     actor.AddBuff(effectConfig.EffectClass,effectConfig.EffectValue);
+                }
+                
+                if (effectConfig.EffectTarget == (int) ListenTarget.OtherActor)
+                {
+                    var otherActor = actor.GetOtherActor();
+                    otherActor.AddBuff(effectConfig.EffectClass,effectConfig.EffectValue);
                 }
             }
               
