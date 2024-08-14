@@ -33,7 +33,7 @@ namespace Game
                 Update(_list[i]);
             }
         }
-        protected virtual void Update(BuffEntity e)
+        protected virtual void Update(BuffEntity buff)
         {
             
         }

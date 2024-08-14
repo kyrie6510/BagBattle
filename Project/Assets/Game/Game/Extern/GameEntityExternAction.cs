@@ -55,6 +55,16 @@ public partial class GameEntity
             {
                 value += (int)buff.buffAdditionAttack.Value;
             }
+
+            else if (buff.hasBuffAdditionAttackOnce)
+            {
+                value += (int) buff.buffAdditionAttackOnce.Value;
+                if (!buff.isDestroy)
+                {
+                    buff.isDestroy = true;
+                }
+            }
+            
         }
         
         return value;
@@ -67,9 +77,25 @@ public partial class GameEntity
         
         EventManager.Instance.TriggerEvent(new BattleLog(actorId.Value,$"local:{localId.value} 概率判断：{value}"));
         
-        return value <= atkRate.Value;
+        //buff
+        var additionRate = 0;
+        var actor = GetActor();
+        if (actor.hasActorBuff)
+        {
+            actor.actorBuff.Value.TryGetValue((int) BuffType.Blind_8, out var blindNUm);
+            actor.actorBuff.Value.TryGetValue((int) BuffType.Luck_3, out var luckValue);
+
+            additionRate = (luckValue - blindNUm) * 5;
+        }
+        
+        return value <= atkRate.Value * ( 100 + additionRate)/100;
     }
 
+
+    public ActorEntity GetActor()
+    {
+        return Contexts.sharedInstance.actor.GetEntityWithId(actorId.Value);
+    }
 
  
 }

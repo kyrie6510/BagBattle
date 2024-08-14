@@ -39,6 +39,7 @@ public sealed partial class ActorEntity : Entitas.Entity
             
         }
         
+        
         ReplaceActorBuff(buffMap);
     }
 

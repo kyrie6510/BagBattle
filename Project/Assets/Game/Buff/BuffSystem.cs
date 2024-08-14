@@ -10,6 +10,9 @@ namespace Game.Buff
             Add(new BuffTimingAtkSystem());    
             Add(new BuffTimingEverHaveBuffSystem());
             Add(new BuffPoisonSystem());
+            
+            
+            Add(new BuffPoisonSystem());
            
         }
         

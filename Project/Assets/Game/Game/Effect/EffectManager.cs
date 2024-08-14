@@ -1,5 +1,6 @@
 ﻿using Game.Game;
 
+
 namespace Game
 {
     public class EffectManager : Singleton<EffectManager>
@@ -8,7 +9,7 @@ namespace Game
         {
             var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
 
-               if (effectConfig.EffectProbably != 100)
+            if (effectConfig.EffectProbably != 100)
             {
                 var value = UtilityRandom.Random.Next(0, 100);
                 if (value > effectConfig.EffectProbably)
@@ -21,6 +22,7 @@ namespace Game
             
             var buff = Contexts.sharedInstance.buff.GetEntityWithLocalId(buffLocalId);
             var actor = Contexts.sharedInstance.actor.GetEntityWithId(actorId);
+            
             //处理添加buff类型
             if (effectConfig.EffectType == (int)EffectType.AddBuff)
             {
@@ -57,7 +59,9 @@ namespace Game
                     //下次攻击伤害
                     if (effectConfig.EffectClass == 5)
                     {
-                        
+                        var nextAdditionBuff = FactoryEntity.CreatBuffEntity();
+                        nextAdditionBuff.AddAttachId(entityId);
+                        nextAdditionBuff.AddBuffAdditionAttackOnce(effectConfig.EffectValue);
                     }
                     
                     
