@@ -24,7 +24,19 @@ public sealed partial class ActorEntity : Entitas.Entity
 
         if (buffId == (int)BuffType.Poison_10)
         {
-            var buff = Contexts.sharedInstance.buff.GetEntityWithAttachActorId(id.Value);
+            var buffs = Contexts.sharedInstance.buff.GetGroup(BuffMatcher.BuffPoison);
+
+            bool isNeedCreat = false;
+            BuffEntity buff = null;
+            foreach (var itemBuff in buffs)
+            {
+                if (itemBuff.attachId.Value == id.Value)
+                {
+                    buff = itemBuff;
+                    break;
+                }
+            }
+            
             if (buff == null)
             {
                 buff = FactoryEntity.CreatBuffEntity();
