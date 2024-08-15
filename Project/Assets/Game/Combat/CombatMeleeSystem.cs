@@ -4,103 +4,121 @@ using FixMath.NET;
 
 namespace Game
 {
-    public class CombatMeleeSystem : CombatBaseExecuteSystem 
+    public class CombatMeleeSystem : CombatBaseExecuteSystem
     {
         public CombatMeleeSystem() : base(CombatMatcher.CombatMeleeWeapon)
         {
-            
         }
+
+        //原游戏:击中对手->(攻击计算结束)
+        //盾牌的监听时机为对手武器攻击时,而不是命中后
+
+        // 攻击流程
+        // 1.产生combat
+        // 2.combat:体力判定 
+        // 3.命中率判定->成功进入4 ->失败设置状态为未命中
+        // 4.combat:攻击状态为(攻击时)
+        // 5.buff:监听攻击时-> 加攻击, 盾牌防御
+        // 6.combat:计算最终伤害(命中后)
+        // 7.buff:监听攻击后->产生效果等
 
         protected override void Update(CombatEntity c)
         {
             var cmpt = c.combatMeleeWeapon;
-            
+
             var e = Contexts.sharedInstance.game.GetEntityWithLocalId(cmpt.AttackerLocalId);
-            
-            if (cmpt.Step == 0)
-            {
-                cmpt.Step = 1;
-                e.ReplaceTimingTypeAtk((int)ListenType.Atking);
-                return;
-            }
-            
+
             var attacker = GetMyActor(c.combatMeleeWeapon.AttackerActorId);
-            
-            //判定阶段
-            if (cmpt.Step == 1)
+
+            //检测
+            if (cmpt.Step == 0)
             {
                 //耐力耗尽
                 if (attacker.stamina.Value <= e.staminaCost.Value)
                 {
                     c.Destroy();
                     e.ReplaceTimingTypeAtk(0);
-                    EventManager.Instance.TriggerEvent(new BattleLog(attacker.id.Value,"耐力耗尽"));
+                    EventManager.Instance.TriggerEvent(new BattleLog(attacker.id.Value, "耐力耗尽"));
                     return;
                 }
 
                 //耐力消耗
                 var staminaCompt = attacker.stamina;
-                attacker.ReplaceStamina(staminaCompt.MaxValue,staminaCompt.Value - e.staminaCost.Value,staminaCompt.LastCoverSpan);
-                
+                attacker.ReplaceStamina(staminaCompt.MaxValue, staminaCompt.Value - e.staminaCost.Value,
+                    staminaCompt.LastCoverSpan);
+
+
                 //命中率判定
                 //命中也不能直接计算伤害,因为其他模块需要产生对应的效果
                 if (!e.JudgeCanHit())
                 {
-                    
-                    EventManager.Instance.TriggerEvent(new BattleLog(attacker.id.Value,$"actor:{attacker.id.Value} local:{cmpt.AttackerLocalId} 未命中"));
-                    e.ReplaceTimingTypeAtk((int)ListenType.AtkMis);
+                    EventManager.Instance.TriggerEvent(new BattleLog(attacker.id.Value,
+                        $"actor:{attacker.id.Value} local:{cmpt.AttackerLocalId} 未命中"));
+                    e.ReplaceTimingTypeAtk((int) ListenType.AtkMis);
                     cmpt.Step = 2;
                     return;
                 }
-                else
-                {
-                    e.ReplaceTimingTypeAtk((int)ListenType.Atked);
-                    
-                    //伤害计算
-                    //伤害获取
-                    var damageValue = e.GetDamage();
-                
-                    var target = GetOtherActor(c.combatMeleeWeapon.AttackerActorId);
-                    //otherActor.OnGetMeleeDamage(attacker.id.Value, e.localId.value,damage);
-                
-                    //目标判断
-                    var buffMap = target.actorBuff.Value;
-        
-                    //护甲buff抵消判断
-                    int defendValue = 0;
-                    if (buffMap.ContainsKey((int) BuffType.Block_11))
-                    {
-                        defendValue = buffMap[(int) BuffType.Block_11];
-                    }
 
-                    bool isHurt = defendValue - damageValue < 0;
-
-                    //受伤
-                    if (isHurt)
-                    {
-                        //尖刺反伤
-                        if (buffMap.ContainsKey((int) BuffType.Spikes_6))
-                        {
-                            attacker.OnGetBuffSpikesDamage(buffMap[(int) BuffType.Spikes_6]);
-                        }
-            
-                        // TODO 盾牌防御判断
-                        target.GetHurt(damageValue);
-                    }
-                    //防御
-                    else
-                    {
-                        //盾牌消耗
-                        buffMap[(int) BuffType.Block_11] -= (int)Fix64.Floor(damageValue);
-                    }
-
-                    cmpt.Step = 2;
-                    return;
-                }
-                
+                e.ReplaceTimingTypeAtk((int) ListenType.Atking);
+                cmpt.Step = 1;
+                return;
             }
 
-            
+            //先盾牌防御,在减去护甲
+
+            //判定阶段
+            if (cmpt.Step == 1)
+            {
+                
+                //伤害获取
+                var damageValue = e.GetAtkValue();
+                
+                //减免
+                if (c.hasCombatReduceDamage)
+                {
+                    damageValue -= c.combatReduceDamage.Value;
+                }
+                
+                
+                var target = GetOtherActor(c.combatMeleeWeapon.AttackerActorId);
+                //目标判断
+                var buffMap = target.actorBuff.Value;
+
+                //护甲buff抵消判断
+                int defendValue = 0;
+                if (buffMap.ContainsKey((int) BuffType.Block_11))
+                {
+                    defendValue = buffMap[(int) BuffType.Block_11];
+                }
+
+                bool isHurt = defendValue - damageValue < 0;
+
+                
+                //受伤
+                if (isHurt)
+                {
+                    //尖刺反伤
+                    if (buffMap.ContainsKey((int) BuffType.Spikes_6))
+                    {
+                        attacker.OnGetBuffSpikesDamage(buffMap[(int) BuffType.Spikes_6]);
+                    }
+                    
+                    target.GetHurt(damageValue);
+                }
+                //防御
+                else
+                {
+                    //盾牌消耗
+                    buffMap[(int) BuffType.Block_11] -= (int) Fix64.Floor(damageValue);
+                }
+                
+                e.ReplaceTimingTypeAtk((int) ListenType.Atked);
+
+                cmpt.Step = 2;
+                return;
+            }
+
+
             //销毁
             if (cmpt.Step == 2)
             {

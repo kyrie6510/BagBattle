@@ -45,7 +45,7 @@
     {
        Atking =1,//攻击时 
        AtkMis =2,//未命中时 
-       Atked =3,//命中时 
+       Atked =3,//被攻击后
        Active=4,//激活时 
        GetBuff =5,//获得n层b时 
        HpLess =6,//生命值低于n时 

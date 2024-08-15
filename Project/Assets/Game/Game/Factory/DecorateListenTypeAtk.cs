@@ -28,7 +28,7 @@ namespace Game.Game.Factory
             buffEntity.AddAttachId(e.localId.value);
             buffEntity.AddAttachActorId(e.actorId.Value);
             buffEntity.AddBuffTimingListenTarget(timConfig.ListenTarget);
-        
+         
         }
     }
 }

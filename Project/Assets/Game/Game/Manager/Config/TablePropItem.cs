@@ -12,10 +12,10 @@ namespace Game
         /// </summary>
         private Dictionary<short, Dictionary<int,List<int>>> _itemTimForEffect = new ();
         
-        public TablePropItemRowData GetPropConfig(short id)
+        public TablePropItemRowData GetPropConfig(int id)
         {
             LoadPropItem();
-            return _itemMap[id];
+            return _itemMap[(short)id];
         }
 
         public Dictionary<int, List<int>> GetConfigTimEffectInfo(short configId)

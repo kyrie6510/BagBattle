@@ -100,10 +100,47 @@ namespace Game
                 }
 
             }
+
+
+            if (effectConfig.EffectType == (int) EffectType.Defend)
+            {
+                if (effectConfig.EffectTarget == (int) ListenTarget.MyActor)
+                {
+                    //受到的伤害
+                    if (effectConfig.EffectClass == 1)
+                    {
+
+                    }
+
+
+                }
+            }
             
             
 
 
         }
+
+        public void CreatMeleeWeaponDefendEffect(int effectId, int attackerWeaponId)
+        {
+            
+            var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
+            var ens = Contexts.sharedInstance.combat.GetGroup(CombatMatcher.CombatMeleeWeapon);
+            foreach (var combat in ens)
+            {
+                if (!combat.hasCombatReduceDamage)
+                {
+                    combat.AddCombatReduceDamage(effectConfig.EffectValue);
+                }
+                else
+                {
+                    combat.ReplaceCombatReduceDamage(effectConfig.EffectValue+ combat.combatReduceDamage.Value);
+                }
+            }
+        }
+        
+       
+        
     }
+    
 }
