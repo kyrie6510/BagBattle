@@ -22,7 +22,7 @@ public static class BuffComponentsLookup {
     public const int TimingConfigId = 11;
     public const int TimingTypeActive = 12;
     public const int TimingTypeAtk = 13;
-    public const int TimingTypeGameStart = 14;
+    public const int TimingTypeBattleStart = 14;
     public const int TimingTypeGetBuff = 15;
     public const int TimingTypeHaveBuff = 16;
     public const int TimingTypeHpLessTarget = 17;
@@ -46,7 +46,7 @@ public static class BuffComponentsLookup {
         "TimingConfigId",
         "TimingTypeActive",
         "TimingTypeAtk",
-        "TimingTypeGameStart",
+        "TimingTypeBattleStart",
         "TimingTypeGetBuff",
         "TimingTypeHaveBuff",
         "TimingTypeHpLessTarget",
@@ -69,7 +69,7 @@ public static class BuffComponentsLookup {
         typeof(Game.TimingConfigIdComponent),
         typeof(Game.TimingTypeActiveComponent),
         typeof(Game.TimingTypeAtkComponent),
-        typeof(Game.TimingTypeGameStartComponent),
+        typeof(Game.TimingTypeBattleStartComponent),
         typeof(Game.TimingTypeGetBuffComponent),
         typeof(Game.TimingTypeHaveBuffComponent),
         typeof(Game.TimingTypeHpLessTargetComponent),

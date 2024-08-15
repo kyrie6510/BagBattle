@@ -50,7 +50,7 @@
        GetBuff =5,//获得n层b时 
        HpLess =6,//生命值低于n时 
        HaveBuf =7,//拥有n层b时 
-       GameBegin =8,//战斗开始 
+       BattleStart =8,//战斗开始 
        TriggerNum =9,//战斗触发n次 
        SecondPass =10,//每n秒 
        InState =11,//进入xx状态
@@ -109,12 +109,29 @@
     public enum EffectType
     {
         TakDamage = 1, 
-        Attribute = 2, 
+        PropAttribute = 2, 
         AddBuff = 3, 
         Active = 4, 
         PlayerAttribute = 5, 
         Special = 6, 
         Defend = 7,
-     
     }
+
+    public enum EffectClassPropAttribute
+    {
+        AdditionAtk = 1,
+        NextAdditionAtk = 2,
+        CoolDown = 3,
+        Rate = 4,
+    }
+    
+    
+    public enum EffectClassPlayerAttribute
+    {
+        Hp = 1,
+        Stamina = 2,
+        HpPercent = 3,
+        StaminaPercent = 4,
+    }
+    
 }

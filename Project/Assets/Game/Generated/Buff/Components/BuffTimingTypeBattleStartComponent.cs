@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class BuffEntity {
 
-    static readonly Game.TimingTypeGameStartComponent timingTypeGameStartComponent = new Game.TimingTypeGameStartComponent();
+    static readonly Game.TimingTypeBattleStartComponent timingTypeBattleStartComponent = new Game.TimingTypeBattleStartComponent();
 
-    public bool isTimingTypeGameStart {
-        get { return HasComponent(BuffComponentsLookup.TimingTypeGameStart); }
+    public bool isTimingTypeBattleStart {
+        get { return HasComponent(BuffComponentsLookup.TimingTypeBattleStart); }
         set {
-            if (value != isTimingTypeGameStart) {
-                var index = BuffComponentsLookup.TimingTypeGameStart;
+            if (value != isTimingTypeBattleStart) {
+                var index = BuffComponentsLookup.TimingTypeBattleStart;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : timingTypeGameStartComponent;
+                            : timingTypeBattleStartComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class BuffEntity {
 //------------------------------------------------------------------------------
 public sealed partial class BuffMatcher {
 
-    static Entitas.IMatcher<BuffEntity> _matcherTimingTypeGameStart;
+    static Entitas.IMatcher<BuffEntity> _matcherTimingTypeBattleStart;
 
-    public static Entitas.IMatcher<BuffEntity> TimingTypeGameStart {
+    public static Entitas.IMatcher<BuffEntity> TimingTypeBattleStart {
         get {
-            if (_matcherTimingTypeGameStart == null) {
-                var matcher = (Entitas.Matcher<BuffEntity>)Entitas.Matcher<BuffEntity>.AllOf(BuffComponentsLookup.TimingTypeGameStart);
+            if (_matcherTimingTypeBattleStart == null) {
+                var matcher = (Entitas.Matcher<BuffEntity>)Entitas.Matcher<BuffEntity>.AllOf(BuffComponentsLookup.TimingTypeBattleStart);
                 matcher.componentNames = BuffComponentsLookup.componentNames;
-                _matcherTimingTypeGameStart = matcher;
+                _matcherTimingTypeBattleStart = matcher;
             }
 
-            return _matcherTimingTypeGameStart;
+            return _matcherTimingTypeBattleStart;
         }
     }
 }

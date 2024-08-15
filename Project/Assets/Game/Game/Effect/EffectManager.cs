@@ -1,10 +1,27 @@
-﻿using Game.Game;
+﻿using System.Collections.Generic;
+using Game.Game;
 
 
 namespace Game
 {
     public class EffectManager : Singleton<EffectManager>
     {
+        private List<int> _attributeList = new List<int>();
+
+
+        private void Test(int effectId)
+        {
+            
+            var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
+
+            var effectType = (EffectType)effectConfig.EffectType;
+            if (effectType == EffectType.AddBuff)
+            {
+                
+                IEffect effect = new EffectPropAttribute();
+            }
+        }
+        
         public void CreatEffect(int effectId,int actorId,int entityId,int buffLocalId)
         {
             var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
@@ -39,12 +56,13 @@ namespace Game
             }
               
             //改变属性
-            if (effectConfig.EffectType == (int)EffectType.Attribute)
+            if (effectConfig.EffectType == (int)EffectType.PropAttribute)
             {
+                
                 if (effectConfig.EffectTarget == (int) ListenTarget.Self)
                 {
                     //额外伤害
-                    if (effectConfig.EffectClass == 1)
+                    if (effectConfig.EffectClass == (int)EffectClassPropAttribute.AdditionAtk)
                     {
                         if (!buff.hasBuffAdditionAttack)
                         {
@@ -63,10 +81,24 @@ namespace Game
                         nextAdditionBuff.AddAttachId(entityId);
                         nextAdditionBuff.AddBuffAdditionAttackOnce(effectConfig.EffectValue);
                     }
-                    
-                    
-                    
                 }
+
+                if (effectConfig.EffectType == (int) ListenTarget.Star)
+                {
+                    //额外伤害
+                    if (effectConfig.EffectClass == (int)EffectClassPropAttribute.AdditionAtk)
+                    {
+                        if (!buff.hasBuffAdditionAttack)
+                        {
+                            buff.AddBuffAdditionAttack(effectConfig.EffectValue,entityId);
+                        }
+                        else
+                        {
+                            buff.ReplaceBuffAdditionAttack(buff.buffAdditionAttack.Value+ effectConfig.EffectValue,entityId);
+                        }
+                    }
+                }
+                
             }
 
             //玩家属性
@@ -100,25 +132,7 @@ namespace Game
                 }
 
             }
-
-
-            if (effectConfig.EffectType == (int) EffectType.Defend)
-            {
-                if (effectConfig.EffectTarget == (int) ListenTarget.MyActor)
-                {
-                    //受到的伤害
-                    if (effectConfig.EffectClass == 1)
-                    {
-
-                    }
-
-
-                }
-            }
             
-            
-
-
         }
 
         public void CreatMeleeWeaponDefendEffect(int effectId, int attackerWeaponId)

@@ -73,9 +73,9 @@ namespace Game.Actor
                     //攻击类型组件
                     if ( type <=  ListenType.Atked&& type>0)  decorate = new DecorateListenTypeAtk();
                     else if (type == ListenType.SecondPass) decorate = new DecorateListenTypeSecondPass();
-                    else if (type == ListenType.GameBegin) decorate = new DecorateListenTypeSecondPass();
                     else if (type == ListenType.HaveBuf) decorate = new DecorateListenTypeHaveBuff();
                     else if (type == ListenType.EverHaveBuff) decorate = new DecorateListenTypeEverHaveBuff();
+                    else if (type == ListenType.BattleStart) decorate = new DecorateListenBattleStart();
                     decorate?.Do(entity,timId,effectIds);
                 }
             }

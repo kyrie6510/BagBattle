@@ -6,6 +6,8 @@ namespace Game.Buff
     {
         public BuffSystem()
         {
+            Add(new BuffBattleStartSystem() );
+            
             Add(new BuffTimingSecondPassSystem());
             Add(new BuffTimingAtkSystem());    
             Add(new BuffTimingEverHaveBuffSystem());

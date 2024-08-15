@@ -7,7 +7,7 @@ namespace Game
     /// 8.战斗开始 
     /// </summary>
     [Buff]
-    public class TimingTypeGameStartComponent: IComponent
+    public class TimingTypeBattleStartComponent: IComponent
     {
 
     }
