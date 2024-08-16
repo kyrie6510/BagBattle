@@ -20,7 +20,7 @@ namespace Game
                 var value = UtilityRandom.Random.Next(0, 100);
                 if (value > effectConfig.EffectProbably)
                 {
-                    EventManager.Instance.TriggerEvent(new BattleLog(actorId,$"{effectId}概率判断失败"));
+                    EventManager.Instance.TriggerEvent(new BattleLog(actorId,$"{effectId}:概率判断失败 {effectConfig.Name}"));
                 }
             }
             

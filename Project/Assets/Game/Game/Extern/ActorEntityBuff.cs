@@ -30,7 +30,7 @@ public sealed partial class ActorEntity : Entitas.Entity
             BuffEntity buff = null;
             foreach (var itemBuff in buffs)
             {
-                if (itemBuff.attachId.Value == id.Value)
+                if (itemBuff.attachActorId.Value == id.Value)
                 {
                     buff = itemBuff;
                     break;

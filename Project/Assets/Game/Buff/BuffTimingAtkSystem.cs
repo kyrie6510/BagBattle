@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using Game.Game;
 
 namespace Game
 {
@@ -9,6 +10,23 @@ namespace Game
         }
 
 
+
+        public bool JudgeProbably(int probably)
+        {
+            //概率
+            //概率判断
+            if (probably != 100)
+            {
+                var value = UtilityRandom.Random.Next(0, 100);
+                if (value > probably)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        
         protected override void Update(BuffEntity buff)
         {
             var config = ConfigManager.Instance.GetTimConfig(buff.timingConfigId.Value);
@@ -22,6 +40,12 @@ namespace Game
             {
                 if (buff.timingTypeAtk.Value != attachEntity.timingTypeAtk.Value)
                 {
+                    return;
+                }
+
+                if (!JudgeProbably(config.ListenValue(0)))
+                {
+                    EventManager.Instance.TriggerEvent(new BattleLog(attachEntity.actorId.Value, $"时机:{config.Id} 概率判断失败 {config.Name}"));
                     return;
                 }
                 
@@ -44,6 +68,13 @@ namespace Game
                     if (!targetWeapon.hasTimingTypeAtk) continue;
                     if (targetWeapon.timingTypeAtk.Value == buff.timingTypeAtk.Value)
                     {
+                        
+                        if (!JudgeProbably(config.ListenValue(0)))
+                        {
+                            EventManager.Instance.TriggerEvent(new BattleLog(attachEntity.actorId.Value, $"时机:{config.Id} 概率判断失败 {config.Name}"));
+                            continue;
+                        }
+                        
                         //触发效果
                         foreach (var effectId in buff.buffEffectId.Value)
                         {
@@ -77,6 +108,12 @@ namespace Game
                             
                             if (effectConfig.EffectType == (int) EffectType.Defend)
                             {
+                                if (!JudgeProbably(config.ListenValue(0)))
+                                {
+                                    EventManager.Instance.TriggerEvent(new BattleLog(attachEntity.actorId.Value, $"时机:{config.Id} 概率判断失败 {config.Name}"));
+                                    continue;
+                                }
+                                
                                 EffectManager.Instance.CreatMeleeWeaponDefendEffect(effectId,targetWeapon.localId.value);
                             }
                             else
