@@ -41,7 +41,7 @@
 
     public interface IEffect
     {
-        public void Do(int effectId);
+        public void Do(int effectId, int creatActorId, int attachEntityId);
 
 
     }

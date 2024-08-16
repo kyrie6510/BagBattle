@@ -25,16 +25,42 @@ namespace Game.Actor
                 
             }
 
-            foreach (var actor in actors)
+            for (int i = 0; i < actors.Length; i++)
             {
+                var actor = actors[i];
                 //创建物品
                 foreach (var item in actor.Items)
                 {
                     var e = FactoryEntity.CreatGameEntity(actor.ActorId, item.ConfigId);
+
+                    if(item.StarTargetLocalId.Count==0) continue;
+                    
+                    if (i == 0)
+                    {
+                        e.AddStarTarget(item.StarTargetLocalId);
+                    }
+                    else
+                    {
+                        
+                        e.AddStarTarget(new ());
+                        var offset = actors[0].Items.Count;
+                        foreach (var localId in item.StarTargetLocalId)
+                        {
+                            e.starTarget.Value.Add(localId + offset);
+                        }
+                        
+                        
+                    }
+                        
                     //通知EntityView
                     EventManager.Instance.TriggerEvent(new OnGameEntityCreat{ViewLocalId =  item.LocalId, Entity = e});
                 }
             }
+            
+          
+            
+            
+            
             
             // 1.攻击时 
             // 2.未命中时 

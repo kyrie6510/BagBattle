@@ -8,24 +8,13 @@ namespace Game
     {
         private List<int> _attributeList = new List<int>();
 
-
-        private void Test(int effectId)
-        {
-            
-            var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
-
-            var effectType = (EffectType)effectConfig.EffectType;
-            if (effectType == EffectType.AddBuff)
-            {
-                
-                IEffect effect = new EffectPropAttribute();
-            }
-        }
+        
         
         public void CreatEffect(int effectId,int actorId,int entityId,int buffLocalId)
         {
             var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
 
+            //概率判断
             if (effectConfig.EffectProbably != 100)
             {
                 var value = UtilityRandom.Random.Next(0, 100);
@@ -35,109 +24,39 @@ namespace Game
                 }
             }
             
-            
-            
-            var buff = Contexts.sharedInstance.buff.GetEntityWithLocalId(buffLocalId);
-            var actor = Contexts.sharedInstance.actor.GetEntityWithId(actorId);
-            
+            EventManager.Instance.TriggerEvent(new BattleLog(actorId, $"actor:{actorId} {effectConfig.Name}"));
+
+            IEffect effect = null;
             //处理添加buff类型
             if (effectConfig.EffectType == (int)EffectType.AddBuff)
             {
-                if (effectConfig.EffectTarget == (int) ListenTarget.MyActor)
-                {
-                    actor.AddBuff(effectConfig.EffectClass,effectConfig.EffectValue);
-                }
-                
-                if (effectConfig.EffectTarget == (int) ListenTarget.OtherActor)
-                {
-                    var otherActor = actor.GetOtherActor();
-                    otherActor.AddBuff(effectConfig.EffectClass,effectConfig.EffectValue);
-                }
+                effect = new EffectAddBuff();
             }
               
             //改变属性
             if (effectConfig.EffectType == (int)EffectType.PropAttribute)
             {
+                //额外伤害
+                if (effectConfig.EffectClass == (int)EffectClassPropAttribute.AdditionAtk) effect = new EffectPropAttributeAdditionAtk();
                 
-                if (effectConfig.EffectTarget == (int) ListenTarget.Self)
-                {
-                    //额外伤害
-                    if (effectConfig.EffectClass == (int)EffectClassPropAttribute.AdditionAtk)
-                    {
-                        if (!buff.hasBuffAdditionAttack)
-                        {
-                            buff.AddBuffAdditionAttack(effectConfig.EffectValue,entityId);
-                        }
-                        else
-                        {
-                            buff.ReplaceBuffAdditionAttack(buff.buffAdditionAttack.Value+ effectConfig.EffectValue,entityId);
-                        }
-                    }
-
-                    //下次攻击伤害
-                    if (effectConfig.EffectClass == 5)
-                    {
-                        var nextAdditionBuff = FactoryEntity.CreatBuffEntity();
-                        nextAdditionBuff.AddAttachId(entityId);
-                        nextAdditionBuff.AddBuffAdditionAttackOnce(effectConfig.EffectValue);
-                    }
-                }
-
-                if (effectConfig.EffectType == (int) ListenTarget.Star)
-                {
-                    //额外伤害
-                    if (effectConfig.EffectClass == (int)EffectClassPropAttribute.AdditionAtk)
-                    {
-                        if (!buff.hasBuffAdditionAttack)
-                        {
-                            buff.AddBuffAdditionAttack(effectConfig.EffectValue,entityId);
-                        }
-                        else
-                        {
-                            buff.ReplaceBuffAdditionAttack(buff.buffAdditionAttack.Value+ effectConfig.EffectValue,entityId);
-                        }
-                    }
-                }
-                
+                //下次攻击伤害
+                if (effectConfig.EffectClass == (int)EffectClassPropAttribute.NextAdditionAtk) effect = new EffectPropAttributeNextAdditionAtk();
+              
             }
-
             //玩家属性
             if (effectConfig.EffectType == (int) EffectType.PlayerAttribute)
             {
-                
-                if (effectConfig.EffectTarget == (int) ListenTarget.MyActor)
-                {
-                    //生命值
-                    if (effectConfig.EffectClass == 1)
-                    {
-                        var maxHp = actor.hp.MaxValue;
-                        
-                        var hpValue = actor.hp.Value;
-                        hpValue = hpValue < 0 ? 0 : hpValue;
-                        hpValue = hpValue > maxHp ? maxHp : hpValue;
-                        
-                        actor.ReplaceHp(maxHp,hpValue +effectConfig.EffectValue);
-                    }
-                    //耐力
-                    else if (effectConfig.EffectClass == 2)
-                    {
-                        var maxValue = actor.stamina.MaxValue;
-                        var staminaValue = actor.stamina.Value+ effectConfig.EffectValue;
-                        
-                        staminaValue = staminaValue < 0 ? 0 : staminaValue;
-                        staminaValue = staminaValue > maxValue ? maxValue : staminaValue;
-                        
-                        actor.ReplaceStamina(maxValue,staminaValue,actor.stamina.LastCoverSpan);
-                    }
-                }
-
+                if (effectConfig.EffectClass == (int) EffectClassPlayerAttribute.Hp) effect = new EffectPlayerAttributeHp();
+                    
+                if (effectConfig.EffectClass == (int) EffectClassPlayerAttribute.Stamina)   effect = new EffectPlayerAttributeStamina();
             }
+            
+            effect.Do(effectId,actorId,entityId);
             
         }
 
         public void CreatMeleeWeaponDefendEffect(int effectId, int attackerWeaponId)
         {
-            
             var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
             var ens = Contexts.sharedInstance.combat.GetGroup(CombatMatcher.CombatMeleeWeapon);
             foreach (var combat in ens)

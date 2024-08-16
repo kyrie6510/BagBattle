@@ -14,24 +14,15 @@ namespace Game
             var config = ConfigManager.Instance.GetTimConfig(buff.timingConfigId.Value);
 
             var attachEntity = Contexts.sharedInstance.game.GetEntityWithLocalId(buff.attachId.Value);
-          
-            // if (attachEntity.timingTypeAtk.Value != buff.timingTypeAtk.Value)
-            // {
-            //     return;
-            // }
-            
-           
+
             //攻击命中
             if (buff.buffTimingListenTarget.ListTargetType == (int) ListenTarget.Self)
             {
                 //触发效果
                 foreach (var effectId in buff.buffEffectId.Value)
                 {
-                    var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
-                    EventManager.Instance.TriggerEvent(new BattleLog(attachEntity.actorId.Value, $"actor:{attachEntity.actorId.Value} {effectConfig.Name}"));
                     EffectManager.Instance.CreatEffect(effectId, attachEntity.actorId.Value, attachEntity.localId.value, buff.localId.value);
                 }
-                
             }
 
          
@@ -49,8 +40,6 @@ namespace Game
                         //触发效果
                         foreach (var effectId in buff.buffEffectId.Value)
                         {
-                            var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
-                            EventManager.Instance.TriggerEvent(new BattleLog(attachEntity.actorId.Value, $"actor:{attachEntity.actorId.Value} {effectConfig.Name}"));
                             EffectManager.Instance.CreatEffect(effectId, attachEntity.actorId.Value, attachEntity.localId.value, buff.localId.value);
                         }
                     }
@@ -78,8 +67,7 @@ namespace Game
                         foreach (var effectId in buff.buffEffectId.Value)
                         {
                             var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
-
-                            EventManager.Instance.TriggerEvent(new BattleLog(attachEntity.actorId.Value, $"actor:{attachEntity.actorId.Value} {effectConfig.Name}"));
+                            
                             if (effectConfig.EffectType == (int) EffectType.Defend)
                             {
                                 EffectManager.Instance.CreatMeleeWeaponDefendEffect(effectId,targetWeapon.localId.value);
@@ -88,8 +76,6 @@ namespace Game
                             {
                                 EffectManager.Instance.CreatEffect(effectId, attachEntity.actorId.Value, attachEntity.localId.value, buff.localId.value);
                             }
-                            
-                           
                         }
                     }
                 }
