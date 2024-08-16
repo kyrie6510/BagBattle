@@ -35,8 +35,8 @@ namespace Game.Buff
             {
                 var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
                         
-                EventManager.Instance.TriggerEvent(new BattleLog(e.actorId.Value, $"actor:{e.actorId.Value} {effectConfig.Name}"));
-                EffectManager.Instance.CreatEffect(effectId, e.actorId.Value, e.localId.value, buff.localId.value);
+               
+                EffectManager.Instance.CreatEffect(effectId, e.actorId.Value, e.localId.value);
             }
             
             

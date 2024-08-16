@@ -78,13 +78,13 @@ namespace Script
 
         private void GenerateItem()
         {
-            for (short i = 1; i <= 8; i++)
+            for (short i = 1; i <= 10; i++)
             {
                 var configId = i;
                 
                 var cfgData  =  ConfigManager.Instance.GetPropConfig(configId);
 
-                var times = cfgData.PropType == (int) PropType.Bag ? 2 : 1;
+                var times = cfgData.PropType == (int) PropType.Bag ? 3 : 1;
 
                 for (int j = 0; j < times; j++)
                 {

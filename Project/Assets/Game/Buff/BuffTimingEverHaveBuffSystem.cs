@@ -30,7 +30,7 @@ namespace Game.Buff
                     //触发效果
                     foreach (var effectId in buff.buffEffectId.Value)
                     {
-                        EffectManager.Instance.CreatEffect(effectId,actor.id.Value, e.localId.value,buff.localId.value);
+                        EffectManager.Instance.CreatEffect(effectId,actor.id.Value, e.localId.value);
                     }
                 }
                 

@@ -56,8 +56,7 @@ namespace Game
             }
             else
             {
-                targetBuff.ReplaceBuffAdditionAttack(targetBuff.buffAdditionAttack.Value + effectConfig.EffectValue,
-                    attachEntityId);
+                targetBuff.ReplaceBuffAdditionAttack(targetBuff.buffAdditionAttack.Value + addValue, attachEntityId);
             }
         }
     }

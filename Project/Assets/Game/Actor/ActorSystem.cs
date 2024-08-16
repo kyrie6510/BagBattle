@@ -33,6 +33,10 @@ namespace Game.Actor
                 {
                     var e = FactoryEntity.CreatGameEntity(actor.ActorId, item.ConfigId);
 
+                        
+                    //通知EntityView
+                    EventManager.Instance.TriggerEvent(new OnGameEntityCreat{ViewLocalId =  item.LocalId, Entity = e});
+                    
                     if(item.StarTargetLocalId.Count==0) continue;
                     
                     if (i == 0)
@@ -51,9 +55,7 @@ namespace Game.Actor
                         
                         
                     }
-                        
-                    //通知EntityView
-                    EventManager.Instance.TriggerEvent(new OnGameEntityCreat{ViewLocalId =  item.LocalId, Entity = e});
+                    
                 }
             }
             

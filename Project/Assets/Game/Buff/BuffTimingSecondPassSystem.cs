@@ -28,10 +28,7 @@ namespace Game.Buff
                     //触发效果
                     foreach (var effectId in buff.buffEffectId.Value)
                     {
-                        var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
-                        
-                        EventManager.Instance.TriggerEvent(new BattleLog(e.actorId.Value, $"actor:{e.actorId.Value} {effectConfig.Name}"));
-                        EffectManager.Instance.CreatEffect(effectId, e.actorId.Value, e.localId.value, buff.localId.value);
+                        EffectManager.Instance.CreatEffect(effectId, e.actorId.Value, e.localId.value);
                     }
 
                     buff.ReplaceTimingTypeSecondPass(second, lastSpan + second);

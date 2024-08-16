@@ -109,7 +109,10 @@ namespace Game
                 else
                 {
                     //盾牌消耗
-                    buffMap[(int) BuffType.Block_11] -= (int) Fix64.Floor(damageValue);
+                    if (buffMap.ContainsKey((int) BuffType.Block_11))
+                    {
+                        buffMap[(int) BuffType.Block_11] -= (int) Fix64.Floor(damageValue);    
+                    }
                 }
                 
                 e.ReplaceTimingTypeAtk((int) ListenType.Atked);

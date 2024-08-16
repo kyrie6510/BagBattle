@@ -10,7 +10,7 @@ namespace Game
 
         
         
-        public void CreatEffect(int effectId,int actorId,int entityId,int buffLocalId)
+        public void CreatEffect(int effectId,int actorId,int entityId)
         {
             var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
 

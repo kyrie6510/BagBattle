@@ -12,16 +12,23 @@ namespace Game
         protected override void Update(BuffEntity buff)
         {
             var config = ConfigManager.Instance.GetTimConfig(buff.timingConfigId.Value);
-
+            
             var attachEntity = Contexts.sharedInstance.game.GetEntityWithLocalId(buff.attachId.Value);
+            var actor =  Contexts.sharedInstance.actor.GetEntityWithId(attachEntity.actorId.Value);
 
-            //攻击命中
+            
+            //自身攻击时机监听
             if (buff.buffTimingListenTarget.ListTargetType == (int) ListenTarget.Self)
             {
+                if (buff.timingTypeAtk.Value != attachEntity.timingTypeAtk.Value)
+                {
+                    return;
+                }
+                
                 //触发效果
                 foreach (var effectId in buff.buffEffectId.Value)
                 {
-                    EffectManager.Instance.CreatEffect(effectId, attachEntity.actorId.Value, attachEntity.localId.value, buff.localId.value);
+                    EffectManager.Instance.CreatEffect(effectId, attachEntity.actorId.Value, attachEntity.localId.value);
                 }
             }
 
@@ -29,7 +36,7 @@ namespace Game
             //未命中    
             else if (buff.buffTimingListenTarget.ListTargetType == (int) ListenTarget.OtherActorWeapon)
             {
-                var other = GetOtherActor(buff.attachActorId.Value);
+                var other = actor.GetOtherActor();
                 var targetList = Contexts.sharedInstance.game.GetEntitiesWithActorId((short) other.id.Value);
 
                 foreach (var targetWeapon in targetList)
@@ -40,7 +47,7 @@ namespace Game
                         //触发效果
                         foreach (var effectId in buff.buffEffectId.Value)
                         {
-                            EffectManager.Instance.CreatEffect(effectId, attachEntity.actorId.Value, attachEntity.localId.value, buff.localId.value);
+                            EffectManager.Instance.CreatEffect(effectId, attachEntity.actorId.Value, attachEntity.localId.value);
                         }
                     }
                 }
@@ -50,13 +57,13 @@ namespace Game
             //盾牌防御
             else if (buff.buffTimingListenTarget.ListTargetType == (int) ListenTarget.OtherActorMeleeWeapon)
             {
-                var other = GetOtherActor(buff.attachActorId.Value);
+                var other = actor.GetOtherActor();
                 var targetList = Contexts.sharedInstance.game.GetEntitiesWithActorId((short) other.id.Value);
 
                 foreach (var targetWeapon in targetList)
                 {
 
-                    var targetConfig = ConfigManager.Instance.GetPropConfig(targetWeapon.localId.value);
+                    var targetConfig = ConfigManager.Instance.GetPropConfig(targetWeapon.configId.Value);
                         
                     if (!targetWeapon.hasTimingTypeAtk) continue;
                     if(targetConfig.PropType != (int)PropType.MeleeWeapon) continue;
@@ -74,7 +81,7 @@ namespace Game
                             }
                             else
                             {
-                                EffectManager.Instance.CreatEffect(effectId, attachEntity.actorId.Value, attachEntity.localId.value, buff.localId.value);
+                                EffectManager.Instance.CreatEffect(effectId, attachEntity.actorId.Value, attachEntity.localId.value);
                             }
                         }
                     }
