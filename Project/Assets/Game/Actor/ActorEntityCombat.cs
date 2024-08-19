@@ -68,12 +68,43 @@ public sealed partial class ActorEntity
     }
     
     /// <summary>
-    /// 当受到尖刺伤害
+    /// 当受毒伤害
     /// </summary>
     public void OnGetBuffPoisonDamage(Fix64 value)
     {
         EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"actor:{id.Value} 受到毒伤害{value}"));
         GetHurt(value);
+    }
+    
+    /// <summary>
+    /// 吸血恢复
+    /// </summary>
+    public void OnGetVampirismRecover(Fix64 value)
+    {
+        EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"actor:{id.Value} 吸血恢复{value}"));
+        GetRecover(value);
+    }
+    
+    
+    /// <summary>
+    /// buff恢复
+    /// </summary>
+    public void OnGetBuffRecover(Fix64 value)
+    {
+        EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"actor:{id.Value} 恢复{value}"));
+        GetRecover(value);
+    }
+    
+    /// <summary>
+    /// 加血
+    /// </summary>
+    /// <param name="damageValue"></param>
+    public void GetRecover(Fix64 value)
+    {
+        var result = hp.Value + value;
+        result = result >= hp.MaxValue ? hp.MaxValue : result;
+        
+        ReplaceHp(hp.MaxValue, result);
     }
     
     
@@ -83,7 +114,6 @@ public sealed partial class ActorEntity
     /// <param name="damageValue"></param>
     public void GetHurt(Fix64 damageValue)
     {
-        
         ReplaceHp(hp.MaxValue, hp.Value - damageValue);
     }
     

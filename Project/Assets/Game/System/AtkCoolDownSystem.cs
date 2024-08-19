@@ -19,7 +19,7 @@ namespace Game
             foreach (var e in _ens)
             {
                 var value = Time.TimeFromStart - e.coolDownTime.TimeSpan;
-                if (value >= e.coolDownTime.Value)
+                if (value >= e.GetCoolDownTimeValue())
                 {
                     e.ReplaceCoolDownTime(e.coolDownTime.TimeSpan+ e.coolDownTime.Value,e.coolDownTime.Value);
                     e.DoAttack();

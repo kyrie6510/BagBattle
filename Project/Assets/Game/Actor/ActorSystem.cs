@@ -98,7 +98,7 @@ namespace Game.Actor
                     var type = (ListenType)timConfig.ListenType;
 
                     IDecorate decorate = null;
-                    //攻击类型组件
+                    // 
                     if ( type <=  ListenType.Atked&& type>0)  decorate = new DecorateListenTypeAtk();
                     else if (type == ListenType.SecondPass) decorate = new DecorateListenTypeSecondPass();
                     else if (type == ListenType.HaveBuf) decorate = new DecorateListenTypeHaveBuff();

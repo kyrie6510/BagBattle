@@ -73,7 +73,7 @@ namespace Game
                 //伤害获取
                 var damageValue = e.GetAtkValue();
                 
-                //减免
+                //减免(盾牌)
                 if (c.hasCombatReduceDamage)
                 {
                     damageValue -= c.combatReduceDamage.Value;
@@ -82,13 +82,14 @@ namespace Game
                 
                 var target = GetOtherActor(c.combatMeleeWeapon.AttackerActorId);
                 //目标判断
-                var buffMap = target.actorBuff.Value;
-
+                var targetBuffMap = target.actorBuff.Value;
+                
+                
                 //护甲buff抵消判断
                 int defendValue = 0;
-                if (buffMap.ContainsKey((int) BuffType.Block_11))
+                if (targetBuffMap.ContainsKey((int) BuffType.Block_11))
                 {
-                    defendValue = buffMap[(int) BuffType.Block_11];
+                    defendValue = targetBuffMap[(int) BuffType.Block_11];
                 }
 
                 bool isHurt = defendValue - damageValue < 0;
@@ -98,25 +99,39 @@ namespace Game
                 if (isHurt)
                 {
                     //尖刺反伤
-                    if (buffMap.ContainsKey((int) BuffType.Spikes_6))
+                    if (targetBuffMap.ContainsKey((int) BuffType.Spikes_6))
                     {
-                        attacker.OnGetBuffSpikesDamage(buffMap[(int) BuffType.Spikes_6]);
+                        attacker.OnGetBuffSpikesDamage(targetBuffMap[(int) BuffType.Spikes_6]);
                     }
                     
+                    //受伤
                     target.GetHurt(damageValue);
+                    
+                    //造成伤害就吸血
+                    var attackerBuffMap = attacker.actorBuff.Value;
+                    attackerBuffMap.TryGetValue((int) BuffType.Vampirism_7, out var recoverValue);
+                    if (recoverValue > 0)
+                    {
+                        attacker.OnGetVampirismRecover(recoverValue); 
+                    }
                 }
                 //防御
                 else
                 {
                     //盾牌消耗
-                    if (buffMap.ContainsKey((int) BuffType.Block_11))
+                    if (targetBuffMap.ContainsKey((int) BuffType.Block_11))
                     {
-                        buffMap[(int) BuffType.Block_11] -= (int) Fix64.Floor(damageValue);    
+                        targetBuffMap[(int) BuffType.Block_11] -= (int) Fix64.Floor(damageValue);    
                     }
                 }
                 
+                
+                
+                
                 e.ReplaceTimingTypeAtk((int) ListenType.Atked);
 
+                
+                
                 cmpt.Step = 2;
                 return;
             }

@@ -51,6 +51,35 @@ public sealed partial class ActorEntity : Entitas.Entity
             
         }
         
+        if (buffId == (int)BuffType.Regeneration_5)
+        {
+            var buffs = Contexts.sharedInstance.buff.GetGroup(BuffMatcher.BuffRegeneration);
+
+            bool isNeedCreat = false;
+            BuffEntity buff = null;
+            foreach (var itemBuff in buffs)
+            {
+                if (itemBuff.attachActorId.Value == id.Value)
+                {
+                    buff = itemBuff;
+                    break;
+                }
+            }
+            
+            if (buff == null)
+            {
+                buff = FactoryEntity.CreatBuffEntity();
+                buff.AddAttachActorId(this.id.Value);
+                buff.AddBuffRegeneration(num,Time.TimeFromStart,2);
+            }
+            else
+            {
+                var curNum = buff.buffPoison.Num;
+                buff.ReplaceBuffRegeneration(curNum+ num,buff.buffPoison.LastSpan,2);
+            }
+            
+        }
+        
         
         ReplaceActorBuff(buffMap);
     }
