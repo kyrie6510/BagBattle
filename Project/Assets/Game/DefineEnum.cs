@@ -134,4 +134,14 @@
         StaminaPercent = 4,
     }
     
+    
+    public enum GameState
+    {
+        Start = 0,
+        Running = 1,
+        Pause = 2,
+        Over = 3,
+
+    }
+    
 }

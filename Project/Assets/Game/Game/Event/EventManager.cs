@@ -71,8 +71,8 @@ namespace Game
                 _delegates[type].Invoke(e);
             }
         }
-        
 
 
+      
     }
 }

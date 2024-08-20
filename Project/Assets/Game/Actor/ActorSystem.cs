@@ -18,7 +18,7 @@ namespace Game.Actor
                 var actorEntity = Contexts.sharedInstance.actor.CreateEntity();
                 actorEntity.AddId(actor.ActorId);
                 actorEntity.AddStamina(6,6,0);
-                actorEntity.AddHp(100,100);
+                actorEntity.AddHp(100,5);
                 actorEntity.AddActorBuff(new Dictionary<int, int>());
                 //通知ActorView
                 EventManager.Instance.TriggerEvent(new OnActorEntityCreat(){ActorId =  actor.ActorId, ActorEntity = actorEntity});

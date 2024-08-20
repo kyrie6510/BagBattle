@@ -18,11 +18,6 @@ namespace Script
         /// itemLocalId gridId
         /// </summary>
         private Dictionary<int, List<int>> _itemInGridInfoMap = new();
-
-        private Dictionary<int, List<int>> _itemInGridBodyInfoMap = new();
-        private Dictionary<int, List<int>> _itemStarInfoMap = new();
-
-
         private List<UIDataGrid> _gridsData = new List<UIDataGrid>();
 
         private int _rowNum = 7;
@@ -71,6 +66,18 @@ namespace Script
             RemoveItemInGridInfo(e.LocalId);
         }
 
+        public void Reset()
+        {
+            _catchStarLocalIdMap.Clear();
+            _catchBodyGrids.Clear();
+            _catchStarGrids.Clear();
+
+            foreach (var dataGrid in _gridsData)
+            {
+                dataGrid.Reset();
+            }
+            _itemInGridInfoMap.Clear();
+        }
         
         
         public void SetTouchGrid(Vector2 quadMin, Vector2 quadMax)

@@ -10,12 +10,17 @@ namespace Script
     {
         private Simulation _simulation;
         private bool _isGameStared = false;
+        
+        
+        
         private void Awake()
         {
             
             EventManager.Instance.AddListener<OnGamePlayEvent>(OnGamePlay);
             EventManager.Instance.AddListener<OnLog>(OnLog);
             EventManager.Instance.AddListener<BattleLog>(OnBattleLog);
+            EventManager.Instance.AddListener<OnGameOver>(OnGameOver);
+            
             
             ItemManager.Instance.Awake();
             InputManager.Instance.Awake();
@@ -24,6 +29,25 @@ namespace Script
             ViewManager.Instance.Awake();
         }
 
+        private void OnGameOver(OnGameOver e)
+        {
+            _isGameStared = false;
+            
+            GridManager.Instance.Reset();
+            ItemManager.Instance.Reset();
+            ViewManager.Instance.Reset();
+            
+            _simulation.OnGameOver();
+          
+            _simulation = null;
+            
+           
+
+            ItemManager.Instance.GenerateItem();
+        }
+
+      
+        
         private void OnBattleLog(BattleLog e)
         {
             Debug.Log(e.Info);
@@ -47,18 +71,17 @@ namespace Script
                 return;
             }
 
-            time += Time.deltaTime;
-            
-            
-          //  Debug.Log($"Time.deltaTime{Time.deltaTime}");
+            _time += Time.deltaTime;
             
             _simulation.Update(Time.deltaTime*1000);
         }
 
-        private float time = 0;
+        private float _time = 0;
         
         private void OnGamePlay(OnGamePlayEvent e)
         {
+            _time = 0;
+            
             GameUser user = new GameUser()
             {
                 Items = ItemManager.Instance.GetAllItemData(),
@@ -78,7 +101,6 @@ namespace Script
             
             _simulation = new Simulation(new GameUser[] { user,user2 });
             _isGameStared = true;
-            
         }
 
         

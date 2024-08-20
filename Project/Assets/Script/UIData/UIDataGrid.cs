@@ -22,6 +22,13 @@ public class UIDataGrid
     public int LocalIdStar;
 
 
+    public void Reset()
+    {
+        this.LocalIdItem = 0;
+        this.LocalIdBag = 0;
+        this.LocalIdStar = 0;
+    }
+    
     public void RemoveInfo(int localId)
     {
         if (localId == LocalIdItem)  LocalIdItem = 0;

@@ -11,7 +11,7 @@ namespace Game
     public class World
     {
         private GameFeature _systems;
-
+        
         internal int Tick;
 
         public World(GameUser[] actors)
@@ -26,12 +26,7 @@ namespace Game
             _systems.Add(new BuffSystem());
             _systems.Add(new ActorSystem(actors));
             
-            // _systems.Add(new BuffSystem());
-
             _systems.Initialize();
-
-            
-
         }
 
 
@@ -43,8 +38,7 @@ namespace Game
             if (time >= 1)
             {
                 time = 0;
-                EventManager.Instance.TriggerEvent(new OnLog($"+++++++++++++++++{Tick}"));
-                
+                EventManager.Instance.TriggerEvent(new OnLog($"Tick:{Tick}"));
             }
             
             Tick++;
@@ -53,6 +47,25 @@ namespace Game
             
             _systems.Execute();
             _systems.Cleanup();
+
+        }
+
+        public void Reset()
+        {
+            
+            
+             
+            _systems.TearDown();
+            _systems.DeactivateReactiveSystems();
+            _systems = null;
+            
+            Contexts.sharedInstance.Reset();
+            
+            // Contexts.sharedInstance.actor.DestroyAllEntities();
+            // Contexts.sharedInstance.combat.DestroyAllEntities();
+            // Contexts.sharedInstance.game.DestroyAllEntities();
+            
+            Tick = 0;
         }
     }
 }

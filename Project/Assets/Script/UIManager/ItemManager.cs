@@ -2,7 +2,8 @@
 using System.Linq;
 using Game;
 using UnityEngine;
-using Image = UnityEngine.UI.Image;
+using UnityEngine.UI;
+
 
 namespace Script
 {
@@ -76,7 +77,7 @@ namespace Script
         }
 
 
-        private void GenerateItem()
+        public void GenerateItem()
         {
             for (short i = 1; i <= 10; i++)
             {
@@ -97,17 +98,22 @@ namespace Script
                     item.LocalId = data.LocalId;
                     _itemUIMap.Add(data.LocalId, item);
                 }
-                
-             
-            
-
-               
-               
-
-             
             }
         }
 
+        public void Reset()
+        {
+            var objs = _itemUIMap.Values.ToList();
+            for (int i = objs.Count - 1; i >= 0; i--)
+            {
+                var obj = objs[i];
+                obj.DoDestroy();
+            }
+            _itemUIMap.Clear();
+            _itemDataMap.Clear();
+        }
+        
+        
 
         private UIDataItem CreatUIData(short configId)
         {

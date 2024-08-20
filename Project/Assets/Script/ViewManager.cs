@@ -1,4 +1,5 @@
-﻿using Game;
+﻿using Entitas.Unity;
+using Game;
 using UnityEngine;
 
 namespace Script
@@ -25,6 +26,12 @@ namespace Script
             var view = ItemManager.Instance.GetItemUI(e.ViewLocalId);
             view.SetGameEntity(e.Entity);
 
+        }
+
+        public void Reset()
+        {
+            _actor1.gameObject.Unlink();
+            _actor2.gameObject.Unlink();
         }
 
         private void OnActorEntityCreat(OnActorEntityCreat e)

@@ -65,5 +65,17 @@
     {
         public int Tick;
     }
+
+    public struct OnGameOver : BaseEvent
+    {
+        
+    }
+
+    public struct ResetView : BaseEvent
+    {
+        
+    }
+    
+
 }
 

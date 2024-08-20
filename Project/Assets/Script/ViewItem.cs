@@ -1,3 +1,4 @@
+using System;
 using Entitas.Unity;
 using Game;
 using UnityEngine;
@@ -18,8 +19,6 @@ public class ViewItem : MonoBehaviour ,IPointerDownHandler
     // Start is called before the first frame update
     void Awake()
     {
-        
-     
         _imgItem = GetComponent<Image>();
         _rig = GetComponent<Rigidbody2D>();
     }
@@ -41,5 +40,15 @@ public class ViewItem : MonoBehaviour ,IPointerDownHandler
     {
         gameObject.Link(entity);
     }
-   
+
+    public void DoDestroy()
+    {
+        gameObject.GetEntityLink()?.Unlink();
+        
+        //this.gameObject.Unlink();
+        
+        Destroy(gameObject);
+    }
+
+    
 }
