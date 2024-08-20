@@ -14,23 +14,24 @@ public static class BuffComponentsLookup {
     public const int BuffRegeneration = 3;
     public const int BuffSpikes = 4;
     public const int BuffTimingListenTarget = 5;
-    public const int BuffAdditionAttack = 6;
-    public const int BuffAdditionAttackOnce = 7;
-    public const int BuffEffectId = 8;
-    public const int TimingTypeEverHaveBuff = 9;
-    public const int Destroy = 10;
-    public const int LocalId = 11;
-    public const int TimingConfigId = 12;
-    public const int TimingTypeActive = 13;
-    public const int TimingTypeAtk = 14;
-    public const int TimingTypeBattleStart = 15;
-    public const int TimingTypeGetBuff = 16;
-    public const int TimingTypeHaveBuff = 17;
-    public const int TimingTypeHpLessTarget = 18;
-    public const int TimingTypeSecondPass = 19;
-    public const int TimingTypeTriggerNum = 20;
+    public const int BuffAddCoolDown = 6;
+    public const int BuffAdditionAttack = 7;
+    public const int BuffAdditionAttackOnce = 8;
+    public const int BuffEffectId = 9;
+    public const int TimingTypeEverHaveBuff = 10;
+    public const int Destroy = 11;
+    public const int LocalId = 12;
+    public const int TimingConfigId = 13;
+    public const int TimingTypeActive = 14;
+    public const int TimingTypeAtk = 15;
+    public const int TimingTypeBattleStart = 16;
+    public const int TimingTypeGetBuff = 17;
+    public const int TimingTypeHaveBuff = 18;
+    public const int TimingTypeHpLessTarget = 19;
+    public const int TimingTypeSecondPass = 20;
+    public const int TimingTypeTriggerNum = 21;
 
-    public const int TotalComponents = 21;
+    public const int TotalComponents = 22;
 
     public static readonly string[] componentNames = {
         "AttachId",
@@ -39,6 +40,7 @@ public static class BuffComponentsLookup {
         "BuffRegeneration",
         "BuffSpikes",
         "BuffTimingListenTarget",
+        "BuffAddCoolDown",
         "BuffAdditionAttack",
         "BuffAdditionAttackOnce",
         "BuffEffectId",
@@ -63,6 +65,7 @@ public static class BuffComponentsLookup {
         typeof(Game.Buff.BuffRegenerationComponent),
         typeof(Game.Buff.BuffSpikesComponent),
         typeof(Game.Buff.BuffTimingListenTargetComponent),
+        typeof(Game.BuffAddCoolDown),
         typeof(Game.BuffAdditionAttackComponent),
         typeof(Game.BuffAdditionAttackOnceComponent),
         typeof(Game.BuffEffectIdComponent),

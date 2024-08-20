@@ -18,7 +18,7 @@ namespace Game.Actor
                 var actorEntity = Contexts.sharedInstance.actor.CreateEntity();
                 actorEntity.AddId(actor.ActorId);
                 actorEntity.AddStamina(6,6,0);
-                actorEntity.AddHp(100,5);
+                actorEntity.AddHp(100,100);
                 actorEntity.AddActorBuff(new Dictionary<int, int>());
                 //通知ActorView
                 EventManager.Instance.TriggerEvent(new OnActorEntityCreat(){ActorId =  actor.ActorId, ActorEntity = actorEntity});
@@ -37,24 +37,30 @@ namespace Game.Actor
                     //通知EntityView
                     EventManager.Instance.TriggerEvent(new OnGameEntityCreat{ViewLocalId =  item.LocalId, Entity = e});
                     
-                    if(item.StarTargetLocalId.Count==0) continue;
-                    
-                    if (i == 0)
+                    //星物品
+                    if (item.StarTargetLocalId.Count != 0)
                     {
-                        e.AddStarTarget(item.StarTargetLocalId);
-                    }
-                    else
-                    {
-                        
-                        e.AddStarTarget(new ());
-                        var offset = actors[0].Items.Count;
-                        foreach (var localId in item.StarTargetLocalId)
+                        //自身玩家添加
+                        if (i == 0)
                         {
-                            e.starTarget.Value.Add(localId + offset);
+                            e.AddStarTarget(item.StarTargetLocalId);
                         }
+                        //
+                        else
+                        {
+                        
+                            e.AddStarTarget(new ());
+                            var offset = actors[0].Items.Count;
+                            foreach (var localId in item.StarTargetLocalId)
+                            {
+                                e.starTarget.Value.Add(localId + offset);
+                            }
                         
                         
+                        }
                     }
+                    
+                   
                     
                 }
             }

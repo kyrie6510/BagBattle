@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    [AttributeEffect(EffectType.PropAttribute, (int) EffectClassPropAttribute.AdditionAtk, "")]
+    [AttributeEffect(EffectType.PropAttribute, (int) EffectClassPropAttribute.AdditionAtk, "攻击+x")]
     public class EffectPropAttributeAdditionAtk : IEffect
     {
         public void Do(int effectId, int creatActorId, int attachEntityId)
@@ -64,7 +64,7 @@ namespace Game
     /// <summary>
     /// 目前有 扫把
     /// </summary>
-    [AttributeEffect(EffectType.PropAttribute, (int) EffectClassPropAttribute.NextAdditionAtk, "")]
+    [AttributeEffect(EffectType.PropAttribute, (int) EffectClassPropAttribute.NextAdditionAtk, "下次攻击伤害")]
     public class EffectPropAttributeNextAdditionAtk : IEffect
     {
         public void Do(int effectId, int creatActorId, int attachEntityId)
@@ -76,4 +76,53 @@ namespace Game
             nextAdditionBuff.AddBuffAdditionAttackOnce(effectConfig.EffectValue);
         }
     }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    [AttributeEffect(EffectType.PropAttribute, (int) EffectClassPropAttribute.CoolDown, "触发速度")]
+    public class EffectPropAttributeCoolDown : IEffect
+    {
+        public void Do(int effectId, int creatActorId, int attachEntityId)
+        {
+            var effectConfig = ConfigManager.Instance.GetEffectConfig(effectId);
+
+            if (effectConfig.EffectTarget == (int) ListenTarget.Bag)
+            {
+                
+            }
+            
+            // var nextAdditionBuff = FactoryEntity.CreatBuffEntity();
+            // nextAdditionBuff.AddAttachId(attachEntityId);
+            // nextAdditionBuff.AddBuffAdditionAttackOnce(effectConfig.EffectValue);
+        }
+        
+        
+        private void AddAddition(int addValue, int attachEntityId)
+        {
+            //找有没有附着在改道具上的buff
+            var buffs = Contexts.sharedInstance.buff.GetEntitiesWithAttachId(attachEntityId);
+
+            BuffEntity targetBuff = null;
+            foreach (var buff in buffs)
+            {
+                if (buff.hasBuffAddCoolDown)
+                {
+                    targetBuff = buff;
+                }
+            }
+
+            if (targetBuff == null)
+            {
+                targetBuff = FactoryEntity.CreatBuffEntity();
+                targetBuff.AddAttachId(attachEntityId);
+                targetBuff.AddBuffAddCoolDown(addValue);
+            }
+            else
+            {
+                targetBuff.ReplaceBuffAddCoolDown(targetBuff.buffAddCoolDown.Value + addValue);
+            }
+        }
+    }
+    
 }

@@ -44,9 +44,6 @@ public class ViewItem : MonoBehaviour ,IPointerDownHandler
     public void DoDestroy()
     {
         gameObject.GetEntityLink()?.Unlink();
-        
-        //this.gameObject.Unlink();
-        
         Destroy(gameObject);
     }
 

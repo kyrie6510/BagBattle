@@ -41,6 +41,9 @@ namespace Game
                 
                 //下次攻击伤害
                 if (effectConfig.EffectClass == (int)EffectClassPropAttribute.NextAdditionAtk) effect = new EffectPropAttributeNextAdditionAtk();
+                
+                if (effectConfig.EffectClass == (int)EffectClassPropAttribute.CoolDown) effect = new EffectPropAttributeCoolDown();
+                
               
             }
             //玩家属性
@@ -49,6 +52,9 @@ namespace Game
                 if (effectConfig.EffectClass == (int) EffectClassPlayerAttribute.Hp) effect = new EffectPlayerAttributeHp();
                     
                 if (effectConfig.EffectClass == (int) EffectClassPlayerAttribute.Stamina)   effect = new EffectPlayerAttributeStamina();
+                
+              
+                
             }
             
             effect.Do(effectId,actorId,entityId);
