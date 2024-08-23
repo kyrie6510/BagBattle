@@ -11,17 +11,19 @@ public partial class BuffEntity {
     public Game.BuffAddCoolDown buffAddCoolDown { get { return (Game.BuffAddCoolDown)GetComponent(BuffComponentsLookup.BuffAddCoolDown); } }
     public bool hasBuffAddCoolDown { get { return HasComponent(BuffComponentsLookup.BuffAddCoolDown); } }
 
-    public void AddBuffAddCoolDown(FixMath.NET.Fix64 newValue) {
+    public void AddBuffAddCoolDown(FixMath.NET.Fix64 newValue, int newAttackLocalId) {
         var index = BuffComponentsLookup.BuffAddCoolDown;
         var component = (Game.BuffAddCoolDown)CreateComponent(index, typeof(Game.BuffAddCoolDown));
         component.Value = newValue;
+        component.AttackLocalId = newAttackLocalId;
         AddComponent(index, component);
     }
 
-    public void ReplaceBuffAddCoolDown(FixMath.NET.Fix64 newValue) {
+    public void ReplaceBuffAddCoolDown(FixMath.NET.Fix64 newValue, int newAttackLocalId) {
         var index = BuffComponentsLookup.BuffAddCoolDown;
         var component = (Game.BuffAddCoolDown)CreateComponent(index, typeof(Game.BuffAddCoolDown));
         component.Value = newValue;
+        component.AttackLocalId = newAttackLocalId;
         ReplaceComponent(index, component);
     }
 

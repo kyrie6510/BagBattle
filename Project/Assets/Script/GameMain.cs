@@ -97,6 +97,7 @@ namespace Script
             };
             
             //创建UI
+            
             ItemManager.Instance.GenerateItemForOther(otherData);
             
             _simulation = new Simulation(new GameUser[] { user,user2 });

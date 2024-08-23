@@ -9,6 +9,6 @@ namespace Game
         /// <summary>
         /// 包内物品的localId
         /// </summary>
-        public List<int> Value;
+        public HashSet<int> Value;
     }
 }

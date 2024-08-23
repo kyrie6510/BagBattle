@@ -50,8 +50,19 @@ public sealed  partial class GameEntity
         actor.actorBuff.Value.TryGetValue((int) BuffType.Cold_9, out var coldValue);
         actor.actorBuff.Value.TryGetValue((int) BuffType.Heat_2, out var heatValue);
 
-        var percent = 100 + (coldValue - heatValue) * 2;
+        Fix64 buffValue = 0;
+        var targetBuff =  Contexts.sharedInstance.buff.GetEntityWithBuffAddCoolDown(localId.value);
+        if (targetBuff != null)
+        {
+            buffValue = targetBuff.buffAddCoolDown.Value;
+        }
+
+        //buff 是每个百分值2 
+        var percent = 100 + (coldValue - heatValue) * 2 - buffValue;
         if (percent <= 0) return 0;
+        
+        
+        
         return coolDownTime.Value *  percent/100;
         
         

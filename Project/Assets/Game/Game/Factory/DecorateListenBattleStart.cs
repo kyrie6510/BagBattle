@@ -15,11 +15,11 @@ namespace Game.Game.Factory
             
            
             var buffEntity = FactoryEntity.CreatBuffEntity();
+            
             buffEntity.AddBuffEffectId(effectId);
             buffEntity.AddTimingConfigId(timConfigId);
-
-            buffEntity.isTimingTypeBattleStart = true;
             buffEntity.AddAttachId(e.localId.value);
+            buffEntity.isTimingTypeBattleStart = true;
         }
     }
 }

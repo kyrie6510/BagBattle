@@ -18,4 +18,8 @@ public class UIDataItem : UIDataBase
 
    public Vector2 LocalPos;
 
+
+   public bool IsBag;
+   
+   public HashSet<int> BagItemId = new HashSet<int>();
 }

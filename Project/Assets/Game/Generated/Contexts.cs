@@ -64,6 +64,7 @@ public partial class Contexts {
 
     public const string ActorId = "ActorId";
     public const string AttachId = "AttachId";
+    public const string BuffAddCoolDown = "BuffAddCoolDown";
     public const string Id = "Id";
     public const string LocalId = "LocalId";
 
@@ -78,6 +79,11 @@ public partial class Contexts {
             AttachId,
             buff.GetGroup(BuffMatcher.AttachId),
             (e, c) => ((Game.AttachIdComponent)c).Value));
+
+        buff.AddEntityIndex(new Entitas.PrimaryEntityIndex<BuffEntity, int>(
+            BuffAddCoolDown,
+            buff.GetGroup(BuffMatcher.BuffAddCoolDown),
+            (e, c) => ((Game.BuffAddCoolDown)c).AttackLocalId));
 
         actor.AddEntityIndex(new Entitas.PrimaryEntityIndex<ActorEntity, int>(
             Id,
@@ -107,6 +113,10 @@ public static class ContextsExtensions {
 
     public static System.Collections.Generic.HashSet<BuffEntity> GetEntitiesWithAttachId(this BuffContext context, int Value) {
         return ((Entitas.EntityIndex<BuffEntity, int>)context.GetEntityIndex(Contexts.AttachId)).GetEntities(Value);
+    }
+
+    public static BuffEntity GetEntityWithBuffAddCoolDown(this BuffContext context, int AttackLocalId) {
+        return ((Entitas.PrimaryEntityIndex<BuffEntity, int>)context.GetEntityIndex(Contexts.BuffAddCoolDown)).GetEntity(AttackLocalId);
     }
 
     public static ActorEntity GetEntityWithId(this ActorContext context, int Value) {

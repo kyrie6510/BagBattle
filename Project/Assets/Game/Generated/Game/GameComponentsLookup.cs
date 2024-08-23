@@ -11,22 +11,24 @@ public static class GameComponentsLookup {
     public const int ActorId = 0;
     public const int AtkRate = 1;
     public const int Attack = 2;
-    public const int BuffBlind = 3;
-    public const int ConfigId = 4;
-    public const int CoolDownTime = 5;
-    public const int LocalId = 6;
-    public const int StaminaCost = 7;
-    public const int StarTarget = 8;
-    public const int TimingTypeActive = 9;
-    public const int TimingTypeAtk = 10;
-    public const int TimingTypeTriggerNum = 11;
+    public const int Bag = 3;
+    public const int BuffBlind = 4;
+    public const int ConfigId = 5;
+    public const int CoolDownTime = 6;
+    public const int LocalId = 7;
+    public const int StaminaCost = 8;
+    public const int StarTarget = 9;
+    public const int TimingTypeActive = 10;
+    public const int TimingTypeAtk = 11;
+    public const int TimingTypeTriggerNum = 12;
 
-    public const int TotalComponents = 12;
+    public const int TotalComponents = 13;
 
     public static readonly string[] componentNames = {
         "ActorId",
         "AtkRate",
         "Attack",
+        "Bag",
         "BuffBlind",
         "ConfigId",
         "CoolDownTime",
@@ -42,6 +44,7 @@ public static class GameComponentsLookup {
         typeof(Game.ActorIdComponent),
         typeof(Game.AtkRate),
         typeof(Game.AttackComponent),
+        typeof(Game.BagComponent),
         typeof(Game.Buff.BuffBlindComponent),
         typeof(Game.ConfigIdComponent),
         typeof(Game.CoolDownTimeComponent),

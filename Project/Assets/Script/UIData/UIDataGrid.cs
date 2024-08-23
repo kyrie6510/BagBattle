@@ -29,13 +29,20 @@ public class UIDataGrid
         this.LocalIdStar = 0;
     }
     
-    public void RemoveInfo(int localId)
+    public void RemoveData(int localId)
     {
-        if (localId == LocalIdItem)  LocalIdItem = 0;
+        if (localId == LocalIdItem)
+        {
+            LocalIdItem = 0;
+            var bagData = ItemManager.Instance.GetItemData(LocalIdBag);
+            bagData.BagItemId.Add(LocalIdBag);
+            bagData.BagItemId.Remove(localId);
+
+        }
         if (localId == LocalIdBag) LocalIdBag = 0;
     }
 
-    public void PutItemData(int itemId,int itemConfigId)
+    public void PutData(int itemId,int itemConfigId)
     {
         var config = ConfigManager.Instance.GetPropConfig((short)itemConfigId);
         if (config.PropType == (int)PropType.Bag)
@@ -44,8 +51,14 @@ public class UIDataGrid
         }
         else
         {
+            var bagData = ItemManager.Instance.GetItemData(LocalIdBag);
+            bagData.BagItemId.Add(itemId);
+            
             LocalIdItem = itemId;
         }
+        
+        
+        
     }
     
 }

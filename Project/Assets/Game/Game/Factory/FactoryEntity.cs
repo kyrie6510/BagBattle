@@ -12,7 +12,7 @@ namespace Game
         private static int _buffEntityLocalId;
         public static void Init()
         {
-            _gameEntityLocalId = 0;
+           // _gameEntityLocalId = 0;
             _buffEntityLocalId = 0;
         }
 
@@ -22,8 +22,8 @@ namespace Game
         {
             var actor = Contexts.sharedInstance.actor.GetEntityWithId(actorId);
             var e = Contexts.sharedInstance.game.CreateEntity();
-            e.AddLocalId(_gameEntityLocalId);
-            _gameEntityLocalId++;
+//            e.AddLocalId(_gameEntityLocalId);
+ //           _gameEntityLocalId++;
 
             e.AddActorId((short)actorId);
             e.AddConfigId(configId);

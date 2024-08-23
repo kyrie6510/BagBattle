@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using Entitas.CodeGeneration.Attributes;
 using FixMath.NET;
 
 namespace Game
@@ -9,5 +10,9 @@ namespace Game
         //百分比
         // value = 5 加快5%
         public Fix64 Value;
+
+
+        [PrimaryEntityIndex]
+        public int AttackLocalId;
     }
 }

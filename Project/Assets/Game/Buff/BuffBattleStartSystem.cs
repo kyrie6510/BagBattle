@@ -4,18 +4,27 @@ namespace Game.Buff
 {
     public class BuffBattleStartSystem : IInitializeSystem, ITearDownSystem
     {
+        private IGroup<BuffEntity> _group;
+
+
+        public BuffBattleStartSystem()
+        {
+            _group = Contexts.sharedInstance.buff.GetGroup(BuffMatcher.TimingTypeBattleStart);
+            _group.OnEntityAdded += OnAdd;
+            _group.OnEntityRemoved += OnRemove;
+        }
+        
         public void Initialize()
         {
-            var group = Contexts.sharedInstance.buff.GetGroup(BuffMatcher.TimingTypeBattleStart);
-            group.OnEntityAdded += OnAdd;
-            group.OnEntityRemoved += OnRemove;
+            
+           
         }
         
         public void TearDown()
         {
-            var group = Contexts.sharedInstance.buff.GetGroup(BuffMatcher.TimingTypeBattleStart);
-            group.OnEntityAdded -= OnAdd;
-            group.OnEntityRemoved -= OnRemove;
+           
+            _group.OnEntityAdded -= OnAdd;
+            _group.OnEntityRemoved -= OnRemove;
         }
 
         private void OnRemove(IGroup<BuffEntity> @group, BuffEntity entity, int index, IComponent component)

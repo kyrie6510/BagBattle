@@ -89,7 +89,14 @@ namespace Game
 
             if (effectConfig.EffectTarget == (int) ListenTarget.Bag)
             {
-                
+                var bagEntity = Contexts.sharedInstance.game.GetEntityWithLocalId(attachEntityId);
+                if (bagEntity.hasBag)
+                {
+                    foreach (var localId in bagEntity.bag.Value)
+                    {
+                        AddAddition(effectConfig.EffectValue,localId);
+                    }
+                }
             }
             
             // var nextAdditionBuff = FactoryEntity.CreatBuffEntity();
@@ -101,26 +108,18 @@ namespace Game
         private void AddAddition(int addValue, int attachEntityId)
         {
             //找有没有附着在改道具上的buff
-            var buffs = Contexts.sharedInstance.buff.GetEntitiesWithAttachId(attachEntityId);
 
-            BuffEntity targetBuff = null;
-            foreach (var buff in buffs)
-            {
-                if (buff.hasBuffAddCoolDown)
-                {
-                    targetBuff = buff;
-                }
-            }
-
+            var targetBuff =  Contexts.sharedInstance.buff.GetEntityWithBuffAddCoolDown(attachEntityId);
+            
             if (targetBuff == null)
             {
                 targetBuff = FactoryEntity.CreatBuffEntity();
                 targetBuff.AddAttachId(attachEntityId);
-                targetBuff.AddBuffAddCoolDown(addValue);
+                targetBuff.AddBuffAddCoolDown(addValue,attachEntityId);
             }
             else
             {
-                targetBuff.ReplaceBuffAddCoolDown(targetBuff.buffAddCoolDown.Value + addValue);
+                targetBuff.ReplaceBuffAddCoolDown(targetBuff.buffAddCoolDown.Value + addValue,attachEntityId);
             }
         }
     }

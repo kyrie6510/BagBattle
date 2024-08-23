@@ -31,36 +31,26 @@ namespace Game.Actor
                 //创建物品
                 foreach (var item in actor.Items)
                 {
+                    if(!item.IsInBag) continue;
+                    
                     var e = FactoryEntity.CreatGameEntity(actor.ActorId, item.ConfigId);
 
-                        
+                    e.AddLocalId(item.LocalId);
+                    
                     //通知EntityView
                     EventManager.Instance.TriggerEvent(new OnGameEntityCreat{ViewLocalId =  item.LocalId, Entity = e});
                     
-                    //星物品
+                    // 星物品
                     if (item.StarTargetLocalId.Count != 0)
                     {
-                        //自身玩家添加
-                        if (i == 0)
-                        {
-                            e.AddStarTarget(item.StarTargetLocalId);
-                        }
-                        //
-                        else
-                        {
-                        
-                            e.AddStarTarget(new ());
-                            var offset = actors[0].Items.Count;
-                            foreach (var localId in item.StarTargetLocalId)
-                            {
-                                e.starTarget.Value.Add(localId + offset);
-                            }
-                        
-                        
-                        }
+                        e.AddStarTarget(item.StarTargetLocalId);
+                    }
+
+                    if (item.IsBag)
+                    {
+                        e.AddBag(item.BagItemId);
                     }
                     
-                   
                     
                 }
             }

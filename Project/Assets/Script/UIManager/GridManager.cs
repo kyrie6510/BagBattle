@@ -305,7 +305,7 @@ namespace Script
 
             foreach (var id in _catchBodyGrids)
             {
-                _gridsData[id].PutItemData(curItemUI.LocalId, curItemUI.ConfigId);
+                _gridsData[id].PutData(curItemUI.LocalId, curItemUI.ConfigId);
                 itemInGrids.Add(id);
             }
 
@@ -334,7 +334,7 @@ namespace Script
             
             foreach (var id in grids)
             {
-                _gridsData[id].RemoveInfo(itemLocalId);
+                _gridsData[id].RemoveData(itemLocalId);
                 _catchCurSelectLastPosGrids.Add(id);
 
             }

@@ -85,12 +85,15 @@ namespace Script
                 
                 var cfgData  =  ConfigManager.Instance.GetPropConfig(configId);
 
-                var times = cfgData.PropType == (int) PropType.Bag ? 3 : 1;
-
+                bool isBag = cfgData.PropType == (int) PropType.Bag;
+                var times =  isBag? 3 : 1;
+                
                 for (int j = 0; j < times; j++)
                 {
                     var data = CreatUIData(configId);
-
+                    if (isBag) data.IsBag = true;
+                    
+                    
                     var go = CreatGameObject(configId, ObjBox.transform);
                     var item = go.GetComponent<ViewItem>();
 
@@ -164,6 +167,8 @@ namespace Script
         {
             foreach (var data in dates)
             {
+                if(!data.IsInBag) continue;
+
                 var go = CreatGameObject(data.ConfigId, ObjOtherBag.transform);
 
                 var view = go.GetComponent<ViewItem>();
@@ -243,16 +248,7 @@ namespace Script
 
         public List<UIDataItem> GetAllItemData()
         {
-            List<UIDataItem> list = new List<UIDataItem>();
-            foreach (var item in _itemDataMap.Values)
-            {
-                if (item.IsInBag)
-                {
-                    list.Add(item);
-                }
-            }
-
-            return list;
+            return _itemDataMap.Values.ToList();
         }
 
         public List<UIDataItem> GetOtherData()
@@ -260,21 +256,37 @@ namespace Script
             List<UIDataItem> list = new List<UIDataItem>();
 
             var inBagList = _itemDataMap.Values.ToList();
+            var offset = inBagList.Count;
             foreach (var item in inBagList)
             {
-                if (item.IsInBag)
+              
+                var creatData = CreatUIData(item.ConfigId);
+
+                creatData.IsRoatete = item.IsRoatete;
+                creatData.LocalPos = item.LocalPos;
+                
+                creatData.StarTargetLocalId = new();
+                creatData.BagItemId = new();
+                
+                
+                
+                foreach (var local in item.StarTargetLocalId)
                 {
-                    var creatData = CreatUIData(item.ConfigId);
-
-                    creatData.IsRoatete = item.IsRoatete;
-                    creatData.LocalPos = item.LocalPos;
-                    creatData.StarTargetLocalId = item.StarTargetLocalId;
-                    creatData.RotateValue = item.RotateValue;
-                    creatData.IsInBag = true;
-
-
-                    list.Add(creatData);
+                    creatData.StarTargetLocalId.Add(local + offset);
                 }
+                
+                foreach (var local in item.BagItemId)
+                {
+                    creatData.BagItemId.Add(local + offset);
+                }
+
+                
+                
+                creatData.RotateValue = item.RotateValue;
+                creatData.IsInBag = item.IsInBag;
+
+
+                list.Add(creatData);
             }
 
             return list;
