@@ -46,9 +46,7 @@ public sealed  partial class GameEntity
             return Fix64.MaxValue;
         }
 
-        var actor = GetActor();
-        actor.actorBuff.Value.TryGetValue((int) BuffType.Cold_9, out var coldValue);
-        actor.actorBuff.Value.TryGetValue((int) BuffType.Heat_2, out var heatValue);
+       
 
         Fix64 buffValue = 0;
         var targetBuff =  Contexts.sharedInstance.buff.GetEntityWithBuffAddCoolDown(localId.value);
@@ -58,7 +56,7 @@ public sealed  partial class GameEntity
         }
 
         //buff 是每个百分值2 
-        var percent = 100 + (coldValue - heatValue) * 2 - buffValue;
+        var percent = 100 + GetActor().GetBuffCoolDownAddition() - buffValue;
         if (percent <= 0) return 0;
         
         

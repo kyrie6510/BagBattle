@@ -116,8 +116,18 @@ public sealed partial class ActorEntity
     {
         ReplaceHp(hp.MaxValue, hp.Value - damageValue);
     }
-    
-    
+
+    /// <summary>
+    /// 冷却buff加成百分比
+    /// </summary>
+    /// <returns></returns>
+    public Fix64 GetBuffCoolDownAddition()
+    {
+        actorBuff.Value.TryGetValue((int) BuffType.Cold_9, out var coldValue);
+        actorBuff.Value.TryGetValue((int) BuffType.Heat_2, out var heatValue);
+        
+        return   (coldValue - heatValue) * 2;
+    }
     
 }
 

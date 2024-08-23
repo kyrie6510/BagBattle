@@ -23,8 +23,8 @@ namespace Game.Game.Factory
             var buffEntity = FactoryEntity.CreatBuffEntity();
             
             buffEntity.AddBuffEffectId(effectId);
-            buffEntity.AddTimingTypeSecondPass(timConfig.ListenValue(0),0);
             buffEntity.AddAttachId(e.localId.value);
+            buffEntity.AddTimingTypeSecondPass(timConfig.ListenValue(0),0);
             buffEntity.AddTimingConfigId(timConfigId);
         }
     }

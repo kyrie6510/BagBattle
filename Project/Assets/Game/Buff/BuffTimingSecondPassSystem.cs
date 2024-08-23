@@ -22,8 +22,10 @@ namespace Game.Buff
             {
                 var second = buff.timingTypeSecondPass.Value;
                 var lastSpan = buff.timingTypeSecondPass.LastTimeSpan;
+
+                var coolDownTime = buff.GetCoolDownTime();
                 
-                if (Time.TimeFromStart - lastSpan >= second)
+                if (Time.TimeFromStart - lastSpan >= coolDownTime)
                 {
                     //触发效果
                     foreach (var effectId in buff.buffEffectId.Value)
@@ -31,7 +33,7 @@ namespace Game.Buff
                         EffectManager.Instance.CreatEffect(effectId, e.actorId.Value, e.localId.value);
                     }
 
-                    buff.ReplaceTimingTypeSecondPass(second, lastSpan + second);
+                    buff.ReplaceTimingTypeSecondPass(second, lastSpan + coolDownTime);
 
                 }
                 
