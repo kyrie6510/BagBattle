@@ -40,7 +40,7 @@ public sealed partial class ActorEntity
             }
             
             //临时护盾判断()
-            EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"actor:{id.Value} 受伤害{damageValue}"));
+            EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"受伤害{damageValue}"));
             GetHurt(damageValue);
         }
         //防御
@@ -62,7 +62,7 @@ public sealed partial class ActorEntity
     public void OnGetBuffSpikesDamage(Fix64 value)
     {
         
-        EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"actor:{id.Value} 受到尖刺伤害{value}"));
+        EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"受到尖刺伤害{value}"));
         
         GetHurt(value);
     }
@@ -72,7 +72,7 @@ public sealed partial class ActorEntity
     /// </summary>
     public void OnGetBuffPoisonDamage(Fix64 value)
     {
-        EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"actor:{id.Value} 受到毒伤害{value}"));
+        EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"受到毒伤害{value}"));
         GetHurt(value);
     }
     
@@ -81,7 +81,7 @@ public sealed partial class ActorEntity
     /// </summary>
     public void OnGetVampirismRecover(Fix64 value)
     {
-        EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"actor:{id.Value} 吸血恢复{value}"));
+        EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"吸血恢复{value}"));
         GetRecover(value);
     }
     
@@ -91,7 +91,7 @@ public sealed partial class ActorEntity
     /// </summary>
     public void OnGetBuffRecover(Fix64 value)
     {
-        EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"actor:{id.Value} 恢复{value}"));
+        EventManager.Instance.TriggerEvent(new BattleLog(id.Value,$"恢复{value}"));
         GetRecover(value);
     }
     

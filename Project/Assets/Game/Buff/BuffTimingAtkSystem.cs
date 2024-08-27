@@ -45,7 +45,7 @@ namespace Game
 
                 if (!JudgeProbably(config.ListenValue(0)))
                 {
-                    EventManager.Instance.TriggerEvent(new BattleLog(attachEntity.actorId.Value, $"时机:{config.Id} 概率判断失败 {config.Name}"));
+                    EventManager.Instance.TriggerEvent(new BattleLog(attachEntity.actorId.Value, $"时机:{config.Name},概率判断失败"));
                     return;
                 }
                 
@@ -71,7 +71,7 @@ namespace Game
                         
                         if (!JudgeProbably(config.ListenValue(0)))
                         {
-                            EventManager.Instance.TriggerEvent(new BattleLog(attachEntity.actorId.Value, $"时机:{config.Id} 概率判断失败 {config.Name}"));
+                            EventManager.Instance.TriggerEvent(new BattleLog(attachEntity.actorId.Value, $"时机:{config.Name},概率判断失败 "));
                             continue;
                         }
                         
@@ -110,7 +110,7 @@ namespace Game
                             {
                                 if (!JudgeProbably(config.ListenValue(0)))
                                 {
-                                    EventManager.Instance.TriggerEvent(new BattleLog(attachEntity.actorId.Value, $"时机:{config.Id} 概率判断失败 {config.Name}"));
+                                    EventManager.Instance.TriggerEvent(new BattleLog(attachEntity.actorId.Value, $"时机:{config.Name},概率判断失败"));
                                     continue;
                                 }
                                 

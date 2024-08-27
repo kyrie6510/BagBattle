@@ -30,7 +30,7 @@ public partial class GameEntity
         if (!hasAtkRate) return false;
         var value = UtilityRandom.Random.Next(0, 100);
         
-        EventManager.Instance.TriggerEvent(new BattleLog(actorId.Value,$"local:{localId.value} 概率判断：{value}"));
+        //EventManager.Instance.TriggerEvent(new BattleLog(actorId.Value,$"local:{localId.value} 概率判断：{value}"));
         
         //buff
         var additionRate = 0;

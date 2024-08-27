@@ -24,7 +24,7 @@ namespace Game
                 }
             }
             
-            EventManager.Instance.TriggerEvent(new BattleLog(actorId, $"actor:{actorId} {effectConfig.Name}"));
+            EventManager.Instance.TriggerEvent(new BattleLog(actorId, $"{effectConfig.Name}"));
 
             IEffect effect = null;
             //处理添加buff类型

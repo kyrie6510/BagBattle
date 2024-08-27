@@ -27,7 +27,7 @@ namespace Game
             var cmpt = c.combatMeleeWeapon;
 
             var e = Contexts.sharedInstance.game.GetEntityWithLocalId(cmpt.AttackerLocalId);
-
+            var config = ConfigManager.Instance.GetPropConfig(e.configId.Value);
             var attacker = GetMyActor(c.combatMeleeWeapon.AttackerActorId);
 
             //检测
@@ -52,8 +52,7 @@ namespace Game
                 //命中也不能直接计算伤害,因为其他模块需要产生对应的效果
                 if (!e.JudgeCanHit())
                 {
-                    EventManager.Instance.TriggerEvent(new BattleLog(attacker.id.Value,
-                        $"actor:{attacker.id.Value} local:{cmpt.AttackerLocalId} 未命中"));
+                    EventManager.Instance.TriggerEvent(new BattleLog(attacker.id.Value, $"{config.Name}_localId_{cmpt.AttackerLocalId},未命中"));
                     e.ReplaceTimingTypeAtk((int) ListenType.AtkMis);
                     cmpt.Step = 2;
                     return;

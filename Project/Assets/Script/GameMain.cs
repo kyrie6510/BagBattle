@@ -1,6 +1,5 @@
 ﻿using System;
 using Game;
-
 using UnityEngine;
 using Time = UnityEngine.Time;
 
@@ -9,7 +8,9 @@ namespace Script
     public class GameMain : MonoBehaviour
     {
         private Simulation _simulation;
-        private bool _isGameStared = false;
+        
+        //0: 未开始  1:运行 2:结束
+        private int _gameState = 0;
         
         
         
@@ -31,19 +32,7 @@ namespace Script
 
         private void OnGameOver(OnGameOver e)
         {
-            _isGameStared = false;
-            
-            GridManager.Instance.Reset();
-            ItemManager.Instance.Reset();
-            ViewManager.Instance.Reset();
-            
-            _simulation.OnGameOver();
-          
-            _simulation = null;
-            
-           
-
-            ItemManager.Instance.GenerateItem();
+            _gameState = 2;
         }
 
       
@@ -66,7 +55,7 @@ namespace Script
             ItemManager.Instance.Update();
 
 
-            if (!_isGameStared)
+            if (_gameState != 1)
             {
                 return;
             }
@@ -80,6 +69,23 @@ namespace Script
         
         private void OnGamePlay(OnGamePlayEvent e)
         {
+            //重置数据
+            if (_gameState == 2)
+            {
+                GridManager.Instance.Reset();
+                ItemManager.Instance.Reset();
+                ViewManager.Instance.Reset();
+            
+                _simulation.OnGameOver();
+                _simulation = null;
+                
+                ItemManager.Instance.GenerateItem();
+
+                _gameState = 0;
+                
+                return;
+            }
+            
             _time = 0;
             
             GameUser user = new GameUser()
@@ -101,7 +107,7 @@ namespace Script
             ItemManager.Instance.GenerateItemForOther(otherData);
             
             _simulation = new Simulation(new GameUser[] { user,user2 });
-            _isGameStared = true;
+            _gameState  = 1;
         }
 
         

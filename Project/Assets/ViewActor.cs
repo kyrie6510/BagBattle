@@ -27,6 +27,11 @@ public class ViewActor : MonoBehaviour , IHpListener , IStaminaListener , IActor
     {
         gameObject.Link(actor);
         
+        
+        foreach (var image in ImgBuffList)
+        {
+            image.gameObject.SetActive(false);
+        }
         // var eventListeners = gameObject.GetComponents<IGameEntiyEventListener>();
         // foreach (var listener in eventListeners)
         //     listener.RegisterListeners(e);

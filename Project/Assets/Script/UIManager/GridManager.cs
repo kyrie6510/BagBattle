@@ -231,7 +231,7 @@ namespace Script
             }
 
             //ClearConsole();
-            Debug.Log(info);
+          //  Debug.Log(info);
         }
 
 
