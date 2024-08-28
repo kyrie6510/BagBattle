@@ -13,9 +13,9 @@ namespace Game.Buff
             Add(new BuffTimingEverHaveBuffSystem());
             Add(new BuffPoisonSystem());
             Add(new BuffRegenerationSystem());
-            
-         
-           
+
+            Add(new BuffDestroySystem());
+
         }
         
         

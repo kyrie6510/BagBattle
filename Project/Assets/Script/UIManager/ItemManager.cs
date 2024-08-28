@@ -97,8 +97,8 @@ namespace Script
                     var go = CreatGameObject(configId, ObjBox.transform);
                     var item = go.GetComponent<ViewItem>();
 
-                    item.ConfigId = configId;
-                    item.LocalId = data.LocalId;
+                    item.SetInfo(configId,data.LocalId);
+                    
                     _itemUIMap.Add(data.LocalId, item);
                 }
             }

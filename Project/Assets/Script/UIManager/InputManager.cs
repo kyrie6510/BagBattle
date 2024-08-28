@@ -45,6 +45,22 @@ public class InputManager : Singleton<InputManager>
             return;
         }
 
+
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //
+        //     var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //     var rayCastHit2Ds = Physics2D.GetRayIntersectionAll(ray);
+        //     
+        //     
+        //     for (int i = 0; i < rayCastHit2Ds.Length; i++)
+        //     {
+        //         var item = rayCastHit2Ds[i];
+        //         var viewItem = item.collider.GetComponent<ViewItem>();
+        //     }
+        // }
+        
+        
         if (Input.GetKeyDown(KeyCode.R))
         {
             //UI

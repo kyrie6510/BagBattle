@@ -21,6 +21,18 @@ public class ViewItem : MonoBehaviour ,IPointerDownHandler
     {
         _imgItem = GetComponent<Image>();
         _rig = GetComponent<Rigidbody2D>();
+
+        _imgItem.alphaHitTestMinimumThreshold = 0;
+    }
+
+    public void SetInfo(int configId, int localID)
+    {
+        this.ConfigId = configId;
+        this.LocalId = localID;
+
+        var config = ConfigManager.Instance.GetPropConfig(ConfigId);
+        var boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider.size = new Vector2(config.UIWidth * 80 , config.UIHeight * 80);
     }
     
     public void OnPointerDown(PointerEventData eventData)
