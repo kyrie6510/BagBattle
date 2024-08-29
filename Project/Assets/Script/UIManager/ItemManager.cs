@@ -3,6 +3,7 @@ using System.Linq;
 using Game;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 
 namespace Script
@@ -45,7 +46,9 @@ namespace Script
             ObjOtherBagItems = GameObject.Find("OtherBagItem");
             ObjOtherProps = GameObject.Find("OtherPropItem");
             ObjOtherBag = GameObject.Find("OtherPropItem");
-            GenerateItem();
+            //GenerateItem();
+
+            _shopItemsLocalId = new() {-1, -1, -1, -1, -1};
         }
 
         private void OnItemSelectFunction(OnItemSelectEvent e)
@@ -77,6 +80,87 @@ namespace Script
         }
 
 
+        private List<int> _shopItemsLocalId = new ();
+        
+        public List<int> GenerateItemForShop()
+        {
+            var count = _shopItemsLocalId.Count;
+
+            if (count == 5)
+            {
+                for (int i = 0; i < _shopItemsLocalId.Count; i++)
+                {
+                    var localId = _shopItemsLocalId[i];
+                    
+                    if(localId == -1) continue;
+
+                    var data = GetItemData(localId);
+                    if (data.State != 0)
+                    {
+                        _shopItemsLocalId[i] = -1;
+                    }
+                }
+            }
+            
+          
+            
+            for (short i = 1; i <= 5; i++)
+            {
+                var shopItemLocalId = _shopItemsLocalId[i - 1];
+
+                Random random = new();
+                var randomConfigId = random.Next(1, 10);
+                    
+                var cfgData  =  ConfigManager.Instance.GetPropConfig(randomConfigId);
+                
+                // == -1 已经不在商店
+                if (shopItemLocalId != -1)
+                {
+                    var data = GetItemData(shopItemLocalId);
+                    if (data.ConfigId == randomConfigId)
+                    {
+                        continue;
+                    }
+
+                    data.ConfigId = randomConfigId;
+                    
+                    bool isBag = cfgData.PropType == (int) PropType.Bag;
+                    if (isBag) data.IsBag = true;
+
+                    var viewItem = GetItemUI(data.LocalId);
+                    viewItem.SetInfo(randomConfigId,data.LocalId);
+                    
+                    SetSpriteFromConfigId(viewItem.gameObject,randomConfigId);
+                }
+                else
+                {
+                    var data = CreatUIData(randomConfigId);
+                    
+                    bool isBag = cfgData.PropType == (int) PropType.Bag;
+                    if (isBag) data.IsBag = true;
+                    
+                    
+                    var go = CreatGameObject(randomConfigId, ObjBox.transform);
+                    var item = go.GetComponent<ViewItem>();
+
+                    item.SetInfo(randomConfigId,data.LocalId);
+                    
+                   
+                    _shopItemsLocalId[i - 1] = item.LocalId;
+                    
+                    _itemUIMap.Add(data.LocalId, item);
+
+                }
+              
+                
+              
+                
+              
+            }
+
+            return _shopItemsLocalId;
+        }
+        
         public void GenerateItem()
         {
             for (short i = 1; i <= 10; i++)
@@ -118,9 +202,9 @@ namespace Script
         
         
 
-        private UIDataItem CreatUIData(short configId)
+        private UIDataItem CreatUIData(int configId)
         {
-            var data = new UIDataItem() {LocalId = _localId, ConfigId = (short) configId};
+            var data = new UIDataItem() {LocalId = _localId, ConfigId = configId};
             _itemDataMap.Add(_localId, data);
             _localId++;
             return data;
@@ -146,8 +230,18 @@ namespace Script
 
             var go = GameObject.Instantiate(obj, parent);
             go.transform.localPosition = Vector3.zero;
-            item = go.GetComponent<ViewItem>();
+          
+            SetSpriteFromConfigId(go,configId);
+            
+            return go;
+        }
 
+        private void SetSpriteFromConfigId(GameObject go,int configId)
+        {
+            var item = go.GetComponent<ViewItem>();
+            var config = ConfigManager.Instance.GetPropConfig(configId);
+            
+            
             if (item == null)
             {
                 item = go.AddComponent<ViewItem>();
@@ -160,14 +254,14 @@ namespace Script
 
             img.rectTransform.sizeDelta = new Vector2(texture.width / 2, texture.height / 2);
 
-            return go;
         }
+        
 
         public void GenerateItemForOther(List<UIDataItem> dates)
         {
             foreach (var data in dates)
             {
-                if(!data.IsInBag) continue;
+                if(data.State!= 1) continue;
 
                 var go = CreatGameObject(data.ConfigId, ObjOtherBag.transform);
 
@@ -212,7 +306,7 @@ namespace Script
             item.SetRigState(false);
 
             var data = GetItemData(item.LocalId);
-            data.IsInBag = true;
+            data.State = 1;
 
             if (GetItemPropType(item.LocalId) == (int) PropType.Bag)
             {
@@ -236,7 +330,7 @@ namespace Script
             }
 
             var data = GetItemData(localId);
-            data.IsInBag = false;
+            data.State = 2;
 
 
             var item = _itemUIMap[localId];
@@ -283,7 +377,7 @@ namespace Script
                 
                 
                 creatData.RotateValue = item.RotateValue;
-                creatData.IsInBag = item.IsInBag;
+                creatData.State = item.State;
 
 
                 list.Add(creatData);

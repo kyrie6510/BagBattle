@@ -31,7 +31,7 @@ namespace Game.Actor
                 //创建物品
                 foreach (var item in actor.Items)
                 {
-                    if(!item.IsInBag) continue;
+                    if(item.State!= 1) continue;
                     
                     var e = FactoryEntity.CreatGameEntity(actor.ActorId, item.ConfigId);
 

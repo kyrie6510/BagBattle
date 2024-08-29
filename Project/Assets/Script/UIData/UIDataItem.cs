@@ -6,7 +6,7 @@ public class UIDataItem : UIDataBase
 {
    public int LocalId;
 
-   public short ConfigId;
+   public int ConfigId;
    
    public bool IsRoatete = false;
    public int RotateValue = 0;
@@ -14,7 +14,10 @@ public class UIDataItem : UIDataBase
    //哪些item吃到该物体的星 buff
    public HashSet<int> StarTargetLocalId = new HashSet<int>();
 
-   public bool IsInBag;
+   /// <summary>
+   /// 0:商店 1:背包 2:箱子
+   /// </summary>
+   public int State;
 
    public Vector2 LocalPos;
 
