@@ -1,4 +1,6 @@
-﻿namespace Game
+﻿using UnityEngine;
+
+namespace Game
 {
     public class Singleton<T> where  T : new ()
     {
@@ -28,4 +30,6 @@
         }
 
     }
+    
+  
 }

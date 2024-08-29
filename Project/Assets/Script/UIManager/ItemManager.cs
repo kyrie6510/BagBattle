@@ -34,8 +34,7 @@ namespace Script
             base.Awake();
 
             EventManager.Instance.AddListener<OnItemSelectEvent>(OnItemSelectFunction);
-
-
+          
             _prefabs = new List<GameObject>();
 
             ObjMyBagItems = GameObject.Find("BagItem");
@@ -46,10 +45,13 @@ namespace Script
             ObjOtherBagItems = GameObject.Find("OtherBagItem");
             ObjOtherProps = GameObject.Find("OtherPropItem");
             ObjOtherBag = GameObject.Find("OtherPropItem");
-            //GenerateItem();
-
+            
+            ObjOtherBag.transform.parent.gameObject.SetActive(false);
+            
             _shopItemsLocalId = new() {-1, -1, -1, -1, -1};
         }
+
+      
 
         private void OnItemSelectFunction(OnItemSelectEvent e)
         {
@@ -208,6 +210,8 @@ namespace Script
             _itemDataMap.Add(_localId, data);
             _localId++;
             return data;
+            
+            
         }
 
 
@@ -259,6 +263,13 @@ namespace Script
 
         public void GenerateItemForOther(List<UIDataItem> dates)
         {
+
+            //TODO 暂时放这里
+            if (!ObjOtherBag.transform.parent.gameObject.activeInHierarchy)
+            {
+                ObjOtherBag.transform.parent.gameObject.SetActive(true);
+            }
+            
             foreach (var data in dates)
             {
                 if(data.State!= 1) continue;
