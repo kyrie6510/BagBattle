@@ -15,7 +15,10 @@
 
                 if (actor.hp.Value <= 0)
                 {
+                    
+                    EventManager.Instance.TriggerEvent(new BattleLog(actor.id.Value, "失败"));
                     EventManager.Instance.TriggerEvent(new OnGameOver());
+
                     return;
                 }
                 

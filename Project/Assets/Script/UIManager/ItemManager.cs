@@ -217,6 +217,7 @@ namespace Script
 
         private GameObject CreatGameObject(int configId, Transform parent)
         {
+            //生成游戏物体
             var config = ConfigManager.Instance.GetPropConfig((short) configId);
 
             var width = config.UIWidth;
@@ -225,7 +226,6 @@ namespace Script
             GameObject obj = null;
             
             obj = Resources.Load($"ItemPrefab/ViewItem") as GameObject;
-
             obj.GetComponent<RectTransform>().sizeDelta = new Vector2(width*80,height*80 );
             
             _prefabs.Add(obj);
@@ -236,6 +236,22 @@ namespace Script
             go.transform.localPosition = Vector3.zero;
           
             SetSpriteFromConfigId(go,configId);
+            
+            //添加宝石孔 TODO 根据位置
+            if (config.PropType == (int) PropType.MeleeWeapon)
+            {
+
+                
+                GameObject hole = null;
+                
+                hole = Resources.Load($"ItemPrefab/ViewGemStoneHole") as GameObject;
+
+                var holeObj = GameObject.Instantiate(hole, go.transform);
+                holeObj.transform.localPosition = Vector3.zero;
+
+
+            }
+            
             
             return go;
         }

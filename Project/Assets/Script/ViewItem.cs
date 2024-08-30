@@ -10,7 +10,8 @@ public class ViewItem : MonoBehaviour ,IPointerDownHandler
     [SerializeField] 
     public int ConfigId;
     public int LocalId;
-    
+
+    private PropType _propType;
  
     public Image _imgItem;
     public Rigidbody2D _rig;
@@ -33,11 +34,22 @@ public class ViewItem : MonoBehaviour ,IPointerDownHandler
         var config = ConfigManager.Instance.GetPropConfig(ConfigId);
         var boxCollider = GetComponent<BoxCollider2D>();
         boxCollider.size = new Vector2(config.UIWidth * 80 , config.UIHeight * 80);
+
+        _propType = (PropType)config.PropType;
     }
     
     public void OnPointerDown(PointerEventData eventData)
     {
-        EventManager.Instance.TriggerEvent(new OnItemSelectEvent(){ LocalId =   this.LocalId});
+        if (_propType != PropType.GemStone)
+        {
+            EventManager.Instance.TriggerEvent(new OnItemSelectEvent(){ LocalId =   this.LocalId});    
+        }
+
+        else
+        {
+            EventManager.Instance.TriggerEvent(new OnGemStoneSelectEvent(){ LocalId =  this.LocalId});   
+        }
+        
     }
 
     

@@ -10,6 +10,11 @@
     {
         public int LocalId;
     }
+    
+    public struct OnGemStoneSelectEvent : BaseEvent
+    {
+        public int LocalId;
+    }
 
 
     public struct OnGamePlayEvent : BaseEvent
